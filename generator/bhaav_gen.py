@@ -1,4 +1,4 @@
-"""Bhaav Tiny clip generator (our code).
+"""Bhaav-E clip generator (our code).
 
 Renders sticker clips from a settings dict and writes the four files
 described in data/README.md: <id>.mp4, <id>.txt, <id>.json, <id>.png.

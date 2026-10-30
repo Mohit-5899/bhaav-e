@@ -125,7 +125,7 @@ round trip. One big file is fast. **Fix:** pack the files into a single tar file
 - **Don't compress.** mp4 is already compressed, and gzip would only burn CPU time.
 
 ```bash
-cd bhaav-tiny/data && COPYFILE_DISABLE=1 tar -cf ../upload/bhaav-clips.tar --exclude='*.png' --exclude='.DS_Store' clips splits && shasum -a 256 ../upload/bhaav-clips.tar
+cd bhaav-e/data && COPYFILE_DISABLE=1 tar -cf ../upload/bhaav-clips.tar --exclude='*.png' --exclude='.DS_Store' clips splits && shasum -a 256 ../upload/bhaav-clips.tar
 ```
 
 **Done 2026-10-29 (Verified):** `upload/bhaav-clips.tar`, **1.77 GB** (more than the 1.35 GB of file bytes,

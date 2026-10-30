@@ -1,4 +1,4 @@
-"""Make stickers with a trained Bhaav Tiny checkpoint.  (OUR code.)
+"""Make stickers with a trained Bhaav-E checkpoint.  (OUR code.)
 
 Generation = walk back along the straight line from noise (t = 1) to clean (t = 0):
     repeat 50 times:  x <- x - v * (t_now - t_next)

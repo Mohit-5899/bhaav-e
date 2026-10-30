@@ -1,4 +1,4 @@
-"""Bhaav Tiny train / val / test splits (our code).
+"""Bhaav-E train / val / test splits (our code).
 
 Four lists of clip ids in data/splits/:
   train.txt        what the model learns from

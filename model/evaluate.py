@@ -1,4 +1,4 @@
-"""Seen vs unseen evaluation of a Bhaav Tiny run.  (OUR code.)
+"""Seen vs unseen evaluation of a Bhaav-E run.  (OUR code.)
 
 The question: did the model learn *parts* it can mix (subject, motion, effect, background, accent), or did it only
 memorise the combinations it trained on? test_unseen holds combinations that never appear in training

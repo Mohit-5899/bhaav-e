@@ -1,4 +1,4 @@
-# Bhaav Tiny: how to make r1 better
+# Bhaav-E: how to make r1 better
 
 Written 2026-10-30 after the r1 evaluation (`runs/r1/eval/RESULTS.md`). Each idea is matched to a failure we actually
 measured, ranked by expected gain per dollar. Web sources are listed at the end; claims taken from papers are

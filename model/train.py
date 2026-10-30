@@ -1,4 +1,4 @@
-"""Train Bhaav Tiny's VideoDiT with rectified flow on the cached latents.  (OUR code.)
+"""Train Bhaav-E's VideoDiT with rectified flow on the cached latents.  (OUR code.)
 
 One training step (how-training-works.md, section 9):
   1. take a batch of clean latents x0 and one caption line each (10% of captions replaced by the empty caption)

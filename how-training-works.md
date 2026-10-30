@@ -1,4 +1,4 @@
-# How Bhaav Tiny will be trained, from first principles
+# How Bhaav-E will be trained, from first principles
 
 This guide assumes you know nothing about the steps. Each part answers three questions:
 **what is it, why do we need it, and what would go wrong without it.**

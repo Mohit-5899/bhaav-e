@@ -1,4 +1,4 @@
-# Bhaav Tiny: project log
+# Bhaav-E: project log
 
 **Bhaav** (भाव) means expression or feeling. That is what a reaction sticker carries.
 
@@ -22,7 +22,7 @@ Our clips come from code, so every caption is **exactly true** and we can score 
 ## Folders
 
 ```
-bhaav-tiny/
+bhaav-e/
   docs/project-log.md  this file (the step-by-step build log)
   generator/       our code that renders clips (Python / HyperFrames)
   data/            all clips, captions, labels, reviews, splits — see data/README.md

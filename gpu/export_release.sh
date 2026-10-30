@@ -17,7 +17,7 @@ run, out = sys.argv[1:]
 s = torch.load(f"/workspace/runs/{run}/snapshots/ema_step040000.pt", map_location="cpu")
 save_file({k: v.float().contiguous() for k, v in s["ema"].items()}, f"{out}/bhaav_tiny.safetensors")
 n = sum(v.numel() for v in s["ema"].values())
-json.dump(dict(model="Bhaav Tiny VideoDiT", run=run, size=s["size"], step=s["step"], parameters=n, weights="EMA",
+json.dump(dict(model="Bhaav-E VideoDiT", run=run, size=s["size"], step=s["step"], parameters=n, weights="EMA",
                frames=17, fps=8, resolution=256, vae="Wan-AI/Wan2.2-TI2V-5B-Diffusers (subfolder vae)",
                text_encoder="google/flan-t5-base", sampler=dict(steps=50, cfg=3.0, shift=5.0)),
           open(f"{out}/config.json", "w"), indent=1)
