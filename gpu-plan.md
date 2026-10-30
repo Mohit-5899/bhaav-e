@@ -275,7 +275,7 @@ sees it (compute capability 12.0), a bf16 matrix multiply ran, `/workspace` is t
   caption drop 10%, image→sticker 25%, EMA 0.9999, bf16 + torch.compile. Val every 1,000; checkpoint every 2,500;
   **snapshot every 5,000** (EMA weights + 8 sample stickers: 3 seen, 3 unseen combinations, 2 image→sticker).
 - Output on the volume: `/workspace/runs/r1/` (train.out, log.jsonl, last.pt, snapshots/). Expected end ≈ 17:05 UTC, ≈ $2.50.
-- The pod has no RunPod key, so it can't stop itself; a watcher on the Mac wakes Claude when training ends, then
+- The pod has no RunPod key, so it can't stop itself; a watcher on the Mac notices when training ends, then
   render → download → stop the pod.
 
 ### r1 results (finished 2026-10-29 ~17:00 UTC)
