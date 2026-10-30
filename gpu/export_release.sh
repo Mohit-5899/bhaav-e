@@ -15,7 +15,7 @@ import json, sys, torch
 from safetensors.torch import save_file
 run, out = sys.argv[1:]
 s = torch.load(f"/workspace/runs/{run}/snapshots/ema_step040000.pt", map_location="cpu")
-save_file({k: v.float().contiguous() for k, v in s["ema"].items()}, f"{out}/bhaav_tiny.safetensors")
+save_file({k: v.float().contiguous() for k, v in s["ema"].items()}, f"{out}/bhaav_e.safetensors")
 n = sum(v.numel() for v in s["ema"].values())
 json.dump(dict(model="Bhaav-E VideoDiT", run=run, size=s["size"], step=s["step"], parameters=n, weights="EMA",
                frames=17, fps=8, resolution=256, vae="Wan-AI/Wan2.2-TI2V-5B-Diffusers (subfolder vae)",
@@ -35,6 +35,6 @@ a glowing star emoji wobbling side to side, sparkles twinkling around it, dark n
 a purple loading spinner spinning round and round, pulsing, black background
 a screaming in shock emoji wobbling side to side, peach background
 PROMPTS
-/root/venv/bin/python sample.py --ckpt /workspace/release/r2/bhaav_tiny.safetensors --cache /workspace/release/r2 \
+/root/venv/bin/python sample.py --ckpt /workspace/release/r2/bhaav_e.safetensors --cache /workspace/release/r2 \
     "${P[@]}" --out /workspace/release/examples --seed 0
 ls -la /workspace/release/r1 /workspace/release/r2 /workspace/release/examples

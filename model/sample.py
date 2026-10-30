@@ -11,8 +11,8 @@ Two standard extras:
 Usage (pod):
   python sample.py --ckpt /workspace/runs/r1/last.pt --cache /workspace/cache \
       --prompt "an angry emoji shaking, steam puffing from its head, black background" --out /workspace/samples
-Usage (released weights from Hugging Face: bhaav_tiny.safetensors + config.json + text/info.json + latents/vae_config.json):
-  python sample.py --ckpt <download>/bhaav_tiny.safetensors --cache <download> --prompt "..." --out samples
+Usage (released weights from Hugging Face: bhaav_e.safetensors + config.json + text/info.json + latents/vae_config.json):
+  python sample.py --ckpt <download>/bhaav_e.safetensors --cache <download> --prompt "..." --out samples
 """
 import argparse, json
 from pathlib import Path

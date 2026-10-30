@@ -121,7 +121,7 @@ Needs a CUDA GPU (tested on a 24 GB L4; peak memory for smaller cards not measur
 git clone https://github.com/Mohit-5899/bhaav-e && cd bhaav-e
 pip install torch diffusers transformers sentencepiece safetensors pillow numpy huggingface_hub
 hf download Mohit5899/bhaav-e --local-dir weights
-cd model && python sample.py --ckpt ../weights/bhaav_tiny.safetensors --cache ../weights \
+cd model && python sample.py --ckpt ../weights/bhaav_e.safetensors --cache ../weights \
     --prompt "a crying emoji bouncing, tears falling, light blue background" --out ../samples
 ```
 
