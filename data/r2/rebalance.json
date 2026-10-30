@@ -1,0 +1,180 @@
+{
+ "generate": [
+  [
+   "animated-emoji",
+   "clap",
+   "none",
+   248
+  ],
+  [
+   "animated-emoji",
+   "fire",
+   "none",
+   327
+  ],
+  [
+   "animated-emoji",
+   "heart",
+   "none",
+   308
+  ],
+  [
+   "animated-emoji",
+   "hundred",
+   "none",
+   211
+  ],
+  [
+   "animated-emoji",
+   "idea",
+   "none",
+   711
+  ],
+  [
+   "animated-emoji",
+   "party",
+   "none",
+   348
+  ],
+  [
+   "animated-emoji",
+   "rocket",
+   "none",
+   295
+  ],
+  [
+   "animated-emoji",
+   "star",
+   "none",
+   504
+  ],
+  [
+   "animated-emoji",
+   "thumbs-up",
+   "none",
+   664
+  ],
+  [
+   "animated-emoji",
+   "trophy",
+   "none",
+   138
+  ],
+  [
+   "reactions",
+   "angry",
+   "none",
+   699
+  ],
+  [
+   "reactions",
+   "cool",
+   "none",
+   545
+  ],
+  [
+   "reactions",
+   "crying",
+   "none",
+   715
+  ],
+  [
+   "reactions",
+   "facepalm",
+   "none",
+   491
+  ],
+  [
+   "reactions",
+   "heart-eyes",
+   "none",
+   321
+  ],
+  [
+   "reactions",
+   "laugh",
+   "none",
+   405
+  ],
+  [
+   "reactions",
+   "shocked",
+   "none",
+   290
+  ],
+  [
+   "reactions",
+   "sleepy",
+   "none",
+   689
+  ],
+  [
+   "reactions",
+   "thinking",
+   "none",
+   670
+  ],
+  [
+   "reactions",
+   "wink",
+   "none",
+   294
+  ],
+  [
+   "ui",
+   "bell",
+   "none",
+   770
+  ],
+  [
+   "ui",
+   "like",
+   "none",
+   697
+  ],
+  [
+   "ui",
+   "success",
+   "none",
+   475
+  ]
+ ],
+ "drop": {
+  "animated-emoji/clap/confetti": 207,
+  "animated-emoji/clap/sparkles": 41,
+  "animated-emoji/fire/embers": 187,
+  "animated-emoji/fire/sparkles": 140,
+  "animated-emoji/heart/hearts": 156,
+  "animated-emoji/heart/sparkles": 151,
+  "animated-emoji/hundred/confetti": 105,
+  "animated-emoji/hundred/sparkles": 107,
+  "animated-emoji/idea/sparkles": 712,
+  "animated-emoji/party/confetti": 174,
+  "animated-emoji/party/sparkles": 175,
+  "animated-emoji/rocket/exhaust": 170,
+  "animated-emoji/rocket/sparkles": 124,
+  "animated-emoji/star/sparkles": 504,
+  "animated-emoji/thumbs-up/sparkles": 663,
+  "animated-emoji/trophy/confetti": 51,
+  "animated-emoji/trophy/sparkles": 86,
+  "reactions/angry/steam": 700,
+  "reactions/cool/sparkles": 544,
+  "reactions/crying/tears": 714,
+  "reactions/facepalm/sweat": 491,
+  "reactions/heart-eyes/hearts": 105,
+  "reactions/heart-eyes/sparkles": 215,
+  "reactions/laugh/sparkles": 190,
+  "reactions/laugh/tears-joy": 214,
+  "reactions/shocked/sparkles": 239,
+  "reactions/shocked/sweat": 52,
+  "reactions/sleepy/zzz": 689,
+  "reactions/thinking/thought": 670,
+  "reactions/wink/hearts": 152,
+  "reactions/wink/sparkles": 141,
+  "ui/bell/sparkles": 771,
+  "ui/like/sparkles": 698,
+  "ui/success/confetti": 321,
+  "ui/success/sparkles": 154
+ },
+ "total_new": 10815
+}

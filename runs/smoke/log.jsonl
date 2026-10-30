@@ -1,0 +1,8 @@
+{"step": 50, "loss": 1.41133, "gnorm": 0.741, "lr_f": 0.5, "clips_per_s": 42.3, "mem_GB": 21.3}
+{"step": 100, "loss": 0.9734, "gnorm": 0.6, "lr_f": 1.0, "clips_per_s": 214.6, "mem_GB": 21.3}
+{"step": 150, "loss": 0.4301, "gnorm": 0.873, "lr_f": 1.0, "clips_per_s": 214.8, "mem_GB": 21.3}
+{"step": 200, "loss": 0.2796, "gnorm": 0.451, "lr_f": 1.0, "clips_per_s": 213.8, "mem_GB": 21.3, "val": 0.34617}
+{"step": 250, "loss": 0.24627, "gnorm": 0.344, "lr_f": 1.0, "clips_per_s": 169.9, "mem_GB": 21.3}
+{"step": 300, "loss": 0.23728, "gnorm": 0.364, "lr_f": 1.0, "clips_per_s": 213.6, "mem_GB": 21.3}
+{"step": 350, "loss": 0.19384, "gnorm": 0.166, "lr_f": 0.51, "clips_per_s": 213.9, "mem_GB": 21.3}
+{"step": 400, "loss": 0.16464, "gnorm": 0.196, "lr_f": 0.01, "clips_per_s": 213.9, "mem_GB": 21.3, "val": 0.2093}

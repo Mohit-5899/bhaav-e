@@ -1,0 +1,409 @@
+{"params_M": 211.92, "train": 61571, "val": 3750, "cache": "/root/cache_r2", "splits": "/root/data/r2splits", "out": "/workspace/runs/r2", "size": "s210", "batch": 64, "steps": 40000, "warmup": 1000, "decay_frac": 0.25, "muon_lr": 0.02, "adam_lr": 0.0002, "no_muon": false, "caption_drop": 0.1, "p_first": 0.25, "ema": 0.9999, "log_every": 100, "val_every": 1000, "ckpt_every": 2500, "snap_every": 5000, "overfit": 0, "compile": true, "seed": 0, "device": "cuda"}
+{"step": 100, "loss": 1.92983, "gnorm": 1.586, "lr_f": 0.1, "clips_per_s": 64.8, "mem_GB": 21.4}
+{"step": 200, "loss": 1.22195, "gnorm": 0.349, "lr_f": 0.2, "clips_per_s": 207.4, "mem_GB": 21.4}
+{"step": 300, "loss": 0.41554, "gnorm": 0.941, "lr_f": 0.3, "clips_per_s": 206.6, "mem_GB": 21.4}
+{"step": 400, "loss": 0.26191, "gnorm": 0.574, "lr_f": 0.4, "clips_per_s": 207.4, "mem_GB": 21.4}
+{"step": 500, "loss": 0.24087, "gnorm": 0.611, "lr_f": 0.5, "clips_per_s": 206.3, "mem_GB": 21.4}
+{"step": 600, "loss": 0.16904, "gnorm": 0.438, "lr_f": 0.6, "clips_per_s": 206.1, "mem_GB": 21.4}
+{"step": 700, "loss": 0.14717, "gnorm": 0.504, "lr_f": 0.7, "clips_per_s": 200.9, "mem_GB": 21.4}
+{"step": 800, "loss": 0.16506, "gnorm": 0.453, "lr_f": 0.8, "clips_per_s": 206.2, "mem_GB": 21.4}
+{"step": 900, "loss": 0.13935, "gnorm": 0.368, "lr_f": 0.9, "clips_per_s": 206.0, "mem_GB": 21.4}
+{"step": 1000, "loss": 0.16806, "gnorm": 0.441, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4, "val": 0.15462}
+{"step": 1100, "loss": 0.12986, "gnorm": 0.369, "lr_f": 1.0, "clips_per_s": 198.5, "mem_GB": 21.4}
+{"step": 1200, "loss": 0.12087, "gnorm": 0.293, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4}
+{"step": 1300, "loss": 0.1153, "gnorm": 0.25, "lr_f": 1.0, "clips_per_s": 205.4, "mem_GB": 21.4}
+{"step": 1400, "loss": 0.11205, "gnorm": 0.262, "lr_f": 1.0, "clips_per_s": 205.0, "mem_GB": 21.4}
+{"step": 1500, "loss": 0.09905, "gnorm": 0.275, "lr_f": 1.0, "clips_per_s": 205.1, "mem_GB": 21.4}
+{"step": 1600, "loss": 0.09664, "gnorm": 0.252, "lr_f": 1.0, "clips_per_s": 205.1, "mem_GB": 21.4}
+{"step": 1700, "loss": 0.09607, "gnorm": 0.247, "lr_f": 1.0, "clips_per_s": 205.0, "mem_GB": 21.4}
+{"step": 1800, "loss": 0.10854, "gnorm": 0.207, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 1900, "loss": 0.09214, "gnorm": 0.171, "lr_f": 1.0, "clips_per_s": 205.2, "mem_GB": 21.4}
+{"step": 2000, "loss": 0.09231, "gnorm": 0.197, "lr_f": 1.0, "clips_per_s": 205.2, "mem_GB": 21.4, "val": 0.11235}
+{"step": 2100, "loss": 0.0856, "gnorm": 0.184, "lr_f": 1.0, "clips_per_s": 198.0, "mem_GB": 21.4}
+{"step": 2200, "loss": 0.08339, "gnorm": 0.188, "lr_f": 1.0, "clips_per_s": 205.2, "mem_GB": 21.4}
+{"step": 2300, "loss": 0.07793, "gnorm": 0.154, "lr_f": 1.0, "clips_per_s": 205.2, "mem_GB": 21.4}
+{"step": 2400, "loss": 0.08462, "gnorm": 0.172, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 2500, "loss": 0.08146, "gnorm": 0.153, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 2600, "loss": 0.07214, "gnorm": 0.153, "lr_f": 1.0, "clips_per_s": 185.2, "mem_GB": 21.4}
+{"step": 2700, "loss": 0.08918, "gnorm": 0.136, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 2800, "loss": 0.07836, "gnorm": 0.145, "lr_f": 1.0, "clips_per_s": 205.2, "mem_GB": 21.4}
+{"step": 2900, "loss": 0.07484, "gnorm": 0.118, "lr_f": 1.0, "clips_per_s": 202.6, "mem_GB": 21.4}
+{"step": 3000, "loss": 0.07841, "gnorm": 0.165, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4, "val": 0.09944}
+{"step": 3100, "loss": 0.06723, "gnorm": 0.118, "lr_f": 1.0, "clips_per_s": 198.5, "mem_GB": 21.4}
+{"step": 3200, "loss": 0.06725, "gnorm": 0.136, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 3300, "loss": 0.07917, "gnorm": 0.146, "lr_f": 1.0, "clips_per_s": 205.5, "mem_GB": 21.4}
+{"step": 3400, "loss": 0.07167, "gnorm": 0.126, "lr_f": 1.0, "clips_per_s": 203.3, "mem_GB": 21.4}
+{"step": 3500, "loss": 0.06786, "gnorm": 0.152, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.4}
+{"step": 3600, "loss": 0.06653, "gnorm": 0.111, "lr_f": 1.0, "clips_per_s": 205.6, "mem_GB": 21.4}
+{"step": 3700, "loss": 0.07015, "gnorm": 0.127, "lr_f": 1.0, "clips_per_s": 205.4, "mem_GB": 21.4}
+{"step": 3800, "loss": 0.08111, "gnorm": 0.142, "lr_f": 1.0, "clips_per_s": 205.5, "mem_GB": 21.4}
+{"step": 3900, "loss": 0.05921, "gnorm": 0.108, "lr_f": 1.0, "clips_per_s": 205.6, "mem_GB": 21.4}
+{"step": 4000, "loss": 0.06465, "gnorm": 0.128, "lr_f": 1.0, "clips_per_s": 205.6, "mem_GB": 21.4, "val": 0.09171}
+{"step": 4100, "loss": 0.07948, "gnorm": 0.288, "lr_f": 1.0, "clips_per_s": 198.5, "mem_GB": 21.4}
+{"step": 4200, "loss": 0.06253, "gnorm": 0.111, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4}
+{"step": 4300, "loss": 0.07458, "gnorm": 0.115, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4}
+{"step": 4400, "loss": 0.05954, "gnorm": 0.099, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4}
+{"step": 4500, "loss": 0.07744, "gnorm": 0.156, "lr_f": 1.0, "clips_per_s": 203.3, "mem_GB": 21.4}
+{"step": 4600, "loss": 0.06761, "gnorm": 0.117, "lr_f": 1.0, "clips_per_s": 205.8, "mem_GB": 21.4}
+{"step": 4700, "loss": 0.06984, "gnorm": 0.144, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4}
+{"step": 4800, "loss": 0.05585, "gnorm": 0.116, "lr_f": 1.0, "clips_per_s": 205.8, "mem_GB": 21.4}
+{"step": 4900, "loss": 0.06151, "gnorm": 0.102, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.4}
+{"step": 5000, "loss": 0.06767, "gnorm": 0.136, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.4, "val": 0.08659}
+{"snapshot": 5000, "samples": 8}
+{"step": 5100, "loss": 0.06569, "gnorm": 0.186, "lr_f": 1.0, "clips_per_s": 111.2, "mem_GB": 21.9}
+{"step": 5200, "loss": 0.07495, "gnorm": 0.114, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 5300, "loss": 0.06137, "gnorm": 0.115, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 5400, "loss": 0.05899, "gnorm": 0.096, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 5500, "loss": 0.05186, "gnorm": 0.09, "lr_f": 1.0, "clips_per_s": 205.9, "mem_GB": 21.9}
+{"step": 5600, "loss": 0.06574, "gnorm": 0.143, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 5700, "loss": 0.05728, "gnorm": 0.1, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 5800, "loss": 0.0553, "gnorm": 0.099, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 5900, "loss": 0.06285, "gnorm": 0.099, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 6000, "loss": 0.06136, "gnorm": 0.135, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9, "val": 0.08121}
+{"step": 6100, "loss": 0.05729, "gnorm": 0.093, "lr_f": 1.0, "clips_per_s": 198.9, "mem_GB": 21.9}
+{"step": 6200, "loss": 0.05603, "gnorm": 0.08, "lr_f": 1.0, "clips_per_s": 204.4, "mem_GB": 21.9}
+{"step": 6300, "loss": 0.0559, "gnorm": 0.088, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 6400, "loss": 0.05032, "gnorm": 0.109, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 6500, "loss": 0.05753, "gnorm": 0.106, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 6600, "loss": 0.06227, "gnorm": 0.093, "lr_f": 1.0, "clips_per_s": 203.2, "mem_GB": 21.9}
+{"step": 6700, "loss": 0.05366, "gnorm": 0.092, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 6800, "loss": 0.07455, "gnorm": 0.247, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 6900, "loss": 0.05851, "gnorm": 0.109, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 7000, "loss": 0.05939, "gnorm": 0.095, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9, "val": 0.07878}
+{"step": 7100, "loss": 0.05163, "gnorm": 0.094, "lr_f": 1.0, "clips_per_s": 199.3, "mem_GB": 21.9}
+{"step": 7200, "loss": 0.06488, "gnorm": 0.152, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 7300, "loss": 0.05991, "gnorm": 0.116, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 7400, "loss": 0.05241, "gnorm": 0.074, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 7500, "loss": 0.06253, "gnorm": 0.221, "lr_f": 1.0, "clips_per_s": 205.9, "mem_GB": 21.9}
+{"step": 7600, "loss": 0.05094, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 184.5, "mem_GB": 21.9}
+{"step": 7700, "loss": 0.05222, "gnorm": 0.091, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 7800, "loss": 0.0542, "gnorm": 0.097, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 7900, "loss": 0.05668, "gnorm": 0.091, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 8000, "loss": 0.05416, "gnorm": 0.078, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9, "val": 0.07631}
+{"step": 8100, "loss": 0.05147, "gnorm": 0.118, "lr_f": 1.0, "clips_per_s": 196.5, "mem_GB": 21.9}
+{"step": 8200, "loss": 0.05859, "gnorm": 0.079, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 8300, "loss": 0.05669, "gnorm": 0.09, "lr_f": 1.0, "clips_per_s": 206.5, "mem_GB": 21.9}
+{"step": 8400, "loss": 0.05336, "gnorm": 0.082, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 8500, "loss": 0.05883, "gnorm": 0.092, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 8600, "loss": 0.05509, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.9}
+{"step": 8700, "loss": 0.04924, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 206.6, "mem_GB": 21.9}
+{"step": 8800, "loss": 0.05639, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 8900, "loss": 0.06069, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 9000, "loss": 0.0486, "gnorm": 0.087, "lr_f": 1.0, "clips_per_s": 206.5, "mem_GB": 21.9, "val": 0.07485}
+{"step": 9100, "loss": 0.06376, "gnorm": 0.111, "lr_f": 1.0, "clips_per_s": 199.5, "mem_GB": 21.9}
+{"step": 9200, "loss": 0.06509, "gnorm": 0.096, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.9}
+{"step": 9300, "loss": 0.04334, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 205.9, "mem_GB": 21.9}
+{"step": 9400, "loss": 0.04868, "gnorm": 0.079, "lr_f": 1.0, "clips_per_s": 207.3, "mem_GB": 21.9}
+{"step": 9500, "loss": 0.04741, "gnorm": 0.104, "lr_f": 1.0, "clips_per_s": 207.2, "mem_GB": 21.9}
+{"step": 9600, "loss": 0.0607, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 206.6, "mem_GB": 21.9}
+{"step": 9700, "loss": 0.04598, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 9800, "loss": 0.05486, "gnorm": 0.078, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 9900, "loss": 0.04595, "gnorm": 0.087, "lr_f": 1.0, "clips_per_s": 205.9, "mem_GB": 21.9}
+{"step": 10000, "loss": 0.05162, "gnorm": 0.12, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9, "val": 0.07306}
+{"snapshot": 10000, "samples": 8}
+{"step": 10100, "loss": 0.04704, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 110.3, "mem_GB": 21.9}
+{"step": 10200, "loss": 0.05415, "gnorm": 0.097, "lr_f": 1.0, "clips_per_s": 206.4, "mem_GB": 21.9}
+{"step": 10300, "loss": 0.04582, "gnorm": 0.085, "lr_f": 1.0, "clips_per_s": 203.5, "mem_GB": 21.9}
+{"step": 10400, "loss": 0.04754, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 205.4, "mem_GB": 21.9}
+{"step": 10500, "loss": 0.04675, "gnorm": 0.079, "lr_f": 1.0, "clips_per_s": 206.3, "mem_GB": 21.9}
+{"step": 10600, "loss": 0.04502, "gnorm": 0.086, "lr_f": 1.0, "clips_per_s": 206.4, "mem_GB": 21.9}
+{"step": 10700, "loss": 0.05724, "gnorm": 0.09, "lr_f": 1.0, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 10800, "loss": 0.08695, "gnorm": 0.43, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 10900, "loss": 0.0458, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 11000, "loss": 0.04722, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 207.8, "mem_GB": 21.9, "val": 0.07187}
+{"step": 11100, "loss": 0.05682, "gnorm": 0.098, "lr_f": 1.0, "clips_per_s": 201.0, "mem_GB": 21.9}
+{"step": 11200, "loss": 0.05836, "gnorm": 0.097, "lr_f": 1.0, "clips_per_s": 208.7, "mem_GB": 21.9}
+{"step": 11300, "loss": 0.04922, "gnorm": 0.113, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 11400, "loss": 0.05664, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 208.7, "mem_GB": 21.9}
+{"step": 11500, "loss": 0.05117, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9}
+{"step": 11600, "loss": 0.03998, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9}
+{"step": 11700, "loss": 0.05319, "gnorm": 0.096, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 11800, "loss": 0.04532, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.9}
+{"step": 11900, "loss": 0.05249, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 12000, "loss": 0.04118, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9, "val": 0.07024}
+{"step": 12100, "loss": 0.04071, "gnorm": 0.074, "lr_f": 1.0, "clips_per_s": 201.7, "mem_GB": 21.9}
+{"step": 12200, "loss": 0.04403, "gnorm": 0.149, "lr_f": 1.0, "clips_per_s": 207.8, "mem_GB": 21.9}
+{"step": 12300, "loss": 0.04406, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 12400, "loss": 0.04303, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 209.4, "mem_GB": 21.9}
+{"step": 12500, "loss": 0.05151, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 209.2, "mem_GB": 21.9}
+{"step": 12600, "loss": 0.05752, "gnorm": 0.08, "lr_f": 1.0, "clips_per_s": 182.7, "mem_GB": 21.9}
+{"step": 12700, "loss": 0.05347, "gnorm": 0.086, "lr_f": 1.0, "clips_per_s": 207.9, "mem_GB": 21.9}
+{"step": 12800, "loss": 0.04683, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 207.3, "mem_GB": 21.9}
+{"step": 12900, "loss": 0.05372, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 13000, "loss": 0.03838, "gnorm": 0.078, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9, "val": 0.0694}
+{"step": 13100, "loss": 0.04178, "gnorm": 0.092, "lr_f": 1.0, "clips_per_s": 201.7, "mem_GB": 21.9}
+{"step": 13200, "loss": 0.04388, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 208.3, "mem_GB": 21.9}
+{"step": 13300, "loss": 0.05157, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9}
+{"step": 13400, "loss": 0.03611, "gnorm": 0.063, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 13500, "loss": 0.04635, "gnorm": 0.063, "lr_f": 1.0, "clips_per_s": 209.1, "mem_GB": 21.9}
+{"step": 13600, "loss": 0.04759, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 208.5, "mem_GB": 21.9}
+{"step": 13700, "loss": 0.05417, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9}
+{"step": 13800, "loss": 0.03909, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 208.7, "mem_GB": 21.9}
+{"step": 13900, "loss": 0.04703, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 208.5, "mem_GB": 21.9}
+{"step": 14000, "loss": 0.05035, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 205.6, "mem_GB": 21.9, "val": 0.06841}
+{"step": 14100, "loss": 0.04843, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 201.9, "mem_GB": 21.9}
+{"step": 14200, "loss": 0.04055, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 14300, "loss": 0.05084, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9}
+{"step": 14400, "loss": 0.05481, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9}
+{"step": 14500, "loss": 0.04476, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 209.2, "mem_GB": 21.9}
+{"step": 14600, "loss": 0.04685, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 208.6, "mem_GB": 21.9}
+{"step": 14700, "loss": 0.04117, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 208.3, "mem_GB": 21.9}
+{"step": 14800, "loss": 0.05035, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 208.2, "mem_GB": 21.9}
+{"step": 14900, "loss": 0.03913, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 15000, "loss": 0.04036, "gnorm": 0.082, "lr_f": 1.0, "clips_per_s": 208.5, "mem_GB": 21.9, "val": 0.06742}
+{"snapshot": 15000, "samples": 8}
+{"step": 15100, "loss": 0.04375, "gnorm": 0.068, "lr_f": 1.0, "clips_per_s": 113.4, "mem_GB": 21.9}
+{"step": 15200, "loss": 0.04432, "gnorm": 0.079, "lr_f": 1.0, "clips_per_s": 207.4, "mem_GB": 21.9}
+{"step": 15300, "loss": 0.05333, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 208.3, "mem_GB": 21.9}
+{"step": 15400, "loss": 0.04417, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 15500, "loss": 0.03687, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 208.5, "mem_GB": 21.9}
+{"step": 15600, "loss": 0.04725, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 206.4, "mem_GB": 21.9}
+{"step": 15700, "loss": 0.04182, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 15800, "loss": 0.04971, "gnorm": 0.069, "lr_f": 1.0, "clips_per_s": 208.0, "mem_GB": 21.9}
+{"step": 15900, "loss": 0.03436, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 16000, "loss": 0.0474, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 207.9, "mem_GB": 21.9, "val": 0.06654}
+{"step": 16100, "loss": 0.0417, "gnorm": 0.076, "lr_f": 1.0, "clips_per_s": 200.4, "mem_GB": 21.9}
+{"step": 16200, "loss": 0.03972, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 207.5, "mem_GB": 21.9}
+{"step": 16300, "loss": 0.04779, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 207.8, "mem_GB": 21.9}
+{"step": 16400, "loss": 0.04078, "gnorm": 0.087, "lr_f": 1.0, "clips_per_s": 207.7, "mem_GB": 21.9}
+{"step": 16500, "loss": 0.04076, "gnorm": 0.068, "lr_f": 1.0, "clips_per_s": 206.3, "mem_GB": 21.9}
+{"step": 16600, "loss": 0.05195, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 16700, "loss": 0.05382, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 206.5, "mem_GB": 21.9}
+{"step": 16800, "loss": 0.03965, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 206.8, "mem_GB": 21.9}
+{"step": 16900, "loss": 0.04761, "gnorm": 0.085, "lr_f": 1.0, "clips_per_s": 207.1, "mem_GB": 21.9}
+{"step": 17000, "loss": 0.04273, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9, "val": 0.06563}
+{"step": 17100, "loss": 0.04074, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 199.1, "mem_GB": 21.9}
+{"step": 17200, "loss": 0.03327, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 205.7, "mem_GB": 21.9}
+{"step": 17300, "loss": 0.04346, "gnorm": 0.162, "lr_f": 1.0, "clips_per_s": 207.1, "mem_GB": 21.9}
+{"step": 17400, "loss": 0.04022, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 206.7, "mem_GB": 21.9}
+{"step": 17500, "loss": 0.03973, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 206.5, "mem_GB": 21.9}
+{"step": 17600, "loss": 0.04254, "gnorm": 0.077, "lr_f": 1.0, "clips_per_s": 181.4, "mem_GB": 21.9}
+{"step": 17700, "loss": 0.04157, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 207.6, "mem_GB": 21.9}
+{"step": 17800, "loss": 0.04187, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 203.5, "mem_GB": 21.9}
+{"step": 17900, "loss": 0.03854, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 207.7, "mem_GB": 21.9}
+{"step": 18000, "loss": 0.03608, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 207.7, "mem_GB": 21.9, "val": 0.06488}
+{"step": 18100, "loss": 0.04645, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 201.1, "mem_GB": 21.9}
+{"step": 18200, "loss": 0.0473, "gnorm": 0.137, "lr_f": 1.0, "clips_per_s": 206.7, "mem_GB": 21.9}
+{"step": 18300, "loss": 0.04994, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 206.8, "mem_GB": 21.9}
+{"step": 18400, "loss": 0.04494, "gnorm": 0.266, "lr_f": 1.0, "clips_per_s": 206.8, "mem_GB": 21.9}
+{"step": 18500, "loss": 0.04204, "gnorm": 0.055, "lr_f": 1.0, "clips_per_s": 209.6, "mem_GB": 21.9}
+{"step": 18600, "loss": 0.04244, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 209.0, "mem_GB": 21.9}
+{"step": 18700, "loss": 0.05017, "gnorm": 0.087, "lr_f": 1.0, "clips_per_s": 209.1, "mem_GB": 21.9}
+{"step": 18800, "loss": 0.06299, "gnorm": 0.087, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 18900, "loss": 0.03973, "gnorm": 0.06, "lr_f": 1.0, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 19000, "loss": 0.0342, "gnorm": 0.073, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9, "val": 0.06507}
+{"step": 19100, "loss": 0.04359, "gnorm": 0.062, "lr_f": 1.0, "clips_per_s": 202.4, "mem_GB": 21.9}
+{"step": 19200, "loss": 0.03879, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 209.7, "mem_GB": 21.9}
+{"step": 19300, "loss": 0.04355, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 207.2, "mem_GB": 21.9}
+{"step": 19400, "loss": 0.03647, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 209.0, "mem_GB": 21.9}
+{"step": 19500, "loss": 0.04378, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 209.5, "mem_GB": 21.9}
+{"step": 19600, "loss": 0.03842, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 19700, "loss": 0.05126, "gnorm": 0.078, "lr_f": 1.0, "clips_per_s": 209.5, "mem_GB": 21.9}
+{"step": 19800, "loss": 0.04111, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 209.5, "mem_GB": 21.9}
+{"step": 19900, "loss": 0.04609, "gnorm": 0.105, "lr_f": 1.0, "clips_per_s": 209.6, "mem_GB": 21.9}
+{"step": 20000, "loss": 0.0459, "gnorm": 0.08, "lr_f": 1.0, "clips_per_s": 209.9, "mem_GB": 21.9, "val": 0.06426}
+{"snapshot": 20000, "samples": 8}
+{"step": 20100, "loss": 0.0415, "gnorm": 0.069, "lr_f": 1.0, "clips_per_s": 111.0, "mem_GB": 21.9}
+{"step": 20200, "loss": 0.0393, "gnorm": 0.063, "lr_f": 1.0, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 20300, "loss": 0.04574, "gnorm": 0.079, "lr_f": 1.0, "clips_per_s": 209.6, "mem_GB": 21.9}
+{"step": 20400, "loss": 0.04572, "gnorm": 0.08, "lr_f": 1.0, "clips_per_s": 210.4, "mem_GB": 21.9}
+{"step": 20500, "loss": 0.04198, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 210.3, "mem_GB": 21.9}
+{"step": 20600, "loss": 0.03357, "gnorm": 0.053, "lr_f": 1.0, "clips_per_s": 210.5, "mem_GB": 21.9}
+{"step": 20700, "loss": 0.04106, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 210.4, "mem_GB": 21.9}
+{"step": 20800, "loss": 0.05553, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 20900, "loss": 0.04066, "gnorm": 0.051, "lr_f": 1.0, "clips_per_s": 207.1, "mem_GB": 21.9}
+{"step": 21000, "loss": 0.03224, "gnorm": 0.068, "lr_f": 1.0, "clips_per_s": 207.3, "mem_GB": 21.9, "val": 0.06371}
+{"step": 21100, "loss": 0.08002, "gnorm": 0.516, "lr_f": 1.0, "clips_per_s": 199.9, "mem_GB": 21.9}
+{"step": 21200, "loss": 0.03745, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 207.0, "mem_GB": 21.9}
+{"step": 21300, "loss": 0.03565, "gnorm": 0.067, "lr_f": 1.0, "clips_per_s": 207.4, "mem_GB": 21.9}
+{"step": 21400, "loss": 0.03581, "gnorm": 0.053, "lr_f": 1.0, "clips_per_s": 206.7, "mem_GB": 21.9}
+{"step": 21500, "loss": 0.04844, "gnorm": 0.074, "lr_f": 1.0, "clips_per_s": 203.0, "mem_GB": 21.9}
+{"step": 21600, "loss": 0.05458, "gnorm": 0.098, "lr_f": 1.0, "clips_per_s": 205.9, "mem_GB": 21.9}
+{"step": 21700, "loss": 0.03983, "gnorm": 0.088, "lr_f": 1.0, "clips_per_s": 206.3, "mem_GB": 21.9}
+{"step": 21800, "loss": 0.03709, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 205.3, "mem_GB": 21.9}
+{"step": 21900, "loss": 0.04035, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 211.0, "mem_GB": 21.9}
+{"step": 22000, "loss": 0.04541, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 208.2, "mem_GB": 21.9, "val": 0.06304}
+{"step": 22100, "loss": 0.04286, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 201.9, "mem_GB": 21.9}
+{"step": 22200, "loss": 0.03066, "gnorm": 0.055, "lr_f": 1.0, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 22300, "loss": 0.0396, "gnorm": 0.074, "lr_f": 1.0, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 22400, "loss": 0.04431, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 208.2, "mem_GB": 21.9}
+{"step": 22500, "loss": 0.03415, "gnorm": 0.054, "lr_f": 1.0, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 22600, "loss": 0.03479, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 181.5, "mem_GB": 21.9}
+{"step": 22700, "loss": 0.03964, "gnorm": 0.121, "lr_f": 1.0, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 22800, "loss": 0.034, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 209.7, "mem_GB": 21.9}
+{"step": 22900, "loss": 0.05178, "gnorm": 0.084, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 23000, "loss": 0.05176, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 207.1, "mem_GB": 21.9, "val": 0.06238}
+{"step": 23100, "loss": 0.03874, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 202.1, "mem_GB": 21.9}
+{"step": 23200, "loss": 0.03996, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 209.4, "mem_GB": 21.9}
+{"step": 23300, "loss": 0.03699, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 23400, "loss": 0.03812, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 209.7, "mem_GB": 21.9}
+{"step": 23500, "loss": 0.03527, "gnorm": 0.077, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9}
+{"step": 23600, "loss": 0.04022, "gnorm": 0.046, "lr_f": 1.0, "clips_per_s": 211.0, "mem_GB": 21.9}
+{"step": 23700, "loss": 0.03729, "gnorm": 0.077, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9}
+{"step": 23800, "loss": 0.0415, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 211.0, "mem_GB": 21.9}
+{"step": 23900, "loss": 0.03887, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 24000, "loss": 0.04117, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 209.0, "mem_GB": 21.9, "val": 0.06216}
+{"step": 24100, "loss": 0.03756, "gnorm": 0.077, "lr_f": 1.0, "clips_per_s": 202.7, "mem_GB": 21.9}
+{"step": 24200, "loss": 0.04199, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 210.3, "mem_GB": 21.9}
+{"step": 24300, "loss": 0.04377, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 208.7, "mem_GB": 21.9}
+{"step": 24400, "loss": 0.03814, "gnorm": 0.068, "lr_f": 1.0, "clips_per_s": 208.7, "mem_GB": 21.9}
+{"step": 24500, "loss": 0.03254, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 209.1, "mem_GB": 21.9}
+{"step": 24600, "loss": 0.0483, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 208.6, "mem_GB": 21.9}
+{"step": 24700, "loss": 0.03162, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 209.5, "mem_GB": 21.9}
+{"step": 24800, "loss": 0.04122, "gnorm": 0.077, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9}
+{"step": 24900, "loss": 0.035, "gnorm": 0.07, "lr_f": 1.0, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 25000, "loss": 0.03594, "gnorm": 0.066, "lr_f": 1.0, "clips_per_s": 209.3, "mem_GB": 21.9, "val": 0.06169}
+{"snapshot": 25000, "samples": 8}
+{"step": 25100, "loss": 0.03872, "gnorm": 0.071, "lr_f": 1.0, "clips_per_s": 111.8, "mem_GB": 21.9}
+{"step": 25200, "loss": 0.03922, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 208.6, "mem_GB": 21.9}
+{"step": 25300, "loss": 0.03857, "gnorm": 0.055, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 25400, "loss": 0.03865, "gnorm": 0.113, "lr_f": 1.0, "clips_per_s": 208.8, "mem_GB": 21.9}
+{"step": 25500, "loss": 0.03135, "gnorm": 0.048, "lr_f": 1.0, "clips_per_s": 209.8, "mem_GB": 21.9}
+{"step": 25600, "loss": 0.03586, "gnorm": 0.058, "lr_f": 1.0, "clips_per_s": 208.6, "mem_GB": 21.9}
+{"step": 25700, "loss": 0.03958, "gnorm": 0.072, "lr_f": 1.0, "clips_per_s": 210.5, "mem_GB": 21.9}
+{"step": 25800, "loss": 0.03949, "gnorm": 0.055, "lr_f": 1.0, "clips_per_s": 210.4, "mem_GB": 21.9}
+{"step": 25900, "loss": 0.03454, "gnorm": 0.064, "lr_f": 1.0, "clips_per_s": 209.1, "mem_GB": 21.9}
+{"step": 26000, "loss": 0.04453, "gnorm": 0.117, "lr_f": 1.0, "clips_per_s": 209.8, "mem_GB": 21.9, "val": 0.06135}
+{"step": 26100, "loss": 0.0504, "gnorm": 0.118, "lr_f": 1.0, "clips_per_s": 201.3, "mem_GB": 21.9}
+{"step": 26200, "loss": 0.05254, "gnorm": 0.176, "lr_f": 1.0, "clips_per_s": 209.6, "mem_GB": 21.9}
+{"step": 26300, "loss": 0.03837, "gnorm": 0.058, "lr_f": 1.0, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 26400, "loss": 0.05291, "gnorm": 0.109, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 26500, "loss": 0.03692, "gnorm": 0.062, "lr_f": 1.0, "clips_per_s": 209.0, "mem_GB": 21.9}
+{"step": 26600, "loss": 0.04023, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 209.5, "mem_GB": 21.9}
+{"step": 26700, "loss": 0.03362, "gnorm": 0.052, "lr_f": 1.0, "clips_per_s": 206.4, "mem_GB": 21.9}
+{"step": 26800, "loss": 0.03616, "gnorm": 0.05, "lr_f": 1.0, "clips_per_s": 209.8, "mem_GB": 21.9}
+{"step": 26900, "loss": 0.03684, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 210.8, "mem_GB": 21.9}
+{"step": 27000, "loss": 0.03964, "gnorm": 0.069, "lr_f": 1.0, "clips_per_s": 210.4, "mem_GB": 21.9, "val": 0.06117}
+{"step": 27100, "loss": 0.0368, "gnorm": 0.061, "lr_f": 1.0, "clips_per_s": 199.8, "mem_GB": 21.9}
+{"step": 27200, "loss": 0.03211, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 206.6, "mem_GB": 21.9}
+{"step": 27300, "loss": 0.04022, "gnorm": 0.082, "lr_f": 1.0, "clips_per_s": 206.8, "mem_GB": 21.9}
+{"step": 27400, "loss": 0.02908, "gnorm": 0.051, "lr_f": 1.0, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 27500, "loss": 0.04928, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 27600, "loss": 0.03392, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 181.4, "mem_GB": 21.9}
+{"step": 27700, "loss": 0.03556, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 206.7, "mem_GB": 21.9}
+{"step": 27800, "loss": 0.03934, "gnorm": 0.058, "lr_f": 1.0, "clips_per_s": 207.3, "mem_GB": 21.9}
+{"step": 27900, "loss": 0.04322, "gnorm": 0.054, "lr_f": 1.0, "clips_per_s": 207.9, "mem_GB": 21.9}
+{"step": 28000, "loss": 0.03658, "gnorm": 0.101, "lr_f": 1.0, "clips_per_s": 207.8, "mem_GB": 21.9, "val": 0.06099}
+{"step": 28100, "loss": 0.03837, "gnorm": 0.053, "lr_f": 1.0, "clips_per_s": 199.8, "mem_GB": 21.9}
+{"step": 28200, "loss": 0.04304, "gnorm": 0.069, "lr_f": 1.0, "clips_per_s": 207.5, "mem_GB": 21.9}
+{"step": 28300, "loss": 0.03835, "gnorm": 0.081, "lr_f": 1.0, "clips_per_s": 208.2, "mem_GB": 21.9}
+{"step": 28400, "loss": 0.03234, "gnorm": 0.062, "lr_f": 1.0, "clips_per_s": 208.0, "mem_GB": 21.9}
+{"step": 28500, "loss": 0.03587, "gnorm": 0.111, "lr_f": 1.0, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 28600, "loss": 0.0311, "gnorm": 0.05, "lr_f": 1.0, "clips_per_s": 207.0, "mem_GB": 21.9}
+{"step": 28700, "loss": 0.04658, "gnorm": 0.103, "lr_f": 1.0, "clips_per_s": 207.7, "mem_GB": 21.9}
+{"step": 28800, "loss": 0.04424, "gnorm": 0.059, "lr_f": 1.0, "clips_per_s": 199.0, "mem_GB": 21.9}
+{"step": 28900, "loss": 0.03989, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 196.3, "mem_GB": 21.9}
+{"step": 29000, "loss": 0.03996, "gnorm": 0.065, "lr_f": 1.0, "clips_per_s": 199.3, "mem_GB": 21.9, "val": 0.06059}
+{"step": 29100, "loss": 0.03642, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 192.9, "mem_GB": 21.9}
+{"step": 29200, "loss": 0.03297, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 197.8, "mem_GB": 21.9}
+{"step": 29300, "loss": 0.03592, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 198.8, "mem_GB": 21.9}
+{"step": 29400, "loss": 0.04191, "gnorm": 0.075, "lr_f": 1.0, "clips_per_s": 200.1, "mem_GB": 21.9}
+{"step": 29500, "loss": 0.03976, "gnorm": 0.063, "lr_f": 1.0, "clips_per_s": 200.2, "mem_GB": 21.9}
+{"step": 29600, "loss": 0.03456, "gnorm": 0.056, "lr_f": 1.0, "clips_per_s": 199.3, "mem_GB": 21.9}
+{"step": 29700, "loss": 0.04481, "gnorm": 0.083, "lr_f": 1.0, "clips_per_s": 199.1, "mem_GB": 21.9}
+{"step": 29800, "loss": 0.04117, "gnorm": 0.074, "lr_f": 1.0, "clips_per_s": 198.9, "mem_GB": 21.9}
+{"step": 29900, "loss": 0.04127, "gnorm": 0.058, "lr_f": 1.0, "clips_per_s": 198.6, "mem_GB": 21.9}
+{"step": 30000, "loss": 0.03511, "gnorm": 0.057, "lr_f": 1.0, "clips_per_s": 200.6, "mem_GB": 21.9, "val": 0.06035}
+{"snapshot": 30000, "samples": 8}
+{"step": 30100, "loss": 0.03729, "gnorm": 0.046, "lr_f": 0.9901, "clips_per_s": 103.5, "mem_GB": 21.9}
+{"step": 30200, "loss": 0.0431, "gnorm": 0.13, "lr_f": 0.9801, "clips_per_s": 203.7, "mem_GB": 21.9}
+{"step": 30300, "loss": 0.03707, "gnorm": 0.083, "lr_f": 0.9701, "clips_per_s": 203.0, "mem_GB": 21.9}
+{"step": 30400, "loss": 0.0303, "gnorm": 0.048, "lr_f": 0.9601, "clips_per_s": 204.2, "mem_GB": 21.9}
+{"step": 30500, "loss": 0.03234, "gnorm": 0.05, "lr_f": 0.9501, "clips_per_s": 200.2, "mem_GB": 21.9}
+{"step": 30600, "loss": 0.04066, "gnorm": 0.063, "lr_f": 0.9401, "clips_per_s": 206.8, "mem_GB": 21.9}
+{"step": 30700, "loss": 0.0312, "gnorm": 0.053, "lr_f": 0.9301, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 30800, "loss": 0.02938, "gnorm": 0.053, "lr_f": 0.9201, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 30900, "loss": 0.03081, "gnorm": 0.05, "lr_f": 0.9101, "clips_per_s": 209.0, "mem_GB": 21.9}
+{"step": 31000, "loss": 0.0323, "gnorm": 0.045, "lr_f": 0.9001, "clips_per_s": 208.8, "mem_GB": 21.9, "val": 0.06009}
+{"step": 31100, "loss": 0.0435, "gnorm": 0.062, "lr_f": 0.8901, "clips_per_s": 201.4, "mem_GB": 21.9}
+{"step": 31200, "loss": 0.03897, "gnorm": 0.056, "lr_f": 0.8801, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 31300, "loss": 0.0327, "gnorm": 0.054, "lr_f": 0.8701, "clips_per_s": 208.0, "mem_GB": 21.9}
+{"step": 31400, "loss": 0.03089, "gnorm": 0.043, "lr_f": 0.8601, "clips_per_s": 207.0, "mem_GB": 21.9}
+{"step": 31500, "loss": 0.03755, "gnorm": 0.049, "lr_f": 0.8501, "clips_per_s": 199.2, "mem_GB": 21.9}
+{"step": 31600, "loss": 0.0299, "gnorm": 0.043, "lr_f": 0.8401, "clips_per_s": 205.5, "mem_GB": 21.9}
+{"step": 31700, "loss": 0.04153, "gnorm": 0.059, "lr_f": 0.8301, "clips_per_s": 205.2, "mem_GB": 21.9}
+{"step": 31800, "loss": 0.03933, "gnorm": 0.049, "lr_f": 0.8201, "clips_per_s": 204.0, "mem_GB": 21.9}
+{"step": 31900, "loss": 0.03494, "gnorm": 0.051, "lr_f": 0.8101, "clips_per_s": 206.2, "mem_GB": 21.9}
+{"step": 32000, "loss": 0.03724, "gnorm": 0.052, "lr_f": 0.8001, "clips_per_s": 201.4, "mem_GB": 21.9, "val": 0.05974}
+{"step": 32100, "loss": 0.02793, "gnorm": 0.054, "lr_f": 0.7901, "clips_per_s": 199.1, "mem_GB": 21.9}
+{"step": 32200, "loss": 0.03005, "gnorm": 0.042, "lr_f": 0.7801, "clips_per_s": 207.4, "mem_GB": 21.9}
+{"step": 32300, "loss": 0.03055, "gnorm": 0.053, "lr_f": 0.7701, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 32400, "loss": 0.05642, "gnorm": 0.09, "lr_f": 0.7601, "clips_per_s": 207.9, "mem_GB": 21.9}
+{"step": 32500, "loss": 0.03067, "gnorm": 0.052, "lr_f": 0.7501, "clips_per_s": 207.4, "mem_GB": 21.9}
+{"step": 32600, "loss": 0.03006, "gnorm": 0.042, "lr_f": 0.7401, "clips_per_s": 176.9, "mem_GB": 21.9}
+{"step": 32700, "loss": 0.03592, "gnorm": 0.066, "lr_f": 0.7301, "clips_per_s": 207.6, "mem_GB": 21.9}
+{"step": 32800, "loss": 0.03727, "gnorm": 0.051, "lr_f": 0.7201, "clips_per_s": 207.8, "mem_GB": 21.9}
+{"step": 32900, "loss": 0.03492, "gnorm": 0.048, "lr_f": 0.7101, "clips_per_s": 208.1, "mem_GB": 21.9}
+{"step": 33000, "loss": 0.02981, "gnorm": 0.035, "lr_f": 0.7001, "clips_per_s": 208.2, "mem_GB": 21.9, "val": 0.05929}
+{"step": 33100, "loss": 0.03192, "gnorm": 0.043, "lr_f": 0.6901, "clips_per_s": 201.0, "mem_GB": 21.9}
+{"step": 33200, "loss": 0.03578, "gnorm": 0.053, "lr_f": 0.6801, "clips_per_s": 208.0, "mem_GB": 21.9}
+{"step": 33300, "loss": 0.03608, "gnorm": 0.054, "lr_f": 0.6701, "clips_per_s": 208.4, "mem_GB": 21.9}
+{"step": 33400, "loss": 0.02921, "gnorm": 0.046, "lr_f": 0.6601, "clips_per_s": 207.2, "mem_GB": 21.9}
+{"step": 33500, "loss": 0.0344, "gnorm": 0.068, "lr_f": 0.6501, "clips_per_s": 207.2, "mem_GB": 21.9}
+{"step": 33600, "loss": 0.0335, "gnorm": 0.043, "lr_f": 0.6401, "clips_per_s": 206.4, "mem_GB": 21.9}
+{"step": 33700, "loss": 0.03533, "gnorm": 0.039, "lr_f": 0.6301, "clips_per_s": 207.7, "mem_GB": 21.9}
+{"step": 33800, "loss": 0.02684, "gnorm": 0.032, "lr_f": 0.6201, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 33900, "loss": 0.03554, "gnorm": 0.035, "lr_f": 0.6101, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 34000, "loss": 0.02925, "gnorm": 0.046, "lr_f": 0.6001, "clips_per_s": 210.5, "mem_GB": 21.9, "val": 0.0589}
+{"step": 34100, "loss": 0.03359, "gnorm": 0.056, "lr_f": 0.5901, "clips_per_s": 204.1, "mem_GB": 21.9}
+{"step": 34200, "loss": 0.02783, "gnorm": 0.043, "lr_f": 0.5801, "clips_per_s": 208.9, "mem_GB": 21.9}
+{"step": 34300, "loss": 0.02805, "gnorm": 0.038, "lr_f": 0.5701, "clips_per_s": 211.2, "mem_GB": 21.9}
+{"step": 34400, "loss": 0.0373, "gnorm": 0.044, "lr_f": 0.5601, "clips_per_s": 211.3, "mem_GB": 21.9}
+{"step": 34500, "loss": 0.0404, "gnorm": 0.049, "lr_f": 0.5501, "clips_per_s": 207.3, "mem_GB": 21.9}
+{"step": 34600, "loss": 0.03085, "gnorm": 0.042, "lr_f": 0.5401, "clips_per_s": 205.6, "mem_GB": 21.9}
+{"step": 34700, "loss": 0.03173, "gnorm": 0.038, "lr_f": 0.5301, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 34800, "loss": 0.03572, "gnorm": 0.074, "lr_f": 0.5201, "clips_per_s": 206.1, "mem_GB": 21.9}
+{"step": 34900, "loss": 0.03067, "gnorm": 0.044, "lr_f": 0.5101, "clips_per_s": 206.0, "mem_GB": 21.9}
+{"step": 35000, "loss": 0.02388, "gnorm": 0.029, "lr_f": 0.5001, "clips_per_s": 202.7, "mem_GB": 21.9, "val": 0.05835}
+{"snapshot": 35000, "samples": 8}
+{"step": 35100, "loss": 0.0345, "gnorm": 0.054, "lr_f": 0.4901, "clips_per_s": 107.0, "mem_GB": 21.9}
+{"step": 35200, "loss": 0.03539, "gnorm": 0.044, "lr_f": 0.4801, "clips_per_s": 207.6, "mem_GB": 21.9}
+{"step": 35300, "loss": 0.03052, "gnorm": 0.059, "lr_f": 0.4701, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 35400, "loss": 0.03402, "gnorm": 0.043, "lr_f": 0.4601, "clips_per_s": 210.5, "mem_GB": 21.9}
+{"step": 35500, "loss": 0.02765, "gnorm": 0.038, "lr_f": 0.4501, "clips_per_s": 210.5, "mem_GB": 21.9}
+{"step": 35600, "loss": 0.04012, "gnorm": 0.046, "lr_f": 0.4401, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 35700, "loss": 0.02593, "gnorm": 0.037, "lr_f": 0.4301, "clips_per_s": 211.6, "mem_GB": 21.9}
+{"step": 35800, "loss": 0.03256, "gnorm": 0.036, "lr_f": 0.4201, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 35900, "loss": 0.03034, "gnorm": 0.032, "lr_f": 0.4101, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 36000, "loss": 0.03081, "gnorm": 0.053, "lr_f": 0.4001, "clips_per_s": 209.8, "mem_GB": 21.9, "val": 0.05773}
+{"step": 36100, "loss": 0.0341, "gnorm": 0.049, "lr_f": 0.3901, "clips_per_s": 202.5, "mem_GB": 21.9}
+{"step": 36200, "loss": 0.0312, "gnorm": 0.056, "lr_f": 0.3801, "clips_per_s": 210.3, "mem_GB": 21.9}
+{"step": 36300, "loss": 0.03464, "gnorm": 0.056, "lr_f": 0.3701, "clips_per_s": 207.7, "mem_GB": 21.9}
+{"step": 36400, "loss": 0.0321, "gnorm": 0.044, "lr_f": 0.3601, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 36500, "loss": 0.03117, "gnorm": 0.037, "lr_f": 0.3501, "clips_per_s": 210.3, "mem_GB": 21.9}
+{"step": 36600, "loss": 0.03272, "gnorm": 0.04, "lr_f": 0.3401, "clips_per_s": 209.9, "mem_GB": 21.9}
+{"step": 36700, "loss": 0.02745, "gnorm": 0.029, "lr_f": 0.3301, "clips_per_s": 210.9, "mem_GB": 21.9}
+{"step": 36800, "loss": 0.02412, "gnorm": 0.027, "lr_f": 0.3201, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 36900, "loss": 0.0308, "gnorm": 0.028, "lr_f": 0.3101, "clips_per_s": 210.4, "mem_GB": 21.9}
+{"step": 37000, "loss": 0.02798, "gnorm": 0.032, "lr_f": 0.3001, "clips_per_s": 210.7, "mem_GB": 21.9, "val": 0.05718}
+{"step": 37100, "loss": 0.02843, "gnorm": 0.032, "lr_f": 0.2901, "clips_per_s": 203.9, "mem_GB": 21.9}
+{"step": 37200, "loss": 0.02934, "gnorm": 0.028, "lr_f": 0.2801, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 37300, "loss": 0.02264, "gnorm": 0.034, "lr_f": 0.2701, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 37400, "loss": 0.02593, "gnorm": 0.032, "lr_f": 0.2601, "clips_per_s": 209.8, "mem_GB": 21.9}
+{"step": 37500, "loss": 0.02953, "gnorm": 0.032, "lr_f": 0.2501, "clips_per_s": 210.3, "mem_GB": 21.9}
+{"step": 37600, "loss": 0.02784, "gnorm": 0.027, "lr_f": 0.2401, "clips_per_s": 185.7, "mem_GB": 21.9}
+{"step": 37700, "loss": 0.03562, "gnorm": 0.042, "lr_f": 0.2301, "clips_per_s": 211.5, "mem_GB": 21.9}
+{"step": 37800, "loss": 0.02721, "gnorm": 0.026, "lr_f": 0.2201, "clips_per_s": 210.1, "mem_GB": 21.9}
+{"step": 37900, "loss": 0.02948, "gnorm": 0.028, "lr_f": 0.2101, "clips_per_s": 209.0, "mem_GB": 21.9}
+{"step": 38000, "loss": 0.02265, "gnorm": 0.023, "lr_f": 0.2001, "clips_per_s": 211.0, "mem_GB": 21.9, "val": 0.05674}
+{"step": 38100, "loss": 0.02741, "gnorm": 0.029, "lr_f": 0.1901, "clips_per_s": 203.4, "mem_GB": 21.9}
+{"step": 38200, "loss": 0.03734, "gnorm": 0.037, "lr_f": 0.1801, "clips_per_s": 210.9, "mem_GB": 21.9}
+{"step": 38300, "loss": 0.03181, "gnorm": 0.025, "lr_f": 0.1701, "clips_per_s": 210.8, "mem_GB": 21.9}
+{"step": 38400, "loss": 0.01976, "gnorm": 0.019, "lr_f": 0.1601, "clips_per_s": 210.2, "mem_GB": 21.9}
+{"step": 38500, "loss": 0.02707, "gnorm": 0.027, "lr_f": 0.1501, "clips_per_s": 210.8, "mem_GB": 21.9}
+{"step": 38600, "loss": 0.02677, "gnorm": 0.04, "lr_f": 0.1401, "clips_per_s": 211.3, "mem_GB": 21.9}
+{"step": 38700, "loss": 0.03121, "gnorm": 0.026, "lr_f": 0.1301, "clips_per_s": 212.0, "mem_GB": 21.9}
+{"step": 38800, "loss": 0.03158, "gnorm": 0.025, "lr_f": 0.1201, "clips_per_s": 210.7, "mem_GB": 21.9}
+{"step": 38900, "loss": 0.03102, "gnorm": 0.03, "lr_f": 0.1101, "clips_per_s": 211.3, "mem_GB": 21.9}
+{"step": 39000, "loss": 0.03497, "gnorm": 0.031, "lr_f": 0.1001, "clips_per_s": 211.6, "mem_GB": 21.9, "val": 0.05642}
+{"step": 39100, "loss": 0.03239, "gnorm": 0.033, "lr_f": 0.0901, "clips_per_s": 204.0, "mem_GB": 21.9}
+{"step": 39200, "loss": 0.03059, "gnorm": 0.022, "lr_f": 0.0801, "clips_per_s": 211.4, "mem_GB": 21.9}
+{"step": 39300, "loss": 0.03386, "gnorm": 0.033, "lr_f": 0.0701, "clips_per_s": 211.3, "mem_GB": 21.9}
+{"step": 39400, "loss": 0.02412, "gnorm": 0.023, "lr_f": 0.0601, "clips_per_s": 210.4, "mem_GB": 21.9}
+{"step": 39500, "loss": 0.02899, "gnorm": 0.024, "lr_f": 0.0501, "clips_per_s": 211.1, "mem_GB": 21.9}
+{"step": 39600, "loss": 0.03233, "gnorm": 0.034, "lr_f": 0.0401, "clips_per_s": 210.8, "mem_GB": 21.9}
+{"step": 39700, "loss": 0.03396, "gnorm": 0.025, "lr_f": 0.0301, "clips_per_s": 210.7, "mem_GB": 21.9}
+{"step": 39800, "loss": 0.02507, "gnorm": 0.02, "lr_f": 0.0201, "clips_per_s": 210.0, "mem_GB": 21.9}
+{"step": 39900, "loss": 0.0284, "gnorm": 0.019, "lr_f": 0.0101, "clips_per_s": 211.1, "mem_GB": 21.9}
+{"step": 40000, "loss": 0.02678, "gnorm": 0.028, "lr_f": 0.0001, "clips_per_s": 210.8, "mem_GB": 21.9, "val": 0.05624}
+{"snapshot": 40000, "samples": 8}

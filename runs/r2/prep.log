@@ -1,0 +1,19 @@
+=== 09:26:14 1 env
+=== 09:26:41 2 unpack
+85816
+=== 09:27:11 3 encode new latents
+shard_00000.safetensors: 4096 clips, done 4096/10815
+shard_00001.safetensors: 4096 clips, done 8192/10815
+shard_00002.safetensors: 2623 clips, done 10815/10815
+23
+=== 09:44:47 4 encode captions (all clips)
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+{"model": "google/flan-t5-base", "max_len": 35, "sentences": 27031, "clips": 85802, "truncated": 0, "tokens_p50": 20, "tokens_p99": 31, "tokens_max": 35}
+=== 09:45:18 5 check the cache
+train 61571
+val 3750
+test_seen 3750
+test_unseen 5918
+=== 09:45:25 6 train r2
+=== 13:17:19 done

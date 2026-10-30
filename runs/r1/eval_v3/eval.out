@@ -1,0 +1,39 @@
+loaded caches {'test_seen': 3750, 'test_unseen': 5918, 'val': 3750} 2s
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+/root/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 35376.22it/s]
+pool ready 3000 1173s
+test_seen cfg:5 acc {"subject": 0.996, "motion": 0.993, "effect": 0.914, "background": 1.0, "accent": 1.0, "all": 0.906}
+test_seen cfg:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.073, "background": 0.0, "accent": 0.0, "all": 0.074} ram 33.4 GB
+test_seen cfg:3 acc {"subject": 1.0, "motion": 0.979, "effect": 0.934, "background": 1.0, "accent": 1.0, "all": 0.922}
+test_seen cfg:3 model_error {"subject": 0.0, "motion": 0.014, "effect": 0.06, "background": 0.0, "accent": 0.0, "all": 0.061} ram 33.4 GB
+test_seen cfg:8 acc {"subject": 0.992, "motion": 0.979, "effect": 0.895, "background": 1.0, "accent": 1.0, "all": 0.879}
+test_seen cfg:8 model_error {"subject": 0.008, "motion": 0.014, "effect": 0.093, "background": 0.0, "accent": 0.0, "all": 0.102} ram 33.4 GB
+test_seen cfgzero:5 acc {"subject": 0.996, "motion": 0.993, "effect": 0.918, "background": 1.0, "accent": 1.0, "all": 0.91}
+test_seen cfgzero:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.077, "background": 0.0, "accent": 0.0, "all": 0.078} ram 33.4 GB
+test_seen auto:2:5000 acc {"subject": 1.0, "motion": 0.979, "effect": 0.926, "background": 1.0, "accent": 0.991, "all": 0.91}
+test_seen auto:2:5000 model_error {"subject": 0.0, "motion": 0.014, "effect": 0.069, "background": 0.0, "accent": 0.009, "all": 0.078} ram 33.4 GB
+test_seen auto:2:10000 acc {"subject": 0.996, "motion": 0.966, "effect": 0.922, "background": 1.0, "accent": 0.991, "all": 0.895}
+test_seen auto:2:10000 model_error {"subject": 0.004, "motion": 0.021, "effect": 0.077, "background": 0.0, "accent": 0.009, "all": 0.094} ram 33.4 GB
+test_seen real_ceiling {"subject": 1.0, "motion": 0.972, "effect": 0.969, "background": 1.0, "accent": 1.0, "all": 0.953}
+test_unseen cfg:5 acc {"subject": 0.996, "motion": 1.0, "effect": 0.895, "background": 1.0, "accent": 1.0, "all": 0.891}
+test_unseen cfg:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.105, "background": 0.0, "accent": 0.0, "all": 0.109} ram 33.4 GB
+test_unseen cfg:3 acc {"subject": 0.996, "motion": 1.0, "effect": 0.93, "background": 1.0, "accent": 1.0, "all": 0.926}
+test_unseen cfg:3 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.069, "background": 0.0, "accent": 0.0, "all": 0.073} ram 33.4 GB
+test_unseen cfg:8 acc {"subject": 0.992, "motion": 1.0, "effect": 0.855, "background": 1.0, "accent": 1.0, "all": 0.848}
+test_unseen cfg:8 model_error {"subject": 0.008, "motion": 0.0, "effect": 0.138, "background": 0.0, "accent": 0.0, "all": 0.146} ram 33.4 GB
+test_unseen cfgzero:5 acc {"subject": 0.996, "motion": 1.0, "effect": 0.898, "background": 1.0, "accent": 1.0, "all": 0.895}
+test_unseen cfgzero:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.101, "background": 0.0, "accent": 0.0, "all": 0.105} ram 33.4 GB
+test_unseen auto:2:5000 acc {"subject": 0.996, "motion": 1.0, "effect": 0.926, "background": 1.0, "accent": 0.932, "all": 0.883}
+test_unseen auto:2:5000 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.069, "background": 0.0, "accent": 0.068, "all": 0.113} ram 33.4 GB
+test_unseen auto:2:10000 acc {"subject": 1.0, "motion": 1.0, "effect": 0.918, "background": 1.0, "accent": 0.912, "all": 0.875}
+test_unseen auto:2:10000 model_error {"subject": 0.0, "motion": 0.0, "effect": 0.073, "background": 0.0, "accent": 0.088, "all": 0.117} ram 33.4 GB
+test_unseen real_ceiling {"subject": 1.0, "motion": 1.0, "effect": 0.965, "background": 1.0, "accent": 1.0, "all": 0.965}
+done 3344s

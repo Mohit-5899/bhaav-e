@@ -1,0 +1,56 @@
++ export HF_HOME=/workspace/hf
++ HF_HOME=/workspace/hf
++ cd /workspace/model
++ /root/venv/bin/python render_snapshots.py --run /workspace/runs/r2 --cache /root/cache_r2
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+/root/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+rendered step 5000
+rendered step 10000
+rendered step 15000
+rendered step 20000
+rendered step 25000
+rendered step 30000
+rendered step 35000
+rendered step 40000
+wrote /workspace/runs/r2/snapshots/progress.png
++ /root/venv/bin/python evaluate.py --run /workspace/runs/r2 --cache /root/cache_r2 --splits /root/data/r2splits --meta /workspace/meta.jsonl --out /workspace/runs/r2/eval_v3 --n_gen 256 --n_pool 3000 --guidance cfg:3,cfg:5
+loaded caches {'test_seen': 3750, 'test_unseen': 5918, 'val': 3750} 2s
+{"step": 5000, "test_seen": 0.07528, "test_unseen": 0.07783, "val": 0.07729, "gap_unseen_minus_seen": 0.00255}
+{"step": 10000, "test_seen": 0.0629, "test_unseen": 0.06531, "val": 0.0646, "gap_unseen_minus_seen": 0.00241}
+{"step": 15000, "test_seen": 0.05725, "test_unseen": 0.05982, "val": 0.05894, "gap_unseen_minus_seen": 0.00257}
+{"step": 20000, "test_seen": 0.05435, "test_unseen": 0.05694, "val": 0.05589, "gap_unseen_minus_seen": 0.00259}
+{"step": 25000, "test_seen": 0.05225, "test_unseen": 0.05485, "val": 0.05359, "gap_unseen_minus_seen": 0.0026}
+{"step": 30000, "test_seen": 0.05069, "test_unseen": 0.05337, "val": 0.05217, "gap_unseen_minus_seen": 0.00268}
+{"step": 35000, "test_seen": 0.04892, "test_unseen": 0.05168, "val": 0.05036, "gap_unseen_minus_seen": 0.00276}
+{"step": 40000, "test_seen": 0.04745, "test_unseen": 0.05033, "val": 0.04885, "gap_unseen_minus_seen": 0.00288}
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+/root/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 32211.58it/s]
+pool ready 3000 335s
+test_seen cfg:3 acc {"subject": 0.996, "motion": 0.986, "effect": 0.922, "background": 1.0, "accent": 0.991, "all": 0.906}
+test_seen cfg:3 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.081, "background": 0.0, "accent": 0.009, "all": 0.09} ram 6.2 GB
+test_seen cfg:5 acc {"subject": 0.996, "motion": 0.986, "effect": 0.906, "background": 1.0, "accent": 1.0, "all": 0.895}
+test_seen cfg:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.093, "background": 0.0, "accent": 0.0, "all": 0.098} ram 6.2 GB
+test_seen real_ceiling {"subject": 1.0, "motion": 0.972, "effect": 0.969, "background": 1.0, "accent": 1.0, "all": 0.953}
+test_unseen cfg:3 acc {"subject": 0.992, "motion": 1.0, "effect": 0.949, "background": 1.0, "accent": 1.0, "all": 0.945}
+test_unseen cfg:3 model_error {"subject": 0.008, "motion": 0.0, "effect": 0.049, "background": 0.0, "accent": 0.0, "all": 0.053} ram 6.2 GB
+test_unseen cfg:5 acc {"subject": 0.996, "motion": 1.0, "effect": 0.945, "background": 1.0, "accent": 1.0, "all": 0.941}
+test_unseen cfg:5 model_error {"subject": 0.004, "motion": 0.0, "effect": 0.053, "background": 0.0, "accent": 0.0, "all": 0.057} ram 6.2 GB
+test_unseen real_ceiling {"subject": 1.0, "motion": 1.0, "effect": 0.965, "background": 1.0, "accent": 1.0, "all": 0.965}
+done 1222s
++ echo EVAL_DONE
+EVAL_DONE

@@ -1,0 +1,546 @@
+<title>How Bhaav Tiny Learns</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a lab notebook. One reading column; every concept gets a "bench" (an interactive panel) beside or under its text. */
+:root{
+  --bg:#f3f5f8; --paper:#ffffff; --ink:#1b2430; --muted:#5b6778; --line:#d9dee6;
+  --sun:#f2b400; --sun-ink:#7a5a00; --frozen:#2f7fd1; --frozen-bg:#e3effb; --trained:#c2337a; --trained-bg:#fbe6f0;
+  --ok:#1f8a4c; --ok-bg:#e3f4ea; --next:#b26200; --next-bg:#fdf0dc; --soft:#eef1f5;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161d; --paper:#18202a; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2b3542;
+  --sun:#f5c23a; --sun-ink:#f5c23a; --frozen:#6aaef0; --frozen-bg:#16283b; --trained:#ec6aa8; --trained-bg:#33182a;
+  --ok:#5fcf8f; --ok-bg:#15301f; --next:#f0a24a; --next-bg:#33240f; --soft:#1e2733; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161d; --paper:#18202a; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2b3542;
+  --sun:#f5c23a; --sun-ink:#f5c23a; --frozen:#6aaef0; --frozen-bg:#16283b; --trained:#ec6aa8; --trained-bg:#33182a;
+  --ok:#5fcf8f; --ok-bg:#15301f; --next:#f0a24a; --next-bg:#33240f; --soft:#1e2733; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.45rem,3vw,1.9rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0;max-width:66ch}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.stack{display:flex;flex-direction:column;gap:14px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:820px){.grid2{grid-template-columns:minmax(0,1fr)}}
+section.step{display:flex;flex-direction:column;gap:18px;padding-block:44px;border-top:1px solid var(--line)}
+.stephead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.stepno{font-family:var(--f-mono);font-weight:600;color:var(--sun-ink);background:color-mix(in srgb,var(--sun) 22%,transparent);padding:2px 9px;border-radius:6px;font-size:.9rem}
+.bench{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.bench .cap{font-size:.85rem;color:var(--muted)}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:.72rem;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);vertical-align:middle;white-space:nowrap}
+.tag.v{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.tag.r{color:var(--frozen);border-color:color-mix(in srgb,var(--frozen) 45%,transparent)}
+.tag.j{color:var(--trained);border-color:color-mix(in srgb,var(--trained) 45%,transparent)}
+.why{border-left:3px solid var(--sun);padding:4px 0 4px 14px;display:flex;flex-direction:column;gap:6px}
+.why b{font-family:var(--f-display)}
+ul.clean{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;max-width:66ch}
+button,.btn{font:inherit;font-size:.92rem;font-weight:700;border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 14px;border-radius:9px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=range]{width:100%;accent-color:var(--sun)}
+canvas.px{image-rendering:pixelated;width:100%;max-width:220px;aspect-ratio:1;border-radius:10px;border:1px solid var(--line);background:var(--soft)}
+.analogy{background:color-mix(in srgb,var(--sun) 12%,var(--paper));border:1px solid color-mix(in srgb,var(--sun) 40%,transparent);border-radius:12px;padding:14px 16px;max-width:72ch}
+.analogy::before{content:"Analogy";display:block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sun-ink);margin-bottom:4px}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.part{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--paper);display:flex;flex-direction:column;gap:6px;cursor:pointer;text-align:left}
+.part .who{font-family:var(--f-display);font-weight:700;font-size:1.05rem}
+.part.frozen{background:var(--frozen-bg);border-color:color-mix(in srgb,var(--frozen) 40%,transparent)}
+.part.trained{background:var(--trained-bg);border-color:color-mix(in srgb,var(--trained) 50%,transparent)}
+.badge{font-family:var(--f-mono);font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.frozen .badge{color:var(--frozen)} .trained .badge{color:var(--trained)} .data .badge{color:var(--muted)}
+.part.sel{outline:3px solid var(--sun);outline-offset:1px}
+
+/* bars */
+.bar{height:22px;border-radius:5px;background:var(--sun);min-width:2px}
+.barrow{display:grid;grid-template-columns:150px minmax(0,1fr) 110px;gap:10px;align-items:center;font-size:.9rem}
+@media (max-width:520px){.barrow{grid-template-columns:90px minmax(0,1fr) 92px;font-size:.8rem}}
+
+/* latent space */
+svg{display:block;max-width:100%}
+.lsv text{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+
+/* tokens */
+.frames{display:flex;gap:10px;flex-wrap:wrap}
+.fr{display:grid;grid-template-columns:repeat(8,14px);gap:2px}
+.fr .tk{width:14px;height:14px;border-radius:3px;background:var(--soft);border:1px solid var(--line);cursor:pointer;padding:0}
+.frlab{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);text-align:center;margin-top:3px}
+.words{display:flex;gap:8px;flex-wrap:wrap}
+.word{font-family:var(--f-mono);font-size:.82rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:var(--soft)}
+
+/* loop */
+.loop{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+@media (max-width:820px){.loop{grid-template-columns:minmax(0,1fr)}}
+.ls{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);font-size:.88rem;display:flex;flex-direction:column;gap:4px;transition:background .25s,border-color .25s}
+.ls b{font-family:var(--f-display)}
+.ls .n{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.ls.hot{background:color-mix(in srgb,var(--sun) 25%,var(--paper));border-color:var(--sun)}
+
+/* roadmap */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.pill{font-family:var(--f-mono);font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.done{background:var(--ok-bg);color:var(--ok)} .pill.next{background:var(--next-bg);color:var(--next)} .pill.later{background:var(--soft);color:var(--muted)}
+.toc{display:flex;gap:6px;flex-wrap:wrap}
+.toc a{font-family:var(--f-mono);font-size:.78rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--paper)}
+.toc a:hover{border-color:var(--ink)}
+dl.gl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 18px;margin:0}
+dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:var(--muted)}
+@media (max-width:520px){dl.gl{grid-template-columns:minmax(0,1fr)} dl.gl dd{margin-bottom:6px}}
+.kv{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;font-size:.92rem}
+.kv span:nth-child(odd){color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="stack" style="gap:16px;padding-bottom:28px">
+  <span class="eyebrow">Bhaav Tiny · our sticker video model · training explained from first principles</span>
+  <h1>How Bhaav Tiny learns</h1>
+  <p class="lede">A computer can't imagine a video. It can learn one small skill: <b>"here is a slightly noisy picture, which way do I nudge it to make it cleaner?"</b> Start from pure static, nudge it 50 times, and a sticker appears. The caption steers every nudge.</p>
+  <div class="pipe" id="pipe">
+    <button class="part data" data-go="s1"><span class="badge">Our data</span><span class="who">75,001 clips</span><span class="cap">video + caption + label</span></button>
+    <button class="part frozen" data-go="s3"><span class="badge">Borrowed · frozen</span><span class="who">VAE</span><span class="cap">squeezes video into a small sketch, and back</span></button>
+    <button class="part frozen" data-go="s6"><span class="badge">Borrowed · frozen</span><span class="who">Text encoder</span><span class="cap">turns words into numbers</span></button>
+    <button class="part trained" data-go="s7"><span class="badge">We train this</span><span class="who">Generator</span><span class="cap">learns to clean noisy sketches</span></button>
+  </div>
+  <div class="analogy">An architect (the generator) only ever draws on small tracing paper (the sketch). A translator (the text encoder) turns the client's words into notes. A builder (the VAE decoder) turns the finished sketch into the real building (the video). We hire the translator and the builder ready-made. We only train the architect.</div>
+  <nav class="toc" aria-label="Steps">
+    <a href="#s1">1 Data</a><a href="#s2">2 Too many numbers</a><a href="#s3">3 Autoencoder</a><a href="#s4">4 Why variational</a><a href="#s5">5 Our VAE</a><a href="#s6">6 Text encoder</a><a href="#s7">7 Noise to sticker</a><a href="#s8">8 Transformer</a><a href="#s9">9 One training step</a><a href="#s10">10 The plan</a><a href="#gl">Words</a>
+  </nav>
+  <p class="cap" style="font-size:.85rem;color:var(--muted)">How each fact is known: <span class="tag v">verified</span> computed by us on our data · <span class="tag r">reported</span> from Udgam's Drishya Tiny write-up, not re-checked · <span class="tag j">judgement</span> our reasoning. The pictures in the demos are tiny 64×64 drawings made by this page to show the idea; they are not output from a real model.</p>
+</header>
+
+<!-- 1 -->
+<section class="step" id="s1">
+  <div class="stephead"><span class="stepno">1</span><h2>Where we are: the raw data</h2><span class="pill done">done</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p>One clip is 17 frames. Each frame is 256 × 256 dots (pixels), and each dot is 3 numbers: how much red, green and blue.</p>
+      <p class="num" style="font-size:1.05rem">17 × 256 × 256 × 3 = <b>3,342,336</b> numbers per clip <span class="tag v">verified</span></p>
+      <p>Every clip also has a caption (what someone would type) and a label file (the exact settings our code used).</p>
+    </div>
+    <div class="bench">
+      <div class="kv">
+        <span>Clips</span><span class="num">75,001 in 3 categories <span class="tag v">verified</span></span>
+        <span>Train</span><span class="num">61,569</span>
+        <span>Val</span><span class="num">3,750 (watch training)</span>
+        <span>Test seen</span><span class="num">3,750 (familiar combinations)</span>
+        <span>Test unseen</span><span class="num">5,918 (never-seen combinations)</span>
+        <span>Example caption</span><span>"a yellow crying emoji bouncing, tears falling, light blue background"</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="step" id="s2">
+  <div class="stephead"><span class="stepno">2</span><h2>The problem: 3.3 million numbers is too many</h2></div>
+  <div class="why"><b>First principle</b><p>The generator is a transformer. Every piece of the input compares itself with every other piece. So the work grows with the <b>square</b> of the number of pieces: twice the pieces means four times the work.</p></div>
+  <div class="bench">
+    <h3>How many comparisons per layer, for one clip?</h3>
+    <div class="row" role="group" aria-label="Input type">
+      <button class="on" data-cmp="raw">Raw pixels, 8×8 blocks</button>
+      <button data-cmp="lat">VAE sketch, 2×2 blocks</button>
+    </div>
+    <div class="stack" style="gap:8px" id="cmpbars"></div>
+    <p class="cap" id="cmptext"></p>
+  </div>
+  <p>Most of those numbers repeat each other. A yellow face is yellow across thousands of neighbouring dots, and frame 5 looks almost like frame 4. The real information is much smaller. <b>So we compress first, and learn on the compressed version.</b> That is the job of the VAE.</p>
+</section>
+
+<!-- 3 -->
+<section class="step" id="s3">
+  <div class="stephead"><span class="stepno">3</span><h2>The autoencoder: a learned zip file</h2></div>
+  <div class="grid2">
+    <div class="stack">
+      <p>An <b>autoencoder</b> is two networks back to back:</p>
+      <p class="mono" style="font-size:.9rem">video → <b>encoder</b> (squeeze) → small code → <b>decoder</b> (unsqueeze) → video again</p>
+      <p>It is trained with one rule: <b>the output must match the input.</b> The "loss" is how different the rebuilt video is from the original.</p>
+      <div class="why"><b>Why does that teach anything?</b><p>Because of the narrow middle (the <b>bottleneck</b>). The code is too small to store every dot, so the encoder is forced to keep only what matters: shapes, colours, where things are. The decoder learns to fill in the obvious rest. Nobody tells it what matters; it finds out because that is the only way to rebuild well.</p></div>
+      <div class="analogy">Describing a photo over the phone in 20 words. You say "yellow round face, two tears, pink background", not the colour of every dot. The listener redraws it.</div>
+    </div>
+    <div class="bench">
+      <h3>Try it: squeeze the sticker</h3>
+      <div class="row" style="align-items:flex-start;gap:14px">
+        <div style="flex:1;min-width:120px"><canvas class="px" id="aeIn" width="64" height="64"></canvas><div class="frlab">original</div></div>
+        <div style="flex:1;min-width:120px"><canvas class="px" id="aeOut" width="64" height="64"></canvas><div class="frlab">rebuilt from the code</div></div>
+      </div>
+      <label for="aeSlider" class="cap">Code size</label>
+      <input type="range" id="aeSlider" min="0" max="4" value="2" step="1">
+      <p class="num" id="aeText"></p>
+      <p class="cap">This demo just averages blocks of dots, so it gets blocky. A real decoder is a trained network: it would redraw sharp edges from the same small code. That's what training buys.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="step" id="s4">
+  <div class="stephead"><span class="stepno">4</span><h2>Why "variational"? A tidy space to generate in</h2></div>
+  <div class="grid2">
+    <div class="stack">
+      <p>A plain autoencoder only cares that its own codes can be rebuilt. It may put "crying" in one corner and "laughing" far away, with <b>empty gaps</b> between. Fine for zipping, bad for <b>generating</b>: our generator has to <i>produce</i> codes, and a code that lands in a gap decodes to garbage.</p>
+      <p>A <b>variational</b> autoencoder (VAE) adds two changes:</p>
+      <ul class="clean">
+        <li>The encoder gives <b>a small cloud</b> (a centre and a spread), not one exact point. The decoder must rebuild from any point in that cloud, so <b>nearby codes look alike</b>.</li>
+        <li>A penalty (the <b>KL term</b>) pulls all clouds toward one bell curve around zero, so codes stay in a <b>sensible range</b>.</li>
+      </ul>
+      <div class="why"><b>First principle</b><p>It is easier to learn to walk on a smooth, bounded map than on a jagged one with cliffs.</p></div>
+    </div>
+    <div class="bench">
+      <h3>Try it: click anywhere in the code space</h3>
+      <div class="row" role="group" aria-label="Autoencoder type">
+        <button class="on" data-ls="ae">Plain autoencoder</button>
+        <button data-ls="vae">Variational (VAE)</button>
+      </div>
+      <svg id="lsv" class="lsv" viewBox="0 0 320 220" role="img" aria-label="Map of codes; click to decode a point"></svg>
+      <div class="row" style="gap:14px;align-items:center">
+        <canvas class="px" id="lsOut" width="64" height="64" style="max-width:110px"></canvas>
+        <p class="cap" id="lsText" style="flex:1;min-width:160px">Click a point between two groups.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="step" id="s5">
+  <div class="stephead"><span class="stepno">5</span><h2>Our VAE: borrowed, frozen, used once</h2></div>
+  <div class="grid2">
+    <div class="stack">
+      <p>We use the <b>Wan2.2 VAE</b> <span class="tag r">reported</span>, the same one Drishya used. It has 555M parameters and was trained by the Wan video team on a very large amount of images and video.</p>
+      <p>VAEs like it are usually trained with: a rebuild loss, the KL term, a "does it <i>look</i> the same" (perceptual) loss, and a second network that tries to spot rebuilt frames, which keeps them sharp <span class="tag j">general knowledge, not checked in their paper</span>.</p>
+      <div class="why"><b>Why borrow it?</b>
+        <ul class="clean">
+          <li>A good video VAE needs millions of clips and far more compute than our whole project.</li>
+          <li>It learned how pictures look in general. That is the same for stickers.</li>
+          <li><b>Frozen</b> means it never changes. So we encode each clip <b>once</b>, save the sketches (the <b>latent cache</b>), and training never touches pixels again. Drishya calls this their biggest saving <span class="tag r">reported</span>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bench">
+      <h3>What it does to one clip</h3>
+      <div class="kv">
+        <span>In</span><span class="num">17 × 256 × 256 × 3 = 3,342,336</span>
+        <span>Out</span><span class="num">48 × 5 × 16 × 16 = 61,440</span>
+        <span>Smaller by</span><span class="num"><b>54×</b> <span class="tag v">verified</span></span>
+        <span>Time</span><span class="num">17 frames → 5 steps</span>
+        <span>Space</span><span class="num">256 → 16 per side</span>
+        <span>All 75,001 clips</span><span class="num">≈ 9.2 GB cache <span class="tag v">verified</span></span>
+      </div>
+      <p class="cap">It handles frame 1 alone, then every 4 frames together: 1 + 4 + 4 + 4 + 4 = 17. That is why our clips have 17 frames.</p>
+      <div class="why"><b>Risk for stickers</b> <span class="tag j">judgement</span><p>It learned from real video. Stickers have flat colours and thin sharp lines. If it blurs our ticks and Zzz's, no generator can fix that, because the decoder is the last step. So we test this first (step 10, "3a").</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="step" id="s6">
+  <div class="stephead"><span class="stepno">6</span><h2>The text encoder: words into numbers</h2></div>
+  <div class="grid2">
+    <div class="stack">
+      <div class="why"><b>First principle</b><p>A network can only do arithmetic. "Crying" means nothing to it until it becomes numbers.</p></div>
+      <p>A <b>text encoder</b> turns each word-piece into a list of numbers (a vector), placed so that <b>similar meanings land close together</b>.</p>
+      <p>We borrow <b>Flan-T5-Base</b> <span class="tag r">reported</span>: 110M parameters, frozen, reads up to 77 word-pieces. It already learned English from billions of sentences. We only have 26,069 different caption lines <span class="tag v">verified</span>, mostly from templates: far too few to learn language from scratch. Each caption is encoded once and cached, like the sketches.</p>
+    </div>
+    <div class="bench">
+      <h3>Try it: click a word</h3>
+      <svg id="wmap" viewBox="0 0 320 220" role="img" aria-label="Map of word meanings"></svg>
+      <p class="cap" id="wText">Words with similar meaning sit near each other. (Drawn by hand to show the idea; real vectors have hundreds of numbers.)</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="step" id="s7">
+  <div class="stephead"><span class="stepno">7</span><h2>The generator's job: from noise to sticker</h2></div>
+  <div class="grid2">
+    <div class="stack">
+      <p>Take a clean sketch <b class="mono">x₀</b> and pure noise <b class="mono">ε</b>. Pick a noisiness <b class="mono">t</b> from 0 (clean) to 1 (pure noise). Mix them on a straight line:</p>
+      <p class="mono" style="font-size:1rem">x_t = (1 − t) · x₀ + t · ε</p>
+      <p>Show the generator <b>x_t</b>, <b>t</b> and the caption, and ask: <i>"which way points from clean to noise here?"</i> The right answer is the <b>velocity</b>:</p>
+      <p class="mono" style="font-size:1rem">v = ε − x₀</p>
+      <p>The loss is how far its guess is from v. This is <b>rectified flow</b> <span class="tag r">reported: Drishya's objective</span>. "Rectified" means the path is a straight line, which is simpler to learn and needs fewer steps to follow.</p>
+      <div class="bench" style="gap:8px">
+        <h3>The same thing with single numbers</h3>
+        <div class="kv num" id="tiny"></div>
+      </div>
+    </div>
+    <div class="bench">
+      <h3>Try it: drag the noise</h3>
+      <div class="row" style="gap:14px;align-items:flex-start">
+        <div style="flex:1;min-width:120px"><canvas class="px" id="flowCv" width="64" height="64"></canvas><div class="frlab" id="flowLab">t = 0.25</div></div>
+      </div>
+      <label for="tSlider" class="cap">Noisiness t</label>
+      <input type="range" id="tSlider" min="0" max="100" value="25">
+      <div class="row"><button id="genBtn">Generate: 50 steps from noise</button><span class="cap" id="genText"></span></div>
+      <p class="cap">"Generate" starts at pure noise and steps back along the line: <span class="mono">x ← x − v × 0.02</span>, 50 times. Here we cheat and use the perfect answer for v. The real model has to guess it, and its guesses are only as good as its training.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="step" id="s8">
+  <div class="stephead"><span class="stepno">8</span><h2>Inside the generator: a transformer</h2></div>
+  <p>The sketch is cut into small blocks: 1 time step × 2 × 2 positions. That gives <b class="num">5 × 8 × 8 = 320 pieces</b> ("tokens") <span class="tag r">reported</span>. A transformer is a stack of layers (16 in Drishya) that lets the pieces exchange information.</p>
+  <div class="bench">
+    <h3>Try it: hover or tap a piece</h3>
+    <div class="frames" id="frames"></div>
+    <p class="cap"><b>Self-attention:</b> darker pieces are the ones the chosen piece "looks at" most. Note the same spot in other frames: that is how the face stays the same across the clip.</p>
+    <div class="words" id="xwords"></div>
+    <p class="cap"><b>Cross-attention:</b> how much the chosen piece listens to each caption word. A piece near the cheek listens to "tears"; an edge piece listens to "background". (Weights drawn by hand to show the idea.)</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Part</th><th>What it does</th><th>What goes wrong without it</th></tr></thead>
+      <tbody>
+        <tr><td>Self-attention</td><td>Every piece looks at all 320 pieces</td><td>Frame 5's face wouldn't match frame 1's; the tear wouldn't line up with the eye</td></tr>
+        <tr><td>Cross-attention</td><td>Every piece looks at the caption vectors</td><td>It would make a sticker, but not the one you asked for</td></tr>
+        <tr><td>Timestep input (adaLN)</td><td>Tells every layer how noisy the input is</td><td>It couldn't tell "remove a lot" from "remove a little"</td></tr>
+        <tr><td>3D position code</td><td>Tells each piece when and where it is</td><td>Top-left of frame 1 and bottom-right of frame 5 would look identical to it</td></tr>
+        <tr><td>MLP</td><td>A small calculation on each piece after attention</td><td>Most "drawing knowledge" lives here; without it the model is too weak</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="why"><b>Trick: caption dropout → guidance</b> <span class="tag r">reported</span><p>10% of the time, train with an empty caption, so the model also learns "a generic sticker". When generating, compare "with caption" vs "without" and push further in the caption's direction (strength 5). It follows the prompt harder.</p></div>
+    <div class="why"><b>Trick: image → sticker in the same model</b> <span class="tag r">reported</span><p>25% of the time, replace the noisy first frame with the clean sketch of a given picture and don't score the model on it. It learns "animate this first frame". That is what our <span class="mono">.png</span> files are for.</p></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="step" id="s9">
+  <div class="stephead"><span class="stepno">9</span><h2>One training step, repeated many thousands of times</h2></div>
+  <div class="row"><button id="loopBtn">Play the loop</button><span class="cap num" id="loopCount">step 0</span></div>
+  <div class="loop" id="loop">
+    <div class="ls"><span class="n">1</span><b>Load</b>64 cached sketches + their caption vectors</div>
+    <div class="ls"><span class="n">2</span><b>Add noise</b>pick t, make noise, mix: x_t</div>
+    <div class="ls"><span class="n">3</span><b>Sometimes</b>blank the caption (10%), give a clean first frame (25%)</div>
+    <div class="ls"><span class="n">4</span><b>Guess</b>the generator predicts the velocity</div>
+    <div class="ls"><span class="n">5</span><b>Score</b>loss = squared error vs the true v</div>
+    <div class="ls"><span class="n">6</span><b>Backprop</b>find which way to turn each of the 212M knobs</div>
+    <div class="ls"><span class="n">7</span><b>Update</b>turn the knobs a little; update the slow average copy (EMA)</div>
+  </div>
+  <p class="cap">Batch 64, MuonAdamW optimiser, EMA 0.9999 <span class="tag r">reported: Drishya's settings</span>. EMA keeps a slowly moving average of all the knobs; it gives smoother stickers and is the copy we release.</p>
+</section>
+
+<!-- 10 -->
+<section class="step" id="s10">
+  <div class="stephead"><span class="stepno">10</span><h2>The plan, in order</h2></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>#</th><th>Step</th><th>Where</th><th>Why in this order</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Make clips, captions, labels</td><td>Mac</td><td>75,001 clips</td><td><span class="pill done">done</span></td></tr>
+        <tr><td class="num">2</td><td>Split train / val / test</td><td>Mac</td><td>Test holds out whole combinations</td><td><span class="pill done">done</span></td></tr>
+        <tr><td class="num">3a</td><td><b>VAE round trip</b> on 200 clips</td><td>GPU, minutes</td><td>If the VAE blurs stickers, stop and rethink before spending more</td><td><span class="pill next">next</span></td></tr>
+        <tr><td class="num">3b</td><td>Encode all clips once → latent cache</td><td>GPU</td><td>≈ 9.2 GB. Drishya did 475K clips in 6.2 h for $7.40 <span class="tag r">reported</span>, so ours should take well under an hour</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">3c</td><td>Encode all captions once with T5</td><td>GPU, minutes</td><td>Never run T5 during training</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">4</td><td>Overfit 8 clips until loss ≈ 0</td><td>GPU, minutes</td><td>If it can't memorise 8 clips, there's a bug</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">5</td><td>Short run, watch val loss, look at samples</td><td>GPU, 1–2 h</td><td>Catches a bad learning rate or broken data cheaply</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">6</td><td>Full run; keep the best checkpoint</td><td>GPU, hours</td><td>Drishya: one L40S, 15 h, $13.76 <span class="tag r">reported</span></td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">7</td><td>Score test_seen vs test_unseen</td><td>GPU</td><td>The gap shows whether it combines ideas or memorised them</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">8</td><td>Export GIF / WebP stickers</td><td>Mac</td><td>The product</td><td><span class="pill later">later</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="why"><b>How we'll score it</b> <span class="tag j">judgement</span><p>Every clip has an exact label. So we can train a small separate checker that watches a clip and says "crying, bounce, tears". Generate a sticker for each test caption and ask the checker if the subject, motion, effect and colour are right.</p></div>
+    <div class="why"><b>Still open</b> <span class="tag j">judgement</span><p>How many training steps. Drishya's 180,080 steps × 64 would be about 187 passes over our 61,569 clips, probably too many for a narrow dataset. We'll stop when the val score stops improving.</p></div>
+  </div>
+</section>
+
+<section class="step" id="gl">
+  <h2>Words used here</h2>
+  <dl class="gl">
+    <dt>Parameter</dt><dd>One adjustable number inside a network (a "knob"). Training adjusts them.</dd>
+    <dt>Loss</dt><dd>One number saying how wrong the model is. Training pushes it down.</dd>
+    <dt>Latent / sketch</dt><dd>The compressed version of a clip made by the VAE encoder.</dd>
+    <dt>Frozen</dt><dd>Borrowed weights we never change.</dd>
+    <dt>Token / piece</dt><dd>One small block of the input that a transformer handles as a unit.</dd>
+    <dt>Attention</dt><dd>Each piece looking at other pieces and taking in what's relevant.</dd>
+    <dt>Backpropagation</dt><dd>Working out, for every knob, which way to turn it to lower the loss.</dd>
+    <dt>Epoch / pass</dt><dd>The model has seen every training clip once.</dd>
+    <dt>bf16</dt><dd>A shorter number format that halves memory with little accuracy loss.</dd>
+    <dt>Checkpoint</dt><dd>A saved copy of the weights at some point in training.</dd>
+  </dl>
+</section>
+</div>
+
+<script>
+(function(){
+const N=64;
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0,v=0;while(!u)u=r();while(!v)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+
+/* ---------- tiny sticker drawings (64x64) ---------- */
+function face(kind){
+  const c=document.createElement('canvas');c.width=c.height=N;const g=c.getContext('2d');
+  g.fillStyle='#ffd6e7';g.fillRect(0,0,N,N);
+  if(kind==='fire'){
+    g.fillStyle='#ff7a1a';g.beginPath();g.moveTo(32,6);g.bezierCurveTo(50,22,54,34,50,44);g.bezierCurveTo(46,56,18,58,14,44);g.bezierCurveTo(10,32,22,26,24,16);g.bezierCurveTo(28,24,30,24,32,6);g.fill();
+    g.fillStyle='#ffd23f';g.beginPath();g.moveTo(32,26);g.bezierCurveTo(42,36,42,46,38,50);g.bezierCurveTo(32,56,24,52,24,46);g.bezierCurveTo(24,38,30,36,32,26);g.fill();
+    return g.getImageData(0,0,N,N);
+  }
+  g.fillStyle=kind==='angry'?'#f2554b':'#ffc83d';g.beginPath();g.arc(32,33,25,0,Math.PI*2);g.fill();
+  g.strokeStyle='#3a2a1a';g.fillStyle='#3a2a1a';g.lineWidth=3;g.lineCap='round';
+  if(kind==='crying'){
+    g.beginPath();g.arc(23,29,4,0,7);g.fill();g.beginPath();g.arc(41,29,4,0,7);g.fill();
+    g.beginPath();g.arc(32,47,8,Math.PI*1.15,Math.PI*1.85);g.stroke();
+    g.fillStyle='#3d8bff';g.beginPath();g.ellipse(21,40,3.5,6,0,0,7);g.fill();
+  }else if(kind==='laugh'){
+    g.beginPath();g.arc(23,30,4.5,Math.PI*1.1,Math.PI*1.9);g.stroke();g.beginPath();g.arc(41,30,4.5,Math.PI*1.1,Math.PI*1.9);g.stroke();
+    g.fillStyle='#8a1d4d';g.beginPath();g.moveTo(19,38);g.lineTo(45,38);g.arc(32,38,13,0,Math.PI);g.fill();
+    g.fillStyle='#3d8bff';g.beginPath();g.ellipse(12,32,3,5,0.4,0,7);g.fill();g.beginPath();g.ellipse(52,32,3,5,-0.4,0,7);g.fill();
+  }else if(kind==='angry'){
+    g.beginPath();g.moveTo(16,22);g.lineTo(27,27);g.stroke();g.beginPath();g.moveTo(48,22);g.lineTo(37,27);g.stroke();
+    g.beginPath();g.arc(23,31,3.5,0,7);g.fill();g.beginPath();g.arc(41,31,3.5,0,7);g.fill();
+    g.beginPath();g.arc(32,49,8,Math.PI*1.15,Math.PI*1.85);g.stroke();
+  }
+  return g.getImageData(0,0,N,N);
+}
+const FACES={crying:face('crying'),laugh:face('laugh'),angry:face('angry'),fire:face('fire')};
+function toArr(img){const a=new Float32Array(N*N*3);for(let i=0;i<N*N;i++)for(let k=0;k<3;k++)a[i*3+k]=img.data[i*4+k]/127.5-1;return a}
+function paint(cv,a){const g=cv.getContext('2d');const im=g.createImageData(N,N);for(let i=0;i<N*N;i++){for(let k=0;k<3;k++)im.data[i*4+k]=Math.max(0,Math.min(255,(a[i*3+k]+1)*127.5));im.data[i*4+3]=255}g.putImageData(im,0,0)}
+const X0=toArr(FACES.crying);
+const r=rng(7);const EPS=new Float32Array(N*N*3);for(let i=0;i<EPS.length;i++)EPS[i]=gauss(r)*0.9;
+const fmt=n=>n.toLocaleString('en-US');
+
+/* ---------- pipeline buttons ---------- */
+document.querySelectorAll('#pipe .part').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth',block:'start'})));
+
+/* ---------- 2: comparisons ---------- */
+const CMP={raw:{pieces:17*32*32,label:'Raw pixels, 8×8 blocks: 17 frames × 32 × 32'},lat:{pieces:5*8*8,label:'VAE sketch, 2×2 blocks: 5 × 8 × 8'}};
+function drawCmp(sel){
+  const max=CMP.raw.pieces**2;const box=document.getElementById('cmpbars');box.innerHTML='';
+  for(const k of ['raw','lat']){const p=CMP[k].pieces,c=p*p;
+    const row=document.createElement('div');row.className='barrow';
+    row.innerHTML=`<span>${k==='raw'?'Raw pixels':'VAE sketch'}</span><div><div class="bar" style="width:${Math.max(0.4,100*c/max)}%;opacity:${k===sel?1:.35}"></div></div><span class="num">${fmt(c)}</span>`;box.appendChild(row)}
+  const p=CMP[sel].pieces;
+  document.getElementById('cmptext').innerHTML=`${CMP[sel].label} = <b class="num">${fmt(p)}</b> pieces. Each compares with each: ${fmt(p)} × ${fmt(p)} = <b class="num">${fmt(p*p)}</b> comparisons per layer. `+(sel==='lat'?`That is <b class="num">${fmt(Math.round(CMP.raw.pieces**2/(p*p)))}×</b> fewer than raw pixels. <span class="tag v">verified</span>`:`Too slow and too big for one GPU. <span class="tag v">verified arithmetic</span>`);
+}
+document.querySelectorAll('[data-cmp]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-cmp]').forEach(x=>x.classList.toggle('on',x===b));drawCmp(b.dataset.cmp)}));
+drawCmp('raw');
+
+/* ---------- 3: bottleneck ---------- */
+paint(document.getElementById('aeIn'),X0);
+const BLK=[2,4,8,16,32];
+function drawAE(){
+  const b=BLK[+document.getElementById('aeSlider').value],m=N/b,out=new Float32Array(X0.length);
+  for(let by=0;by<m;by++)for(let bx=0;bx<m;bx++)for(let k=0;k<3;k++){let s=0;for(let y=0;y<b;y++)for(let x=0;x<b;x++)s+=X0[((by*b+y)*N+bx*b+x)*3+k];s/=b*b;for(let y=0;y<b;y++)for(let x=0;x<b;x++)out[((by*b+y)*N+bx*b+x)*3+k]=s}
+  paint(document.getElementById('aeOut'),out);
+  const kept=m*m*3;document.getElementById('aeText').innerHTML=`Code: ${m} × ${m} × 3 = <b>${fmt(kept)}</b> numbers, out of ${fmt(N*N*3)} (${Math.round(N*N*3/kept)}× smaller)`;
+}
+document.getElementById('aeSlider').addEventListener('input',drawAE);drawAE();
+
+/* ---------- 4: latent space ---------- */
+const SV='http://www.w3.org/2000/svg';
+const CL={ae:{crying:[40,40],laugh:[280,50],angry:[50,185],fire:[275,180]},vae:{crying:[130,90],laugh:[192,92],angry:[134,140],fire:[190,142]}};
+let lsMode='ae',probe=null;
+function svgEl(t,a){const e=document.createElementNS(SV,t);for(const k in a)e.setAttribute(k,a[k]);return e}
+function drawLS(){
+  const s=document.getElementById('lsv');s.innerHTML='';
+  s.appendChild(svgEl('rect',{x:0,y:0,width:320,height:220,rx:10,fill:'var(--soft)'}));
+  const pr=rng(3);
+  for(const [name,[cx,cy]] of Object.entries(CL[lsMode])){
+    if(lsMode==='vae')s.appendChild(svgEl('circle',{cx,cy,r:30,fill:'var(--frozen)','fill-opacity':.14}));
+    for(let i=0;i<14;i++){const rr=lsMode==='ae'?5:18;s.appendChild(svgEl('circle',{cx:cx+(pr()-.5)*2*rr,cy:cy+(pr()-.5)*2*rr,r:2.6,fill:'var(--frozen)'}))}
+    const t=svgEl('text',{x:cx,y:cy+(lsMode==='ae'?20:44),'text-anchor':'middle'});t.textContent=name;s.appendChild(t);
+  }
+  if(lsMode==='vae'){s.appendChild(svgEl('circle',{cx:160,cy:116,r:70,fill:'none',stroke:'var(--muted)','stroke-dasharray':'3 4'}));const t=svgEl('text',{x:160,y:200,'text-anchor':'middle'});t.textContent='everything stays near the centre';s.appendChild(t)}
+  if(probe)s.appendChild(svgEl('circle',{cx:probe[0],cy:probe[1],r:7,fill:'none',stroke:'var(--sun)','stroke-width':3}));
+}
+function decodeProbe(){
+  if(!probe)return;const cv=document.getElementById('lsOut');
+  const d=Object.entries(CL[lsMode]).map(([n,[x,y]])=>[n,Math.hypot(x-probe[0],y-probe[1])]).sort((a,b)=>a[1]-b[1]);
+  if(lsMode==='ae'){
+    if(d[0][1]<16){paint(cv,toArr(FACES[d[0][0]]));document.getElementById('lsText').textContent=`On the "${d[0][0]}" group: it decodes fine.`}
+    else{const rr=rng(Math.round(probe[0]*7+probe[1])),a=new Float32Array(N*N*3);for(let i=0;i<a.length;i++)a[i]=gauss(rr)*.8;paint(cv,a);
+      document.getElementById('lsText').textContent='In a gap. The decoder never learned anything here, so it makes garbage. A generator that lands here fails.'}
+  }else{
+    const w1=1/(d[0][1]+4),w2=1/(d[1][1]+4),A=toArr(FACES[d[0][0]]),B=toArr(FACES[d[1][0]]),o=new Float32Array(A.length);
+    for(let i=0;i<o.length;i++)o[i]=(A[i]*w1+B[i]*w2)/(w1+w2);paint(cv,o);
+    document.getElementById('lsText').textContent=`Between "${d[0][0]}" and "${d[1][0]}": it decodes to something in between. No holes, so a generator can't fall off the map.`}
+}
+document.getElementById('lsv').addEventListener('click',e=>{const s=e.currentTarget,b=s.getBoundingClientRect();probe=[(e.clientX-b.left)*320/b.width,(e.clientY-b.top)*220/b.height];drawLS();decodeProbe()});
+document.querySelectorAll('[data-ls]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-ls]').forEach(x=>x.classList.toggle('on',x===b));lsMode=b.dataset.ls;probe=lsMode==='ae'?[160,110]:[161,116];drawLS();decodeProbe()}));
+probe=[160,110];drawLS();decodeProbe();
+
+/* ---------- 6: word map ---------- */
+const WORDS={crying:[60,50],sad:[82,64],upset:[50,74],'in tears':[92,40],laughing:[230,48],LOL:[258,64],haha:[214,72],'cracking up':[246,34],angry:[70,165],furious:[96,180],mad:[52,188],fire:[236,160],lit:[262,178],hot:[218,184]};
+function drawWords(sel){
+  const s=document.getElementById('wmap');s.innerHTML='';s.appendChild(svgEl('rect',{x:0,y:0,width:320,height:220,rx:10,fill:'var(--soft)'}));
+  const P=sel?WORDS[sel]:null;
+  for(const [w,[x,y]] of Object.entries(WORDS)){
+    const near=P&&Math.hypot(P[0]-x,P[1]-y)<45;
+    if(P&&near&&w!==sel)s.appendChild(svgEl('line',{x1:P[0],y1:P[1],x2:x,y2:y,stroke:'var(--sun)','stroke-width':2}));
+    const g=svgEl('g',{style:'cursor:pointer',tabindex:0,role:'button','aria-label':w});
+    g.appendChild(svgEl('circle',{cx:x,cy:y,r:5,fill:w===sel?'var(--sun)':(near?'var(--frozen)':'var(--muted)')}));
+    const t=svgEl('text',{x:x+8,y:y+4,'font-size':11,'font-family':'var(--f-mono)',fill:'var(--ink)'});t.textContent=w;g.appendChild(t);
+    g.addEventListener('click',()=>{drawWords(w);const n=Object.keys(WORDS).filter(k=>k!==w&&Math.hypot(WORDS[k][0]-WORDS[w][0],WORDS[k][1]-WORDS[w][1])<45);document.getElementById('wText').textContent=`"${w}" sits next to: ${n.join(', ')}. So a caption saying "${n[0]}" steers the generator almost the same way as "${w}".`});
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();g.dispatchEvent(new Event('click'))}});
+    s.appendChild(g);
+  }
+}
+drawWords(null);
+
+/* ---------- 7: flow ---------- */
+const flowCv=document.getElementById('flowCv');
+function xt(t){const a=new Float32Array(X0.length);for(let i=0;i<a.length;i++)a[i]=(1-t)*X0[i]+t*EPS[i];return a}
+function showT(t){paint(flowCv,xt(t));document.getElementById('flowLab').textContent=`t = ${t.toFixed(2)}`;
+  const x0=3,e=-1,x=(1-t)*x0+t*e;
+  document.getElementById('tiny').innerHTML=`<span>clean x₀</span><span>3</span><span>noise ε</span><span>−1</span><span>noisiness t</span><span>${t.toFixed(2)}</span><span>mixed x_t</span><span>(1 − ${t.toFixed(2)}) × 3 + ${t.toFixed(2)} × (−1) = <b>${x.toFixed(2)}</b></span><span>right answer v</span><span>−1 − 3 = <b>−4</b> (the same at every t: it's a straight line)</span>`;}
+const tS=document.getElementById('tSlider');tS.addEventListener('input',()=>showT(tS.value/100));showT(.25);
+let genTimer=null;
+document.getElementById('genBtn').addEventListener('click',()=>{
+  clearInterval(genTimer);let k=0;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tick=()=>{const t=1-k/50;tS.value=Math.round(t*100);showT(t);document.getElementById('genText').textContent=`step ${k} of 50`;if(k>=50){clearInterval(genTimer);document.getElementById('genText').textContent='done: a clean sticker'}k++};
+  if(reduce){k=50;tick()}else{tick();genTimer=setInterval(tick,60)}
+});
+
+/* ---------- 8: tokens ---------- */
+const XW=['crying','emoji','bouncing','tears','pink background'];
+const frames=document.getElementById('frames');const cells=[];
+for(let f=0;f<5;f++){const wrap=document.createElement('div');const gr=document.createElement('div');gr.className='fr';
+  for(let y=0;y<8;y++)for(let x=0;x<8;x++){const b=document.createElement('button');b.className='tk';b.setAttribute('aria-label',`frame ${f+1}, row ${y+1}, column ${x+1}`);b.dataset.f=f;b.dataset.y=y;b.dataset.x=x;gr.appendChild(b);cells.push(b)}
+  const lab=document.createElement('div');lab.className='frlab';lab.textContent=`time ${f+1}`;wrap.appendChild(gr);wrap.appendChild(lab);frames.appendChild(wrap)}
+const xw=document.getElementById('xwords');XW.forEach(w=>{const s=document.createElement('span');s.className='word';s.textContent=w;xw.appendChild(s)});
+function attend(f,y,x){
+  cells.forEach(c=>{const df=Math.abs(c.dataset.f-f),dy=Math.abs(c.dataset.y-y),dx=Math.abs(c.dataset.x-x);
+    let w=Math.exp(-(dy+dx)*0.7-df*0.25);if(+c.dataset.f===f&&+c.dataset.y===y&&+c.dataset.x===x)w=1;
+    c.style.background=`color-mix(in srgb, var(--frozen) ${Math.round(w*100)}%, var(--soft))`});
+  const edge=Math.min(x,y,7-x,7-y)===0,cheek=(y>=4&&y<=6&&x>=1&&x<=3),centre=(x>=2&&x<=5&&y>=2&&y<=5);
+  const ws=[centre?.9:.3,.35,.5,cheek?.95:.15,edge?.95:.1];
+  [...xw.children].forEach((s,i)=>{s.style.background=`color-mix(in srgb, var(--trained) ${Math.round(ws[i]*70)}%, var(--soft))`;s.style.color=ws[i]>.6?'var(--paper)':'var(--ink)'});
+}
+cells.forEach(c=>{const go=()=>attend(+c.dataset.f,+c.dataset.y,+c.dataset.x);c.addEventListener('mouseenter',go);c.addEventListener('focus',go);c.addEventListener('click',go)});
+attend(0,5,2);
+
+/* ---------- 9: loop ---------- */
+let loopT=null,li=0,steps=0;const ls=[...document.querySelectorAll('#loop .ls')];
+function hot(i){ls.forEach((e,j)=>e.classList.toggle('hot',j===i))}
+hot(0);
+document.getElementById('loopBtn').addEventListener('click',e=>{
+  if(loopT){clearInterval(loopT);loopT=null;e.target.textContent='Play the loop';return}
+  e.target.textContent='Pause';loopT=setInterval(()=>{li=(li+1)%7;if(li===0)steps++;hot(li);document.getElementById('loopCount').textContent=`step ${fmt(steps)}`},700)});
+})();
+</script>

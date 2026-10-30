@@ -1,0 +1,16 @@
+# Clips to leave out of every split. One id per line; the reason is after the #.
+reactions-crying-000001           # first test clip, generator v0.1: older settings format and caption style
+# Byte-identical to an earlier clip: same visible settings, and nothing the seed changes was shown.
+animated-emoji-hundred-002417     # = animated-emoji-hundred-000543
+animated-emoji-idea-001351        # = animated-emoji-idea-000826
+animated-emoji-thumbs-up-001606   # = animated-emoji-thumbs-up-000328
+ui-error-002461                   # = ui-error-000048
+ui-error-002361                   # = ui-error-000532
+ui-error-002276                   # = ui-error-000580
+ui-progress-002136                # = ui-progress-000716
+ui-progress-002483                # = ui-progress-001291
+ui-spinner-002181                 # = ui-spinner-000334
+ui-spinner-001607                 # = ui-spinner-001238
+ui-spinner-001755                 # = ui-spinner-001489
+ui-toggle-001051                  # = ui-toggle-000238
+ui-typing-002152                  # = ui-typing-001065

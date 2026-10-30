@@ -1,0 +1,23 @@
+loaded caches {'test_seen': 3750, 'test_unseen': 5918, 'val': 3750} 2s
+{"step": 5000, "test_seen": 0.0747, "test_unseen": 0.07791, "val": 0.07654, "gap_unseen_minus_seen": 0.00321}
+{"step": 10000, "test_seen": 0.06123, "test_unseen": 0.06454, "val": 0.06316, "gap_unseen_minus_seen": 0.00331}
+{"step": 15000, "test_seen": 0.05663, "test_unseen": 0.05998, "val": 0.05834, "gap_unseen_minus_seen": 0.00335}
+{"step": 20000, "test_seen": 0.05369, "test_unseen": 0.05705, "val": 0.05532, "gap_unseen_minus_seen": 0.00336}
+{"step": 25000, "test_seen": 0.05146, "test_unseen": 0.05486, "val": 0.05294, "gap_unseen_minus_seen": 0.0034}
+{"step": 30000, "test_seen": 0.04988, "test_unseen": 0.05336, "val": 0.0513, "gap_unseen_minus_seen": 0.00348}
+{"step": 35000, "test_seen": 0.04825, "test_unseen": 0.0519, "val": 0.0497, "gap_unseen_minus_seen": 0.00365}
+{"step": 40000, "test_seen": 0.04667, "test_unseen": 0.05038, "val": 0.048, "gap_unseen_minus_seen": 0.00371}
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+/root/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+The config attributes {'clip_output': False} were passed to AutoencoderKLWan, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 35189.04it/s]
+pool ready 3000 1497s
+test_seen {"generated": {"subject": 0.996, "motion": 0.945, "effect": 0.926, "background": 1.0, "accent": 1.0, "all": 0.875}, "real_ceiling": {"subject": 1.0, "motion": 0.953, "effect": 0.969, "background": 1.0, "accent": 1.0, "all": 0.922}}
+test_unseen {"generated": {"subject": 0.996, "motion": 0.848, "effect": 0.797, "background": 1.0, "accent": 1.0, "all": 0.645}, "real_ceiling": {"subject": 1.0, "motion": 0.836, "effect": 0.859, "background": 1.0, "accent": 1.0, "all": 0.703}}
+done 2003s

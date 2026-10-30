@@ -1,0 +1,14 @@
+# big or local-only: clips are rebuilt by generator/bhaav_gen.py, latents by gpu/encode_latents.py
+.venv/
+upload/
+data/clips/
+data/cache/
+data/review/
+data/manifest.jsonl
+data/logs/
+*.pt
+*.safetensors
+__pycache__/
+.DS_Store
+data/.lock
+release/
