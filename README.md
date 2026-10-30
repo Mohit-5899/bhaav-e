@@ -1,9 +1,9 @@
-# Bhaav Tiny
+# Bhaav-E
 
 **A 212M-parameter text-to-video model that makes 2-second animated stickers, trained from scratch for about $12 of
 GPU time on data our own code generated.**
 
-**Bhaav** (भाव) means expression or feeling, which is what a reaction sticker carries.
+**Bhaav** (भाव) means feeling, and the **E** stands for **expressions**: a tiny model that animates expressions.
 
 | | | | |
 |---|---|---|---|
@@ -15,7 +15,7 @@ GPU time on data our own code generated.**
 These are the released model (r2), seed 0, 50 steps, guidance 3. They were not picked from several tries; these are
 the first and only samples for these prompts.
 
-- **Weights:** [huggingface.co/Mohit5899/bhaav-tiny](https://huggingface.co/Mohit5899/bhaav-tiny) (safetensors, EMA)
+- **Weights:** [huggingface.co/Mohit5899/bhaav-e](https://huggingface.co/Mohit5899/bhaav-e) (safetensors, EMA)
 - **Output:** 256 × 256, 17 frames at 8 fps (2 s), loops
 - **Code:** everything in this repo is ours: data generator, model, training, evaluation
 
@@ -120,7 +120,7 @@ Needs a CUDA GPU (tested on a 24 GB L4; peak memory for smaller cards not measur
 ```bash
 git clone https://github.com/Mohit-5899/bhaav-e && cd bhaav-e
 pip install torch diffusers transformers sentencepiece safetensors pillow numpy huggingface_hub
-hf download Mohit5899/bhaav-tiny --local-dir weights
+hf download Mohit5899/bhaav-e --local-dir weights
 cd model && python sample.py --ckpt ../weights/bhaav_tiny.safetensors --cache ../weights \
     --prompt "a crying emoji bouncing, tears falling, light blue background" --out ../samples
 ```
