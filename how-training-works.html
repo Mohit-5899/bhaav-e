@@ -128,7 +128,7 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
   <nav class="toc" aria-label="Steps">
     <a href="#s1">1 Data</a><a href="#s2">2 Too many numbers</a><a href="#s3">3 Autoencoder</a><a href="#s4">4 Why variational</a><a href="#s5">5 Our VAE</a><a href="#s6">6 Text encoder</a><a href="#s7">7 Noise to sticker</a><a href="#s8">8 Transformer</a><a href="#s9">9 One training step</a><a href="#s10">10 The plan</a><a href="#gl">Words</a>
   </nav>
-  <p class="cap" style="font-size:.85rem;color:var(--muted)">How each fact is known: <span class="tag v">verified</span> computed by us on our data · <span class="tag r">reported</span> from Udgam's Drishya Tiny write-up, not re-checked · <span class="tag j">judgement</span> our reasoning. The pictures in the demos are tiny 64×64 drawings made by this page to show the idea; they are not output from a real model.</p>
+  <p class="cap" style="font-size:.85rem;color:var(--muted)">How each fact is known: <span class="tag v">verified</span> computed by us on our data · <span class="tag r">reported</span> from a published reference run of the same design, not re-checked · <span class="tag j">judgement</span> our reasoning. The pictures in the demos are tiny 64×64 drawings made by this page to show the idea; they are not output from a real model.</p>
 </header>
 
 <!-- 1 -->
@@ -227,13 +227,13 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
   <div class="stephead"><span class="stepno">5</span><h2>Our VAE: borrowed, frozen, used once</h2></div>
   <div class="grid2">
     <div class="stack">
-      <p>We use the <b>Wan2.2 VAE</b> <span class="tag r">reported</span>, the same one Drishya used. It has 555M parameters and was trained by the Wan video team on a very large amount of images and video.</p>
+      <p>We use the <b>Wan2.2 VAE</b> <span class="tag r">reported</span>. It has 555M parameters and was trained by the Wan video team on a very large amount of images and video.</p>
       <p>VAEs like it are usually trained with: a rebuild loss, the KL term, a "does it <i>look</i> the same" (perceptual) loss, and a second network that tries to spot rebuilt frames, which keeps them sharp <span class="tag j">general knowledge, not checked in their paper</span>.</p>
       <div class="why"><b>Why borrow it?</b>
         <ul class="clean">
           <li>A good video VAE needs millions of clips and far more compute than our whole project.</li>
           <li>It learned how pictures look in general. That is the same for stickers.</li>
-          <li><b>Frozen</b> means it never changes. So we encode each clip <b>once</b>, save the sketches (the <b>latent cache</b>), and training never touches pixels again. Drishya calls this their biggest saving <span class="tag r">reported</span>.</li>
+          <li><b>Frozen</b> means it never changes. So we encode each clip <b>once</b>, save the sketches (the <b>latent cache</b>), and training never touches pixels again. A published run of this design calls it the biggest saving <span class="tag r">reported</span>.</li>
         </ul>
       </div>
     </div>
@@ -279,7 +279,7 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
       <p class="mono" style="font-size:1rem">x_t = (1 − t) · x₀ + t · ε</p>
       <p>Show the generator <b>x_t</b>, <b>t</b> and the caption, and ask: <i>"which way points from clean to noise here?"</i> The right answer is the <b>velocity</b>:</p>
       <p class="mono" style="font-size:1rem">v = ε − x₀</p>
-      <p>The loss is how far its guess is from v. This is <b>rectified flow</b> <span class="tag r">reported: Drishya's objective</span>. "Rectified" means the path is a straight line, which is simpler to learn and needs fewer steps to follow.</p>
+      <p>The loss is how far its guess is from v. This is <b>rectified flow</b> <span class="tag r">reported</span>. "Rectified" means the path is a straight line, which is simpler to learn and needs fewer steps to follow.</p>
       <div class="bench" style="gap:8px">
         <h3>The same thing with single numbers</h3>
         <div class="kv num" id="tiny"></div>
@@ -301,7 +301,7 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
 <!-- 8 -->
 <section class="step" id="s8">
   <div class="stephead"><span class="stepno">8</span><h2>Inside the generator: a transformer</h2></div>
-  <p>The sketch is cut into small blocks: 1 time step × 2 × 2 positions. That gives <b class="num">5 × 8 × 8 = 320 pieces</b> ("tokens") <span class="tag r">reported</span>. A transformer is a stack of layers (16 in Drishya) that lets the pieces exchange information.</p>
+  <p>The sketch is cut into small blocks: 1 time step × 2 × 2 positions. That gives <b class="num">5 × 8 × 8 = 320 pieces</b> ("tokens") <span class="tag r">reported</span>. A transformer is a stack of layers (16 in our model) that lets the pieces exchange information.</p>
   <div class="bench">
     <h3>Try it: hover or tap a piece</h3>
     <div class="frames" id="frames"></div>
@@ -340,7 +340,7 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
     <div class="ls"><span class="n">6</span><b>Backprop</b>find which way to turn each of the 212M knobs</div>
     <div class="ls"><span class="n">7</span><b>Update</b>turn the knobs a little; update the slow average copy (EMA)</div>
   </div>
-  <p class="cap">Batch 64, MuonAdamW optimiser, EMA 0.9999 <span class="tag r">reported: Drishya's settings</span>. EMA keeps a slowly moving average of all the knobs; it gives smoother stickers and is the copy we release.</p>
+  <p class="cap">Batch 64, MuonAdamW optimiser, EMA 0.9999 <span class="tag r">reported: a standard setting</span>. EMA keeps a slowly moving average of all the knobs; it gives smoother stickers and is the copy we release.</p>
 </section>
 
 <!-- 10 -->
@@ -353,11 +353,11 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
         <tr><td class="num">1</td><td>Make clips, captions, labels</td><td>Mac</td><td>75,001 clips</td><td><span class="pill done">done</span></td></tr>
         <tr><td class="num">2</td><td>Split train / val / test</td><td>Mac</td><td>Test holds out whole combinations</td><td><span class="pill done">done</span></td></tr>
         <tr><td class="num">3a</td><td><b>VAE round trip</b> on 200 clips</td><td>GPU, minutes</td><td>If the VAE blurs stickers, stop and rethink before spending more</td><td><span class="pill next">next</span></td></tr>
-        <tr><td class="num">3b</td><td>Encode all clips once → latent cache</td><td>GPU</td><td>≈ 9.2 GB. Drishya did 475K clips in 6.2 h for $7.40 <span class="tag r">reported</span>, so ours should take well under an hour</td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">3b</td><td>Encode all clips once → latent cache</td><td>GPU</td><td>≈ 9.2 GB. A published run did 475K clips in 6.2 h for $7.40 <span class="tag r">reported</span>, so ours should take well under an hour</td><td><span class="pill later">later</span></td></tr>
         <tr><td class="num">3c</td><td>Encode all captions once with T5</td><td>GPU, minutes</td><td>Never run T5 during training</td><td><span class="pill later">later</span></td></tr>
         <tr><td class="num">4</td><td>Overfit 8 clips until loss ≈ 0</td><td>GPU, minutes</td><td>If it can't memorise 8 clips, there's a bug</td><td><span class="pill later">later</span></td></tr>
         <tr><td class="num">5</td><td>Short run, watch val loss, look at samples</td><td>GPU, 1–2 h</td><td>Catches a bad learning rate or broken data cheaply</td><td><span class="pill later">later</span></td></tr>
-        <tr><td class="num">6</td><td>Full run; keep the best checkpoint</td><td>GPU, hours</td><td>Drishya: one L40S, 15 h, $13.76 <span class="tag r">reported</span></td><td><span class="pill later">later</span></td></tr>
+        <tr><td class="num">6</td><td>Full run; keep the best checkpoint</td><td>GPU, hours</td><td>A reference run: one L40S, 15 h, $13.76 <span class="tag r">reported</span></td><td><span class="pill later">later</span></td></tr>
         <tr><td class="num">7</td><td>Score test_seen vs test_unseen</td><td>GPU</td><td>The gap shows whether it combines ideas or memorised them</td><td><span class="pill later">later</span></td></tr>
         <tr><td class="num">8</td><td>Export GIF / WebP stickers</td><td>Mac</td><td>The product</td><td><span class="pill later">later</span></td></tr>
       </tbody>
@@ -365,7 +365,7 @@ dl.gl dt{font-weight:700;font-family:var(--f-display)} dl.gl dd{margin:0;color:v
   </div>
   <div class="grid2">
     <div class="why"><b>How we'll score it</b> <span class="tag j">judgement</span><p>Every clip has an exact label. So we can train a small separate checker that watches a clip and says "crying, bounce, tears". Generate a sticker for each test caption and ask the checker if the subject, motion, effect and colour are right.</p></div>
-    <div class="why"><b>Still open</b> <span class="tag j">judgement</span><p>How many training steps. Drishya's 180,080 steps × 64 would be about 187 passes over our 61,569 clips, probably too many for a narrow dataset. We'll stop when the val score stops improving.</p></div>
+    <div class="why"><b>Still open</b> <span class="tag j">judgement</span><p>How many training steps. A published reference's 180,080 steps × 64 would be about 187 passes over our 61,569 clips, probably too many for a narrow dataset. We'll stop when the val score stops improving.</p></div>
   </div>
 </section>
 

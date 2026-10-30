@@ -21,8 +21,8 @@ import torch
 from safetensors.torch import save_file
 from transformers import AutoTokenizer, T5EncoderModel
 
-MODEL = "google/flan-t5-base"   # the frozen text encoder Drishya used (110M, 768-dim)
-MAX_LEN = 77                    # Drishya's cap; we use the shortest length that fits every caption, up to this
+MODEL = "google/flan-t5-base"   # the frozen text encoder (110M, 768-dim)
+MAX_LEN = 77                    # the usual cap; we use the shortest length that fits every caption, up to this
 
 
 def main():

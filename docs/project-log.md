@@ -2,8 +2,8 @@
 
 **Bhaav** (भाव) means expression or feeling. That is what a reaction sticker carries.
 
-This is **our own model** (Judgement and our code throughout). It copies the recipe of Udgam Labs'
-[Drishya Tiny](https://udgamlabs.com), but trains only on stickers that our own code makes.
+This is **our own model** (Judgement and our code throughout). It follows a standard small video-diffusion recipe,
+but trains only on stickers that our own code makes.
 
 ## What it does
 
@@ -14,9 +14,9 @@ This is **our own model** (Judgement and our code throughout). It copies the rec
 
 Output format (v1): **256×256, 17 frames, 8 fps, 2 s, loops** (frame 17 = frame 1).
 
-## Why our data is different from Drishya's
+## Why our data is made by code
 
-Drishya trained on web video with noisy captions, and it follows prompts badly.
+Web video comes with noisy captions, which makes prompt-following hard to learn and hard to measure.
 Our clips come from code, so every caption is **exactly true** and we can score prompt-following automatically.
 
 ## Folders

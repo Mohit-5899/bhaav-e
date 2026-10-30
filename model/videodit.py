@@ -1,6 +1,6 @@
 """Bhaav-E generator: a video diffusion transformer (VideoDiT).  (OUR code, written from the public design.)
 
-Design source: the DiT idea (Peebles & Xie, 2023) at the size Drishya Tiny published ("s210": width 768, 16 blocks,
+Design source: the DiT idea (Peebles & Xie, 2023) at the published "s210" size (width 768, 16 blocks,
 12 heads, about 212M parameters). We copy the blueprint, not code; `count_params` checks we built the same size.
 
 What it does, in one line: given a noisy sketch x_t, the noise level t and a caption, predict the velocity

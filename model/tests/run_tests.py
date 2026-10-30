@@ -1,6 +1,6 @@
 """Mac CPU tests for our training code.  (OUR code.)  Run: .venv/bin/python model/tests/run_tests.py
 
-1. size: the full s210 model has about the same number of parameters as Drishya's (211.92M), so it is the same blueprint
+1. size: the full s210 model has about the same number of parameters as the published s210 size (211.92M), so it is the same blueprint
 2. shapes: input and output shapes match; at the start the model predicts exactly 0 (adaLN-zero + zero output layer)
 3. patchify then unpatchify gives back the exact input (cutting into pieces loses nothing)
 4. Muon's orthogonalize really makes all singular values close to 1
@@ -18,14 +18,14 @@ sys.path.insert(0, str(HERE))
 from muon import orthogonalize                     # noqa: E402
 from videodit import SIZES, VideoDiT, count_params  # noqa: E402
 
-DRISHYA_PARAMS_M = 211.92   # from Drishya's published stage-3 log (params_M)
+REF_PARAMS_M = 211.92       # the published s210 size (params_M)
 
 
 def test_size():
     with torch.device("meta"):
         n = count_params(VideoDiT(SIZES["s210"])) / 1e6
-    gap = 100 * (n - DRISHYA_PARAMS_M) / DRISHYA_PARAMS_M
-    print(f"1. size: ours {n:.2f}M vs Drishya {DRISHYA_PARAMS_M}M ({gap:+.2f}%)")
+    gap = 100 * (n - REF_PARAMS_M) / REF_PARAMS_M
+    print(f"1. size: ours {n:.2f}M vs reference {REF_PARAMS_M}M ({gap:+.2f}%)")
     assert abs(gap) < 0.5
 
 

@@ -20,7 +20,7 @@ and never goes back to the shop.
 ## 1. Which GPU, and why
 
 **Problem first.** The VAE has 555M parameters (Reported). Squeezing one clip is a fixed amount of maths.
-75K clips is not a huge job: Drishya squeezed 475K clips in 6.2 h on an RTX 5090 (Reported), which is about
+75K clips is not a huge job: a published run of this VAE encoded 475K clips in 6.2 h on an RTX 5090 (Reported), about
 **21 clips per second**. At that speed, ours would take about **1 hour** (Judgement: an estimate; our clips may
 be a different size from theirs, and 3a will measure the real speed).
 
@@ -33,10 +33,10 @@ So almost any modern GPU is fast enough. The choice is about **memory, matching 
 | RTX 4090 | 24 GB | about 1,000 GB/s | $0.89 / $0.34 | Training peaks at 20.6–25.5 GB (below), which is too close to 24 GB |
 | A100 80GB | 80 GB | | $1.79 / $1.19 | More than we need |
 
-**Why the 5090 replaced the L40S: measured, not guessed.** Drishya ran the **same 211.9M generator at batch 64** on both
-cards (Verified: read in their `results/stage1/RESULTS.md`, `stage3/RESULTS.md` and `log.jsonl` files):
+**Why the 5090 replaced the L40S: measured, not guessed.** A published reference run trained the **same 211.9M generator at batch 64** on both
+cards (Verified: read in its published results and logs):
 
-| Drishya run | GPU | Peak memory | Speed |
+| Reference run | GPU | Peak memory | Speed |
 |---|---|---|---|
 | Stage 1 (unconditional, no captions) | RTX 5090 | **25.5 GB** | **386 clips/s** |
 | Stage 3 (with captions, the release run) | L40S | 20.6 GB | 213 clips/s |
@@ -47,8 +47,8 @@ cards (Verified: read in their `results/stage1/RESULTS.md`, `stage3/RESULTS.md` 
   Caveat: the two runs differ (captions, image-to-video), so the exact ratio is Medium confidence; the direction is clear.
   It matches first principles: this model is small, so moving data through memory is the bottleneck, and the 5090's
   memory is about 2× faster (1,792 vs 864 GB/s, Reported: several spec sites agree).
-- **Why Drishya trained on the L40S anyway:** not speed. Three RunPod 5090 starts never came up, so they moved the run
-  to an L40S at another provider (Verified: their `stage3/RESULTS.md`). Their cost log also shows 5090 hosts that never
+- **Why the reference run used the L40S anyway:** not speed. Three RunPod 5090 starts never came up, so they moved the run
+  to an L40S at another provider (Verified: its published results). Its cost log also shows 5090 hosts that never
   became reachable or had a broken CUDA, mostly on Community Cloud. **Lesson: budget for a failed start or two.**
 - **Software:** the 5090 is a newer chip (Blackwell) and needs CUDA 12.8+ and a recent PyTorch. RunPod's
   `runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404` image (CUDA 12.8.1, PyTorch 2.8; already used on your ATAS pods)
@@ -145,7 +145,7 @@ Untar onto the **network volume** at `/workspace/clips`.
 
 **What:** encode then decode 200 clips, and compare with the originals.
 **Why:** if the VAE can't rebuild a sticker, the generator can't either, because the VAE decoder is always the last step.
-**What if we skip it:** we would spend about $14 or more and 15 hours training (Drishya's numbers, Reported) and
+**What if we skip it:** we would spend about $14 or more and 15 hours training (a reference run's numbers, Reported) and
 only then find out the outputs are blurry, with no way to fix it.
 
 What the script does:
@@ -182,7 +182,7 @@ by ffprobe), so a perfect VAE would still not score infinity.
   **not normalised**. We also save the VAE config (its `latents_mean` / `latents_std`, 48 values each, Reported
   from the Hugging Face config) next to the cache, so training can normalise the latents itself.
   - Why the mean and not a random sample: a sample would freeze one random draw forever. Storing mean + spread
-    would double the size to 18.4 GB. Drishya's choice is not stated. (Judgement)
+    would double the size to 18.4 GB. (Judgement)
 - **Speed tricks:** mp4 decoding runs on 8 CPU worker processes, so the GPU never waits. The batch size comes from 3a.
 - **Crash-safe:** it writes shards of 4,096 clips, each saved under a temp name and renamed when complete. A
   re-run skips finished shards, so a crash loses at most about 3 minutes of work.
@@ -208,7 +208,7 @@ number of caption lines. Count the caption lengths first, then pick the length.
 | Network volume, 30 GB | per month | ≈ $2.10 |
 | **Budget cap (stop and ask if we would go over)** | | **$5** |
 
-Compare Drishya's encoding: $7.40 for 475K clips (Reported). Ours is about 6× fewer clips.
+For comparison, a reference run's encoding cost $7.40 for 475K clips (Reported). Ours is about 6× fewer clips.
 
 **Stop the pod the moment 3c finishes.** A forgotten RTX 5090 costs about $28.50 a day ($1.19 × 24).
 
@@ -255,7 +255,7 @@ sees it (compute capability 12.0), a bf16 matrix multiply ran, `/workspace` is t
 | `cache/text/` | **26,066 unique sentences** (row 0 = empty caption) × **35 tokens** × 768, bf16 + mask; `clip_captions.json` maps each clip to its 3 rows | 1.4 GB |
 
 - 3b: 21.1 clips/s, 11:39 → about 12:37 UTC (58 min), batch 16, 16 decode workers. 3c: 23 s (`gpu/encode_captions.py`).
-- Captions: max 35 tokens, median 20, **none truncated** (so length 35, not Drishya's 77).
+- Captions: max 35 tokens, median 20, **none truncated** (so length 35, not the usual 77).
 - `gpu/verify_cache.py`: duplicates 0, missing 0; **20 random clips decoded from the cache: mean 38.88 dB, min 33.51 dB**
   (matches 3a's 38.51 dB, so saving/loading scrambled nothing); every clip has captions. **ALL CHECKS PASSED.**
 - **Pod stopped 12:39 UTC.** GPU time 10:39 → 12:39 ≈ 2 h × $1.19 ≈ **$2.38** (estimate from the clock; check the bill).
@@ -265,7 +265,7 @@ sees it (compute capability 12.0), a bf16 matrix multiply ran, `/workspace` is t
 ## Training run r1 (started 2026-10-29 13:38 UTC; user authorised running it end to end)
 
 - **Our own code** (`model/`: videodit.py, muon.py, data.py, train.py, sample.py, render_snapshots.py). Same blueprint as
-  Drishya's s210: **211.92M parameters, exact match** (Verified by `model/tests/run_tests.py`).
+  the published s210 size: **211.92M parameters, exact match** (Verified by `model/tests/run_tests.py`).
 - The 5090 pod (`z8olzxqapr1if1`) could not restart (its host's GPU was taken), so it was **terminated** and a new pod
   created: `skr4jccmwj4lz6`, **RTX PRO 4500 Blackwell 32 GB, $0.72/h**, EU-RO-1, same volume. EU-RO-1 had no 5090/4090 then.
 - Tests before the run (Verified): Mac CPU: size, shapes, patchify, Muon; overfit 2 clips → loss 0.0 (tiny model must be
@@ -327,5 +327,5 @@ sees it (compute capability 12.0), a bf16 matrix multiply ran, `/workspace` is t
 - ~~RunPod prices come from the public pricing page through a summary tool~~ **Fixed 2026-10-29:** GPU prices and
   stock read live from RunPod's catalog; storage price and the Secure-only rule from RunPod's docs.
 - Stock is **LOW** in every single data center for both cards; it can disappear between the check and the create.
-- Drishya hit several RunPod 5090 hosts that never came up or had broken CUDA. Expect to retry once or twice.
-- The speed estimate assumes Drishya's clips are a similar size to ours; their clip resolution is not stated in our note.
+- The reference run hit several RunPod 5090 hosts that never came up or had broken CUDA. Expect to retry once or twice.
+- The speed estimate assumes the reference run's clips are a similar size to ours; its clip resolution is not stated.

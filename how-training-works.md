@@ -5,7 +5,7 @@ This guide assumes you know nothing about the steps. Each part answers three que
 
 How each fact is known:
 - **Verified:** computed or checked by us on our own data
-- **Reported:** from Udgam's Drishya Tiny write-up (our private study note; the lab is at https://udgamlabs.com), not re-checked
+- **Reported:** from a published reference run of the same design, not re-checked
 - **Judgement:** our own reasoning or plan
 
 ---
@@ -112,7 +112,7 @@ jagged one with cliffs.)
 
 ### 3c. Which VAE we use and how it was made
 
-We use the **Wan2.2 VAE** (Reported: 555M parameters, frozen, the same one Drishya used).
+We use the **Wan2.2 VAE** (Reported: 555M parameters, frozen).
 - It was trained by the Wan video team on a very large amount of images and video. Typical
   recipe for VAEs like this (Judgement, from general knowledge, not checked in their paper):
   rebuild loss + KL term + a "perceptual" loss (does it *look* the same to another network) +
@@ -134,7 +134,7 @@ one sketch:  48 × 5 × 16 × 16 =    61,440 numbers   (54× smaller, Verified)
 - It only needs to learn "how pictures look", which is the same for stickers and real video.
 - **Frozen** means its weights never change. So we can encode every clip **once**, save the
   sketches to disk (the **latent cache**), and never touch pixels again during training.
-  Drishya says this was their single biggest saving (Reported).
+  A published run of this design called it the single biggest saving (Reported).
 
 ### 3e. The risk for *our* data (Judgement)
 
@@ -152,7 +152,7 @@ last step. So step 6a below tests this first, before spending on anything else.
 A **text encoder** turns a sentence into a list of vectors (one per word-piece) where similar
 meanings get similar vectors: "sad" lands near "crying", "LOL" near "laughing".
 
-We borrow **Flan-T5-Base** (Reported: 110M parameters, frozen, max 77 word-pieces), like Drishya.
+We borrow **Flan-T5-Base** (Reported: 110M parameters, frozen, max 77 word-pieces).
 - It already learned language from billions of sentences. We only have 26,069 different caption
   lines (Verified), mostly from templates: far too little to learn English from scratch.
 - Frozen again, so each caption is encoded **once** and cached.
@@ -179,7 +179,7 @@ x_t = 0.75 × 3 + 0.25 × (−1) = 2.0. Correct velocity v = −1 − 3 = −4.
 The model sees "2.0, t = 0.25, caption" and should answer −4. Repeat millions of times on
 61,440 numbers at once and it learns what crying emoji sketches look like at every noise level.
 
-This is called **rectified flow** (Reported: Drishya's objective). "Rectified" = the path from noise
+This is called **rectified flow** (Reported). "Rectified" = the path from noise
 to data is a **straight line**, which is simpler to learn and needs fewer steps to follow than the
 curvy paths of older diffusion methods.
 
@@ -191,14 +191,14 @@ repeat 50 times:  ask the model for v,  step:  x ← x − v × 0.02
 end:   a clean sketch (t = 0)  ──►  VAE decoder  ──►  17 frames  ──►  sticker
 ```
 
-Each step walks a little way back along the straight line towards clean data (Reported: Drishya
-uses 50 such "Euler" steps).
+Each step walks a little way back along the straight line towards clean data (we use 50 such
+"Euler" steps).
 
 ### 5c. Why a transformer, and what's inside
 
 The sketch is cut into small blocks (1 time step × 2 × 2 positions), giving **5 × 8 × 8 = 320 pieces**
 ("tokens", Reported). Each piece is one row of numbers. A **transformer** is a stack of layers
-(16 in Drishya, Reported) that repeatedly lets the pieces exchange information:
+(16 in our model) that repeatedly lets the pieces exchange information:
 
 | Part | What it does | Why we need it |
 |---|---|---|
@@ -208,10 +208,10 @@ The sketch is cut into small blocks (1 time step × 2 × 2 positions), giving **
 | **3D position code** | Tells each piece *when* and *where* it is | Otherwise it can't tell top-left frame 1 from bottom-right frame 5 |
 | **MLP** | A small per-piece calculation after attention | Where most "drawing knowledge" is stored |
 
-This design is called a **DiT** (Diffusion Transformer). Drishya's has 212M trainable numbers
-("parameters": the knobs training adjusts) (Reported).
+This design is called a **DiT** (Diffusion Transformer). Ours has 212M trainable numbers
+("parameters": the knobs training adjusts) (Verified by `model/tests/run_tests.py`).
 
-### 5d. Two extra tricks Drishya used (Reported), and why
+### 5d. Two extra tricks, and why
 
 - **Caption dropout (10%) → classifier-free guidance.** Sometimes train with an empty caption, so
   the model also learns "a generic sticker". At generation, compare "with caption" vs "without" and
@@ -229,7 +229,7 @@ This design is called a **DiT** (Diffusion Transformer). Drishya's has 212M trai
 | ✅ 1 | Make clips, captions, labels | Mac | Done: 75,001 clips |
 | ✅ 2 | Split train / val / test_seen / test_unseen | Mac | Done |
 | 3a | **VAE round-trip test:** encode → decode 200 clips, compare to originals by eye and by number | GPU, minutes | If the VAE can't rebuild stickers, stop and rethink before spending more (step 3e) |
-| 3b | **Encode all clips once → latent cache** | GPU | About 9.2 GB in bf16 (Verified by arithmetic). Drishya: 475K clips took 6.2 h for $7.40 (Reported), so ours should be well under an hour |
+| 3b | **Encode all clips once → latent cache** | GPU | About 9.2 GB in bf16 (Verified by arithmetic). A published run encoded 475K clips in 6.2 h for $7.40 (Reported), so ours should be well under an hour |
 | 3c | **Encode all captions once** with T5 → text cache | GPU, minutes | Same idea: never run T5 during training |
 | 4 | **Overfit test:** train on 1 tiny batch until loss ≈ 0 | GPU, minutes | Proves the code can learn at all. If it can't memorise 8 clips, there's a bug |
 | 5 | **Short run** on all train data (an hour or two), watch val loss, decode a few samples | GPU | Catches wrong learning rates and broken data before the long run |
@@ -239,13 +239,13 @@ This design is called a **DiT** (Diffusion Transformer). Drishya's has 212M trai
 
 ### What happens in one training step (step 6, repeated many thousands of times)
 
-1. Load a batch of 64 cached sketches + their caption vectors (Reported: Drishya's batch size).
+1. Load a batch of 64 cached sketches + their caption vectors.
 2. For each: pick t, make noise, mix to get x_t. Blank the caption 10% of the time; use the
    clean first frame 25% of the time.
 3. The generator guesses the velocity for each.
 4. Loss = average squared error between guess and true velocity.
 5. **Backpropagation:** work out, for each of the 212M knobs, which way to turn it to reduce the loss.
-6. **Optimiser** turns the knobs a little (Reported: Drishya used MuonAdamW, learning rate 2e-4 for AdamW parts).
+6. **Optimiser** turns the knobs a little (MuonAdamW, learning rate 2e-4 for AdamW parts).
 7. Keep a slow-moving average copy of the knobs (**EMA**, Reported 0.9999). It gives smoother results and is what we release.
 
 ### How we will score it
@@ -262,13 +262,13 @@ Score that on test_seen and test_unseen; the gap is the headline number.
 
 | Decision | Choice for run 1 | Why |
 |---|---|---|
-| Recipe | Copy Drishya's architecture and settings | Change **one** variable (the data) so results are interpretable |
+| Recipe | Keep a known-good architecture and settings | Change **one** variable (the data) so results are interpretable |
 | VAE / text encoder | Borrow, frozen | Too expensive to train; they encode general looks and language |
-| Which VAE | **Wan2.2 VAE** (Apache-2.0), not the MiniMax H3 VAE | H3's licence (checked 2026-10-29) forbids using its outputs to improve any other model, makes anything built on it a "Model Derivative" under its terms, and excludes the US, EU, UK and Korea. Wan2.2 has none of these limits. H3 also has 24 latent channels vs Wan's 48, which would change two things at once vs Drishya |
-| Frames | 17 at 8 fps | Matches the VAE's 1 + 4k rule and Drishya |
-| Number of steps | **Open.** Drishya: 180,080 steps × 64 = 11.5M clips seen (Reported). On our 61.5K train clips that is ~187 passes; likely too many for a narrow dataset | Decide from step 5: stop when val score stops improving |
+| Which VAE | **Wan2.2 VAE** (Apache-2.0), not the MiniMax H3 VAE | H3's licence (checked 2026-10-29) forbids using its outputs to improve any other model, makes anything built on it a "Model Derivative" under its terms, and excludes the US, EU, UK and Korea. Wan2.2 has none of these limits. H3 also has 24 latent channels vs Wan's 48, which would change two things at once |
+| Frames | 17 at 8 fps | Matches the VAE's 1 + 4k rule |
+| Number of steps | **Open.** A published reference: 180,080 steps × 64 = 11.5M clips seen (Reported). On our 61.5K train clips that is ~187 passes; likely too many for a narrow dataset | Decide from step 5: stop when val score stops improving |
 | Model size | 212M for run 1; a smaller model is a good second experiment | Our world is narrow (24 emoji images and 10 code-drawn UI elements); it may not need 212M |
-| GPU | **Next step to plan.** Drishya used one L40S for 15 h, $13.76 (Reported) | |
+| GPU | **Next step to plan.** A reference run used one L40S for 15 h, $13.76 (Reported) | |
 
 ---
 

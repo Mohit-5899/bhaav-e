@@ -46,8 +46,8 @@ automatically whether a generated sticker shows what was asked.
  clean latent [48 × 5 × 16 × 16] ──► Wan2.2 VAE decoder (FROZEN, borrowed) ──► 17 × 256 × 256 RGB video
 ```
 
-- **VideoDiT** (`model/videodit.py`): a Diffusion Transformer (Peebles & Xie, 2023) at the size Udgam Labs used for
-  Drishya Tiny. The noise level comes in through adaptive LayerNorm, and the caption through cross-attention.
+- **VideoDiT** (`model/videodit.py`): a Diffusion Transformer (Peebles & Xie, 2023) with 16 blocks, width 768, 12 heads.
+  The noise level comes in through adaptive LayerNorm, and the caption through cross-attention.
   Frame 1 can optionally be given clean, so the same model can also animate a still image (trained 25% of the time).
 - **Objective:** rectified flow. `x_t = (1 − t)·x0 + t·ε`; the model predicts `v = ε − x0`; mean squared error loss.
 
