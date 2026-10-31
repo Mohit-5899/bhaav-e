@@ -1,0 +1,92 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      container-type: size;
+    }
+    #end-ground {
+      position: absolute;
+      inset: 0;
+      background: var(--orange);
+    }
+    #end-lockup {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 30cqh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3cqmin;
+    }
+    #end-mark {
+      width: 19cqmin;
+      height: 19cqmin;
+      border-radius: 4cqmin;
+      background-image: url(assets/stickers/s0.png);
+      background-size: 400% 400%;
+    }
+    #end-word {
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 14cqmin;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    #end-cta {
+      position: absolute;
+      left: 50%;
+      top: calc(30cqh + 26cqmin);
+      transform: translateX(-50%);
+      padding: 1.8cqmin 4.2cqmin;
+      border-radius: 99cqmin;
+      background: #ffffff;
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 4.2cqmin;
+      white-space: nowrap;
+    }
+    #end-links {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(30cqh + 38cqmin);
+      text-align: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 3.4cqmin;
+      line-height: 1.5;
+    }
+  </style>
+  <div data-hf-id="hf-gwfo" id="root" data-composition-id="end" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-fwzw" id="end-ground"></div>
+    <div data-hf-id="hf-u2tv" id="end-lockup">
+      <div data-hf-id="hf-d956" id="end-mark"></div>
+      <div data-hf-id="hf-0ejj" id="end-word">Bhaav-E</div>
+    </div>
+    <div data-hf-id="hf-q2pj" id="end-cta">Try it free in Colab</div>
+    <div data-hf-id="hf-ec19" id="end-links">github.com/Mohit-5899/bhaav-e<br data-hf-id="hf-x5px" />huggingface.co/Mohit5899/bhaav-e</div>
+  </div>
+  <script>
+    (function () {
+      const mark = document.getElementById("end-mark");
+      const clock = { s: 0 };
+      const frame = () => {
+        const k = Math.floor((clock.s + 26.5) * 8) % 16;
+        mark.style.backgroundPosition = ((k % 4) * 100) / 3 + "% " + (Math.floor(k / 4) * 100) / 3 + "%";
+      };
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(clock, { s: 0 }, { s: 3.5, duration: 3.5, ease: "none", onUpdate: frame }, 0);
+      // colour flood from the white of the numbers into the brand orange
+      tl.fromTo("#end-ground", { backgroundColor: "#ffffff" }, { backgroundColor: "#e8590c", duration: 0.4, ease: "power2.inOut" }, 0);
+      // the mark springs in, then the wordmark wipes in beside it
+      tl.fromTo(mark, { yPercent: 120, scale: 0.6, opacity: 0 }, { yPercent: 0, scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 0.1);
+      tl.fromTo("#end-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "power3.out" }, 0.35);
+      tl.fromTo("#end-cta", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, 0.55);
+      tl.fromTo("#end-links", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.62);
+      window.__timelines["end"] = tl;
+    })();
+  </script>
+</template>

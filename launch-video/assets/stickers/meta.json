@@ -1,0 +1,34 @@
+[
+ {
+  "file": "s0.png",
+  "bg": "#cfe7ff"
+ },
+ {
+  "file": "s1.png",
+  "bg": "#1d2843"
+ },
+ {
+  "file": "s2.png",
+  "bg": "#ffffff"
+ },
+ {
+  "file": "s3.png",
+  "bg": "#ececec"
+ },
+ {
+  "file": "s4.png",
+  "bg": "#fde0c6"
+ },
+ {
+  "file": "s5.png",
+  "bg": "#1d2844"
+ },
+ {
+  "file": "s6.png",
+  "bg": "#101010"
+ },
+ {
+  "file": "s7.png",
+  "bg": "#fde0c6"
+ }
+]

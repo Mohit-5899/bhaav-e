@@ -13,3 +13,8 @@ __pycache__/
 data/.lock
 release/
 .gradio/
+launch-video-square/
+launch-video/.hyperframes/
+launch-video/.thumbnails/
+launch-video/assets/audio/
+node_modules/

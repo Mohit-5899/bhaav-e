@@ -1,0 +1,127 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      container-type: size;
+    }
+    #rev-ground {
+      position: absolute;
+      inset: 0;
+      background: var(--blue);
+    }
+    #rev-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 9cqh;
+      text-align: center;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 13cqmin;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    #rev-title span {
+      display: inline-block;
+    }
+    #rev-sub {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(9cqh + 15cqmin);
+      text-align: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: min(3.9cqmin, 3.1cqw);
+      white-space: nowrap;
+    }
+    #rev-grid {
+      position: absolute;
+      left: 50%;
+      top: calc(9cqh + 23cqmin);
+      width: 92.8cqmin;
+      margin-left: -46.4cqmin;
+      display: grid;
+      grid-template-columns: repeat(4, 22cqmin);
+      gap: 1.6cqmin;
+    }
+    .rev-tile {
+      width: 22cqmin;
+      height: 22cqmin;
+      border-radius: 2.2cqmin;
+      background-size: 400% 400%;
+    }
+    #rev-hero {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 62cqmin;
+      height: 62cqmin;
+      margin: -31cqmin 0 0 -31cqmin;
+      background-image: url(assets/stickers/s0.png);
+      background-size: 400% 400%;
+    }
+  </style>
+  <div data-hf-id="hf-yqoq" id="root" data-composition-id="reveal" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-nio0" id="rev-ground"></div>
+    <div data-hf-id="hf-fyb1" id="rev-title"><span data-hf-id="hf-ll95">B</span><span data-hf-id="hf-vx7v">h</span><span data-hf-id="hf-zhz4">a</span><span data-hf-id="hf-wqew">a</span><span data-hf-id="hf-qcxh">v</span><span data-hf-id="hf-k5wk">-</span><span data-hf-id="hf-l6y4">E</span></div>
+    <div data-hf-id="hf-ykyk" id="rev-sub">turns one sentence into a 2-second animated sticker</div>
+    <div data-hf-id="hf-3aht" id="rev-grid">
+      <div data-hf-id="hf-8mo1" class="rev-tile" id="rev-t0" style="background-image: url(assets/stickers/s0.png); opacity: 0"></div>
+      <div data-hf-id="hf-uzgl" class="rev-tile" id="rev-t1" style="background-image: url(assets/stickers/s1.png)"></div>
+      <div data-hf-id="hf-0e77" class="rev-tile" id="rev-t2" style="background-image: url(assets/stickers/s2.png)"></div>
+      <div data-hf-id="hf-vxk1" class="rev-tile" id="rev-t3" style="background-image: url(assets/stickers/s3.png)"></div>
+      <div data-hf-id="hf-7v0z" class="rev-tile" id="rev-t4" style="background-image: url(assets/stickers/s4.png)"></div>
+      <div data-hf-id="hf-8k11" class="rev-tile" id="rev-t5" style="background-image: url(assets/stickers/s5.png)"></div>
+      <div data-hf-id="hf-l5ib" class="rev-tile" id="rev-t6" style="background-image: url(assets/stickers/s6.png)"></div>
+      <div data-hf-id="hf-opmx" class="rev-tile" id="rev-t7" style="background-image: url(assets/stickers/s7.png)"></div>
+    </div>
+    <div data-hf-id="hf-5gjt" id="rev-hero"></div>
+  </div>
+  <script>
+    (function () {
+      const root = document.getElementById("rev-hero").parentElement;
+      const W = root.clientWidth || 1920, H = root.clientHeight || 1080;
+      const box = root.getBoundingClientRect();
+      // measure once: where tile 0 sits relative to the frame centre, and its size relative to the hero
+      const t0 = document.getElementById("rev-t0").getBoundingClientRect();
+      const slot = { x: t0.left - box.left + t0.width / 2 - W / 2, y: t0.top - box.top + t0.height / 2 - H / 2 };
+      const heroPx = 0.62 * Math.min(W, H);
+      const tileScale = t0.width / heroPx;
+      const zoomScale = (1.127 * H) / heroPx;            // the size the 3D scene opens at
+
+      const tiles = Array.from(document.querySelectorAll(".rev-tile"));
+      const hero = document.getElementById("rev-hero");
+      const clock = { s: 0 };
+      const pos = (k) => ((k % 4) * 100) / 3 + "% " + (Math.floor(k / 4) * 100) / 3 + "%";
+      const frames = () => {
+        const g = clock.s + 4.0;                            // global time keeps every sticker at its own 8 fps
+        hero.style.backgroundPosition = pos(Math.floor(g * 8) % 16);
+        tiles.forEach((t, i) => (t.style.backgroundPosition = pos((Math.floor(g * 8) + i * 3) % 16)));
+      };
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(clock, { s: 0 }, { s: 4.5, duration: 4.5, ease: "none", onUpdate: frames }, 0);
+      // colour flood to the brand orange while the hero carries into its slot
+      tl.fromTo("#rev-ground", { backgroundColor: "#cfe7ff" }, { backgroundColor: "#e8590c", duration: 0.45, ease: "power2.inOut" }, 0.05);
+      tl.fromTo(hero, { x: 0, y: 0, scale: 1 }, { x: slot.x, y: slot.y, scale: tileScale, duration: 0.75, ease: "expo.out" }, 0.1);
+      tl.fromTo(hero, { borderRadius: "0cqmin" }, { borderRadius: "6.2cqmin", duration: 0.5, ease: "power2.out" }, 0.1);
+      tiles.slice(1).forEach((t, i) => {
+        tl.fromTo(t, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, 0.4 + i * 0.06);
+      });
+      // the name, letter by letter
+      document.querySelectorAll("#rev-title span").forEach((l, i) => {
+        tl.fromTo(l, { opacity: 0.3, filter: "blur(4px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.75 + i * 0.07);
+      });
+      tl.fromTo("#rev-title", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 0.75);
+      tl.fromTo("#rev-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 1.45);
+      // zoom through the crying sticker into the 3D scene; the ground floods navy so the cut matches
+      tl.to(["#rev-title", "#rev-sub", ...tiles.slice(1)], { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power3.in" }, 3.85);
+      tl.to("#rev-ground", { backgroundColor: "#1d2843", duration: 0.35, ease: "power2.inOut" }, 4.0);
+      tl.to(hero, { x: 0, y: 0, scale: zoomScale, borderRadius: "0cqmin", duration: 0.5, ease: "power3.in" }, 3.9);
+      window.__timelines["reveal"] = tl;
+    })();
+  </script>
+</template>

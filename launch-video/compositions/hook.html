@@ -1,0 +1,90 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: var(--blue);
+      overflow: hidden;
+      container-type: size;
+    }
+    #hook-line {
+      position: absolute;
+      left: 7cqw;
+      top: 50%;
+      width: 44cqw;
+      transform: translateY(-50%);
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 7.6cqh;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+    }
+    #hook-line span {
+      display: inline-block;
+      color: rgba(16, 36, 63, 0.2);
+    }
+    #hook-stk-wrap {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 62cqmin;
+      height: 62cqmin;
+      margin: -31cqmin 0 0 -31cqmin;
+    }
+    #hook-stk {
+      width: 100%;
+      height: 100%;
+      background-image: url(assets/stickers/s0.png);
+      background-size: 400% 400%;
+    }
+    @container (max-aspect-ratio: 5/4) {
+      #hook-line {
+        left: 7cqw;
+        top: 8cqh;
+        width: 86cqw;
+        transform: none;
+        font-size: 6.4cqh;
+      }
+    }
+  </style>
+  <div data-hf-id="hf-ktv8" id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-1y7o" id="hook-line" data-layout-allow-overflow>
+      <span data-hf-id="hf-zhz4">a</span> <span data-hf-id="hf-y8rd">crying</span> <span data-hf-id="hf-sm89">emoji</span> <span data-hf-id="hf-gcwi">bouncing,</span> <span data-hf-id="hf-puze">tears</span>
+      <span data-hf-id="hf-l9yf" id="hook-last">falling</span>
+    </div>
+    <div data-hf-id="hf-daw0" id="hook-stk-wrap"><div data-hf-id="hf-xwkr" id="hook-stk"></div></div>
+  </div>
+  <script>
+    (function () {
+      const root = document.getElementById("hook-stk-wrap").parentElement;
+      const W = root.clientWidth || 1920, H = root.clientHeight || 1080;
+      const wide = W / H > 1.25;
+      // the sticker's resting place beside (wide) or below (square) the sentence, then centre for the match cut
+      const rest = wide ? { x: W * 0.22, y: 0 } : { x: 0, y: H * 0.14 };
+      const stk = document.getElementById("hook-stk");
+      const clock = { s: 0 };
+      const frame = () => {
+        const k = Math.floor(clock.s * 8) % 16;
+        stk.style.backgroundPosition = ((k % 4) * 100) / 3 + "% " + (Math.floor(k / 4) * 100) / 3 + "%";
+      };
+      const words = Array.from(document.querySelectorAll("#hook-line span"));
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(clock, { s: 0 }, { s: 4, duration: 4, ease: "none", onUpdate: frame }, 0);
+      // per word from light grey to ink; the last word in the brand colour
+      words.forEach((w, i) => {
+        const last = i === words.length - 1;
+        tl.fromTo(w, { color: "rgba(16,36,63,0.2)" }, { color: last ? "#b7410e" : "#10243f", duration: 0.12, ease: "none" }, 0.2 + i * 0.09);
+      });
+      // the last word becomes the picture: the sticker grows out of it
+      tl.fromTo("#hook-stk-wrap",
+        { x: rest.x - (wide ? W * 0.2 : 0), y: rest.y - (wide ? 0 : H * 0.1), scale: 0.12, opacity: 0 },
+        { x: rest.x, y: rest.y, scale: 1, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.82);
+      // exit the sentence word by word, then centre the sticker for the next scene's match cut
+      words.forEach((w, i) => {
+        tl.to(w, { opacity: 0, filter: "blur(6px)", duration: 0.15, ease: "power3.in" }, 3.0 + i * 0.04);
+      });
+      tl.to("#hook-stk-wrap", { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" }, 3.3);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

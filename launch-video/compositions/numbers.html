@@ -1,0 +1,88 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+      container-type: size;
+    }
+    .num-block {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: var(--ink);
+      opacity: 0;
+    }
+    .num-big {
+      font-weight: 900;
+      font-size: 22cqmin;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-variant-numeric: tabular-nums;
+    }
+    .num-big span {
+      display: inline-block;
+    }
+    .num-label {
+      margin-top: 2.4cqmin;
+      font-weight: 700;
+      font-size: 4.6cqmin;
+    }
+    .num-label span {
+      display: inline-block;
+    }
+    #num-c .num-big {
+      color: var(--orange);
+    }
+  </style>
+  <div data-hf-id="hf-a1bv" id="root" data-composition-id="numbers" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-4fes" class="num-block" id="num-a">
+      <div data-hf-id="hf-auwo" class="num-big"><span data-hf-id="hf-ddmc" id="num-a-val">0.00</span>M</div>
+      <div data-hf-id="hf-2yc2" class="num-label">parameters, trained from scratch</div>
+    </div>
+    <div data-hf-id="hf-d3an" class="num-block" id="num-b">
+      <div data-hf-id="hf-dv8t" class="num-big" id="num-b-big"><span data-hf-id="hf-ezx7">8</span><span data-hf-id="hf-gzgc">5</span><span data-hf-id="hf-jrlj">,</span><span data-hf-id="hf-khi3">8</span><span data-hf-id="hf-ikog">1</span><span data-hf-id="hf-fsj9">6</span></div>
+      <div data-hf-id="hf-rtfa" class="num-label">clips, all made by code</div>
+    </div>
+    <div data-hf-id="hf-956m" class="num-block" id="num-c">
+      <div data-hf-id="hf-uguj" class="num-big" id="num-c-big">≈ $12</div>
+      <div data-hf-id="hf-52ds" class="num-label">total GPU cost</div>
+    </div>
+    <div data-hf-id="hf-ht2h" class="num-block" id="num-d">
+      <div data-hf-id="hf-mvwq" class="num-big" id="num-d-big">3.3%</div>
+      <div data-hf-id="hf-d7av" class="num-label" id="num-d-label"><span data-hf-id="hf-ofgl">error</span> <span data-hf-id="hf-dnos">on</span> <span data-hf-id="hf-3ktp">unseen</span> <span data-hf-id="hf-x6kl">combinations</span></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const val = document.getElementById("num-a-val");
+      const count = { v: 0 };
+      // a) a count-up
+      tl.fromTo("#num-a", { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0.05);
+      tl.fromTo(count, { v: 0 }, { v: 211.92, duration: 0.8, ease: "expo.out", onUpdate: () => (val.textContent = count.v.toFixed(2)) }, 0.05);
+      tl.to("#num-a", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 1.3);
+      // b) digits roll up one after another
+      tl.fromTo("#num-b", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 1.45);
+      document.querySelectorAll("#num-b-big span").forEach((d, i) => {
+        tl.fromTo(d, { yPercent: 60, opacity: 0, filter: "blur(6px)" }, { yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, 1.45 + i * 0.05);
+      });
+      tl.to("#num-b", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 2.95);
+      // c) the cost lands with a punch
+      tl.fromTo("#num-c", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 3.08);
+      tl.fromTo("#num-c-big", { scale: 1.5, filter: "blur(10px)" }, { scale: 1, filter: "blur(0px)", duration: 0.3, ease: "expo.out" }, 3.08);
+      tl.to("#num-c", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 4.08);
+      // d) the line turns ink word by word under the number
+      tl.fromTo("#num-d", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 4.2);
+      tl.fromTo("#num-d-big", { filter: "blur(8px)", opacity: 0 }, { filter: "blur(0px)", opacity: 1, duration: 0.18, ease: "power4.out" }, 4.2);
+      document.querySelectorAll("#num-d-label span").forEach((w, i) => {
+        tl.fromTo(w, { color: "rgba(16,36,63,0.2)" }, { color: "#10243f", duration: 0.1, ease: "none" }, 4.3 + i * 0.08);
+      });
+      window.__timelines["numbers"] = tl;
+    })();
+  </script>
+</template>
