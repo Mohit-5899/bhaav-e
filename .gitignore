@@ -21,3 +21,5 @@ node_modules/
 explainer/build/raw/
 explainer/build/precompute.log
 data/audio_sample/
+data/audio_gate/
+data/audio_gate_*.log
