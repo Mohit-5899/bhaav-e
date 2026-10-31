@@ -1,0 +1,1259 @@
+{
+ "subjects": [
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "laugh",
+   "arts": [
+    "laughing emoji with tears of joy",
+    "rolling on the floor laughing emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "tears-joy",
+     "tears of joy flying out"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "crying",
+   "arts": [
+    "crying emoji",
+    "loudly crying emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "tears",
+     "tears falling"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "heart-eyes",
+   "arts": [
+    "heart-eyes emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "hearts",
+     "little hearts floating up"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "facepalm",
+   "arts": [
+    "facepalming emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "sweat",
+     "a sweat drop sliding down"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "angry",
+   "arts": [
+    "angry emoji",
+    "red furious emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "steam",
+     "steam puffing from its head"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "shocked",
+   "arts": [
+    "astonished emoji",
+    "screaming in shock emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "sweat",
+     "a sweat drop sliding down"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "wink",
+   "arts": [
+    "winking emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "hearts",
+     "little hearts floating up"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "thinking",
+   "arts": [
+    "thinking emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "thought",
+     "thought bubbles popping up"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "sleepy",
+   "arts": [
+    "sleeping emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "zzz",
+     "Zzz floating up"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "reactions",
+   "group": "Emotion faces",
+   "key": "cool",
+   "arts": [
+    "cool emoji with sunglasses"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "still",
+     "staying still"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "fire",
+   "arts": [
+    "fire emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "flicker",
+     "flickering"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "float",
+     "floating gently"
+    ]
+   ],
+   "effects": [
+    [
+     "embers",
+     "sparks rising from the flame"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "heart",
+   "arts": [
+    "red heart emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "heartbeat",
+     "beating like a heart"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ]
+   ],
+   "effects": [
+    [
+     "hearts",
+     "little hearts floating up"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "party",
+   "arts": [
+    "party popper emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "confetti",
+     "confetti bursting out"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "thumbs-up",
+   "arts": [
+    "thumbs up emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "float",
+     "floating gently"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "star",
+   "arts": [
+    "glowing star emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "spin",
+     "spinning around"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "hundred",
+   "arts": [
+    "100 points emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "confetti",
+     "confetti bursting out"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "clap",
+   "arts": [
+    "clapping hands emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "confetti",
+     "confetti bursting out"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "rocket",
+   "arts": [
+    "rocket emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "shake",
+     "shaking"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ]
+   ],
+   "effects": [
+    [
+     "exhaust",
+     "smoke puffing from its tail"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "trophy",
+   "arts": [
+    "gold trophy emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "float",
+     "floating gently"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "confetti",
+     "confetti bursting out"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "animated-emoji",
+   "group": "Animated emoji",
+   "key": "idea",
+   "arts": [
+    "light bulb emoji"
+   ],
+   "action": null,
+   "motions": [
+    [
+     "pulse",
+     "pulsing"
+    ],
+    [
+     "wobble",
+     "wobbling side to side"
+    ],
+    [
+     "bounce",
+     "bouncing"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "flicker",
+     "flickering"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "spinner",
+   "arts": [
+    "green loading spinner",
+    "teal loading spinner",
+    "blue loading spinner",
+    "purple loading spinner",
+    "pink loading spinner",
+    "red loading spinner",
+    "orange loading spinner"
+   ],
+   "action": "spinning round and round",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "dots-loader",
+   "arts": [
+    "green three-dot loader",
+    "teal three-dot loader",
+    "blue three-dot loader",
+    "purple three-dot loader",
+    "pink three-dot loader",
+    "red three-dot loader",
+    "orange three-dot loader"
+   ],
+   "action": "with the dots bouncing one after another",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "success",
+   "arts": [
+    "green success checkmark",
+    "teal success checkmark",
+    "blue success checkmark"
+   ],
+   "action": "drawing itself inside a circle",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "confetti",
+     "confetti bursting out"
+    ],
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "error",
+   "arts": [
+    "red error cross",
+    "orange error cross",
+    "pink error cross"
+   ],
+   "action": "drawing itself inside a circle",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "like",
+   "arts": [
+    "red like heart button",
+    "pink like heart button",
+    "purple like heart button",
+    "blue like heart button"
+   ],
+   "action": "being tapped and filling in with a pop",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "bell",
+   "arts": [
+    "blue notification bell",
+    "purple notification bell",
+    "orange notification bell",
+    "teal notification bell",
+    "green notification bell"
+   ],
+   "action": "ringing as a red badge pops up",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "sparkles",
+     "sparkles twinkling around it"
+    ],
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "download",
+   "arts": [
+    "green download arrow",
+    "teal download arrow",
+    "blue download arrow",
+    "purple download arrow",
+    "pink download arrow",
+    "red download arrow",
+    "orange download arrow"
+   ],
+   "action": "dropping down into a tray",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "progress",
+   "arts": [
+    "green progress bar",
+    "teal progress bar",
+    "blue progress bar",
+    "purple progress bar",
+    "pink progress bar",
+    "red progress bar",
+    "orange progress bar"
+   ],
+   "action": "filling up from left to right",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "toggle",
+   "arts": [
+    "green toggle switch",
+    "teal toggle switch",
+    "blue toggle switch",
+    "purple toggle switch",
+    "pink toggle switch",
+    "red toggle switch",
+    "orange toggle switch"
+   ],
+   "action": "sliding on and then off",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  },
+  {
+   "category": "ui",
+   "group": "UI animations",
+   "key": "typing",
+   "arts": [
+    "green typing indicator chat bubble",
+    "teal typing indicator chat bubble",
+    "blue typing indicator chat bubble",
+    "purple typing indicator chat bubble",
+    "pink typing indicator chat bubble",
+    "red typing indicator chat bubble",
+    "orange typing indicator chat bubble"
+   ],
+   "action": "with its dots pulsing",
+   "motions": [
+    [
+     "still",
+     "staying still"
+    ],
+    [
+     "float",
+     "floating gently"
+    ],
+    [
+     "pulse",
+     "pulsing"
+    ]
+   ],
+   "effects": [
+    [
+     "none",
+     ""
+    ]
+   ]
+  }
+ ],
+ "backgrounds": [
+  "light blue",
+  "pink",
+  "mint green",
+  "lavender",
+  "peach",
+  "pale yellow",
+  "white",
+  "light grey",
+  "sky blue",
+  "teal",
+  "dark navy",
+  "black"
+ ]
+}

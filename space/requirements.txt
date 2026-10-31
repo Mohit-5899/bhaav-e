@@ -1,0 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+diffusers>=0.33
+transformers
+sentencepiece
+safetensors
+huggingface_hub
+pillow
+numpy

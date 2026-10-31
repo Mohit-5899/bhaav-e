@@ -15,6 +15,8 @@ GPU time on data our own code generated.**
 These are the released model (r2), seed 0, 50 steps, guidance 3. They were not picked from several tries; these are
 the first and only samples for these prompts.
 
+- **Try it (free GPU, no setup):** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mohit-5899/bhaav-e/blob/main/bhaav_e_demo.ipynb) → *Runtime → Run all* → open the `gradio.live` link it prints
+- **Showcase page:** [huggingface.co/spaces/Mohit5899/bhaav-e](https://huggingface.co/spaces/Mohit5899/bhaav-e)
 - **Weights:** [huggingface.co/Mohit5899/bhaav-e](https://huggingface.co/Mohit5899/bhaav-e) (safetensors, EMA)
 - **Output:** 256 × 256, 17 frames at 8 fps (2 s), loops
 - **Code:** everything in this repo is ours: data generator, model, training, evaluation
@@ -115,6 +117,10 @@ What we learned:
 
 ## Use it
 
+**Easiest:** the [Colab notebook](https://colab.research.google.com/github/Mohit-5899/bhaav-e/blob/main/bhaav_e_demo.ipynb) runs the full web demo (prompt builder, examples, quality settings) on Google's free GPU. **Locally with the same demo:** `cd space && python app.py` after the install below (works on CPU too: about a minute per sticker, mostly decoding).
+
+**From the command line:**
+
 Needs a CUDA GPU (tested on a 24 GB L4; peak memory for smaller cards not measured). The first run downloads the Wan2.2 VAE and Flan-T5-Base from Hugging Face.
 
 ```bash
@@ -140,6 +146,9 @@ gpu/             scripts run on the GPU pod: VAE/T5 caching, r2 training, evalua
 model/           videodit.py · train.py · sample.py · evaluate.py · effect_check.py · motion_check.py · muon.py
 runs/            logs, snapshot GIFs, evaluation reports and error sheets for r1 and r2
 docs/            examples and the step-by-step project log
+space/           the web demo (Gradio): prompt builder, examples, generation on CPU or GPU
+showcase/        the static page at huggingface.co/spaces/Mohit5899/bhaav-e
+bhaav_e_demo.ipynb     Colab notebook that launches the web demo on a free GPU
 how-training-works.md   the training process explained from first principles
 improvement-plan.md     what we tried to improve and why, ranked
 ```

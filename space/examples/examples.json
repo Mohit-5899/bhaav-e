@@ -1,0 +1,42 @@
+[
+ {
+  "file": "00_seed0.gif",
+  "prompt": "a crying emoji bouncing, tears falling, light blue background",
+  "label": "Crying \u00b7 tears"
+ },
+ {
+  "file": "01_seed0.gif",
+  "prompt": "a red furious emoji pulsing, steam puffing from its head, dark navy background",
+  "label": "Furious \u00b7 steam"
+ },
+ {
+  "file": "02_seed0.gif",
+  "prompt": "a blue success checkmark drawing itself inside a circle, confetti bursting out, white background",
+  "label": "Success \u00b7 confetti"
+ },
+ {
+  "file": "03_seed0.gif",
+  "prompt": "a party popper emoji pulsing, sparkles twinkling around it, light grey background",
+  "label": "Party \u00b7 sparkles"
+ },
+ {
+  "file": "04_seed0.gif",
+  "prompt": "a cool emoji with sunglasses floating gently, sparkles twinkling around it, peach background",
+  "label": "Cool \u00b7 sparkles"
+ },
+ {
+  "file": "05_seed0.gif",
+  "prompt": "a glowing star emoji wobbling side to side, sparkles twinkling around it, dark navy background",
+  "label": "Star \u00b7 sparkles"
+ },
+ {
+  "file": "06_seed0.gif",
+  "prompt": "a purple loading spinner spinning round and round, pulsing, black background",
+  "label": "Spinner \u00b7 pulse"
+ },
+ {
+  "file": "07_seed0.gif",
+  "prompt": "a screaming in shock emoji wobbling side to side, peach background",
+  "label": "Shocked \u00b7 wobble"
+ }
+]
