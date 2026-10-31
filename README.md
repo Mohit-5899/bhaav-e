@@ -245,3 +245,5 @@ licenses: the Wan2.2 VAE and Flan-T5-Base are Apache-2.0.
 Bhaav-E builds on [Wan2.2](https://github.com/Wan-Video/Wan2.2) (video VAE), [Flan-T5](https://huggingface.co/google/flan-t5-base)
 (text encoder), [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji) (training artwork), Diffusion
 Transformers (Peebles & Xie, 2023), Rectified Flow (Liu et al., 2022) and the Muon optimizer (Jordan et al., 2024).
+
+Special thanks to [Udgam Labs](https://udgamlabs.com) for openly publishing the code, training logs and cost reports of their small models; their published recipe and model size served as the reference for this work.
