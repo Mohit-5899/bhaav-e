@@ -20,3 +20,4 @@ launch-video/assets/audio/
 node_modules/
 explainer/build/raw/
 explainer/build/precompute.log
+data/audio_sample/
