@@ -1,0 +1,606 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bhaav-E Explainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: a sticky "machine" strip (words → numbers → 50 steps → pixels) you can open box by box,
+   over a plain-words article. Colour = stage: teal for text, orange for the latent, violet for pixels. */
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --ink: #10243f;
+  --muted: #5b6b82;
+  --line: #d7e0ec;
+  --text-c: #1f7a74;
+  --text-soft: #e2f3f1;
+  --lat-c: #d9530b;
+  --lat-soft: #fdeadc;
+  --pix-c: #6741d9;
+  --pix-soft: #ece6fd;
+  --b-c: #2f6fd6;
+  --head-bg: #10243f;
+  --head-fg: #f4f7fb;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1422; --panel: #141e30; --ink: #e8eef8; --muted: #9aa9bf; --line: #26344c;
+    --text-c: #4fc4bb; --text-soft: #12302f; --lat-c: #ff8a3d; --lat-soft: #3a2414;
+    --pix-c: #a58bff; --pix-soft: #251d45; --b-c: #6ea2ff; --head-bg: #070c16; --head-fg: #e8eef8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1422; --panel: #141e30; --ink: #e8eef8; --muted: #9aa9bf; --line: #26344c;
+  --text-c: #4fc4bb; --text-soft: #12302f; --lat-c: #ff8a3d; --lat-soft: #3a2414;
+  --pix-c: #a58bff; --pix-soft: #251d45; --b-c: #6ea2ff; --head-bg: #070c16; --head-fg: #e8eef8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); margin: 0; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--lat-c); outline-offset: 2px; }
+canvas { image-rendering: pixelated; display: block; }
+
+/* header */
+header { background: var(--head-bg); color: var(--head-fg); }
+header .wrap { padding-block: 28px 24px; display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: end; justify-content: space-between; }
+.brand h1 { font: 800 clamp(30px, 5vw, 46px)/1 var(--display); margin: 0; letter-spacing: -0.02em; }
+.brand h1 span { color: #ff8a3d; }
+.brand p { margin: 8px 0 0; opacity: .85; max-width: 52ch; }
+.brand p b { color: #6fd6cd; font-weight: 500; } .brand p i { color: #b9a4ff; font-style: normal; }
+header nav { display: flex; gap: 18px; font-size: 14px; }
+header nav a { color: var(--head-fg); opacity: .8; text-decoration: none; border-bottom: 1px solid transparent; }
+header nav a:hover { opacity: 1; border-color: currentColor; }
+
+/* machine */
+#machine { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line); box-shadow: 0 8px 24px -18px rgba(16, 36, 63, .35); }
+#machine .wrap { padding-block: 14px 12px; display: grid; gap: 10px; }
+.flow { display: grid; grid-template-columns: minmax(180px, 1.3fr) auto minmax(110px, .8fr) auto minmax(190px, 1.4fr) auto minmax(110px, .8fr) auto minmax(150px, 1fr); align-items: center; gap: 6px; }
+.arrow { color: var(--muted); font: 500 18px var(--mono); text-align: center; }
+.prompt-card { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; background: var(--bg); min-width: 0; }
+.prompt-card select { width: 100%; border: 0; background: transparent; font-size: 12px; color: var(--muted); padding: 0; cursor: pointer; }
+.prompt-text { font-size: 13.5px; line-height: 1.35; margin-top: 4px; }
+.prompt-text mark { background: var(--lat-soft); color: var(--lat-c); border-radius: 3px; padding: 0 2px; font-weight: 600; }
+.box { border: 1.5px solid; border-radius: 10px; padding: 8px 10px; text-align: left; background: var(--panel); cursor: pointer; transition: background .15s, transform .15s; min-width: 0; }
+.box:hover { transform: translateY(-1px); }
+.box b { display: block; font: 700 15px/1.15 var(--display); }
+.box small { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.3; margin-top: 3px; }
+.box .tag { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.box.text { border-color: var(--text-c); } .box.text .tag, .box.text b { color: var(--text-c); }
+.box.lat { border-color: var(--lat-c); } .box.lat .tag, .box.lat b { color: var(--lat-c); }
+.box.pix { border-color: var(--pix-c); } .box.pix .tag, .box.pix b { color: var(--pix-c); }
+.box.text[aria-expanded="true"] { background: var(--text-soft); }
+.box.lat[aria-expanded="true"] { background: var(--lat-soft); }
+.box.pix[aria-expanded="true"] { background: var(--pix-soft); }
+.refiner-mini { display: flex; align-items: center; gap: 8px; }
+.refiner-mini canvas { width: 80px; height: 16px; border-radius: 2px; flex: none; }
+.out { display: grid; justify-items: center; gap: 4px; }
+.out canvas { width: 128px; height: 128px; border-radius: 10px; background: var(--bg); }
+.out small { font: 500 11px var(--mono); color: var(--muted); text-align: center; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+.controls label { display: inline-flex; align-items: center; gap: 6px; }
+.controls select { border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; background: var(--panel); }
+.play { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lat-c); color: #fff; cursor: pointer; font-size: 13px; flex: none; }
+.slider { display: flex; align-items: center; gap: 10px; flex: 1 1 280px; min-width: 220px; }
+.track { position: relative; flex: 1; }
+.track input { width: 100%; accent-color: var(--lat-c); margin: 0; }
+.ticks { position: absolute; left: 8px; right: 8px; top: -6px; height: 4px; pointer-events: none; }
+.ticks i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--pix-c); transform: translateX(-2px); }
+.stepnum { font: 500 13px var(--mono); color: var(--ink); min-width: 13ch; font-variant-numeric: tabular-nums; }
+.cmp { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--panel); cursor: pointer; }
+.cmp[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+
+/* detail panels */
+.detail { border-top: 1px dashed var(--line); padding-top: 12px; display: grid; gap: 14px; max-height: 58vh; overflow: auto; }
+.detail h3 { font: 700 17px var(--display); margin: 0; }
+.detail p { margin: 0; font-size: 14px; color: var(--muted); max-width: 70ch; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.cell { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.cell .lbl { font: 500 11px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.film { width: 100%; max-width: 320px; height: auto; aspect-ratio: 5 / 1; border-radius: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font: 500 12px var(--mono); border: 1px solid var(--text-c); color: var(--text-c); border-radius: 5px; padding: 1px 6px; background: var(--panel); }
+.chip.pad { border-style: dashed; opacity: .55; }
+.chip.end { background: var(--text-soft); }
+.matrix { font: 400 12px var(--mono); border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.matrix td, .matrix th { padding: 2px 6px; text-align: right; }
+.matrix th { color: var(--muted); font-weight: 400; text-align: left; }
+.matrix td { background: var(--text-soft); border: 1px solid var(--panel); }
+.formula { font: 400 14px/1.7 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; }
+.formula .c { color: var(--text-c); } .formula .l { color: var(--lat-c); } .formula .p { color: var(--pix-c); }
+.gscale { display: flex; gap: 6px; flex-wrap: wrap; }
+.gscale button { border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; background: var(--panel); cursor: pointer; font: 500 13px var(--mono); }
+.gscale button[aria-pressed="true"] { border-color: var(--lat-c); color: var(--lat-c); background: var(--lat-soft); }
+.gscale button:disabled { opacity: .35; cursor: not-allowed; }
+svg text { fill: var(--muted); font: 400 11px var(--mono); }
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.side { border: 1.5px solid var(--lat-c); border-radius: 10px; padding: 10px; display: grid; gap: 8px; grid-template-columns: auto 1fr; align-items: start; }
+.side.b { border-color: var(--b-c); }
+.side canvas.big { width: 120px; height: 120px; border-radius: 8px; }
+.side .prompt-text { font-size: 13px; }
+.note { font-size: 12.5px; color: var(--muted); }
+
+/* article */
+main .wrap { display: grid; gap: 8px; padding-block: 36px 64px; }
+article { max-width: 72ch; }
+article h2 { font: 700 clamp(22px, 3vw, 28px)/1.2 var(--display); margin: 44px 0 10px; text-wrap: balance; letter-spacing: -0.01em; }
+article h2 .k { font: 500 12px var(--mono); color: var(--lat-c); display: block; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+article p, article li { color: var(--ink); }
+article .lead { font-size: 18px; }
+article code { font: 400 .9em var(--mono); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+.analogy { border-left: 3px solid var(--lat-c); padding: 4px 0 4px 16px; margin: 16px 0; font-size: 17px; }
+.numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 16px 0; }
+.numbers div { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.numbers b { display: block; font: 700 20px var(--display); font-variant-numeric: tabular-nums; }
+.numbers span { font-size: 13px; color: var(--muted); }
+.trainbox { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; margin: 16px 0; }
+.trainbox .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.trainbox input { flex: 1 1 200px; accent-color: var(--lat-c); }
+table.plain { border-collapse: collapse; font-size: 14px; width: 100%; }
+table.plain th, table.plain td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.plain th { font-weight: 600; }
+.tablewrap { overflow-x: auto; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer .wrap { padding-block: 20px 32px; }
+footer a { color: inherit; }
+
+@media (max-width: 900px) {
+  #machine { position: static; }
+  .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .flow .arrow { display: none; }
+  .box { padding: 7px 8px; }
+  .box small:not(#miniStep) { display: none; }
+  .refiner-mini { flex-direction: column; align-items: start; gap: 2px; }
+  .refiner-mini canvas { width: 100%; max-width: 80px; }
+  .prompt-card { grid-column: 1 / -1; }
+  .out { grid-column: 1 / -1; grid-template-columns: auto 1fr; justify-items: start; align-items: center; }
+  .out canvas { width: 96px; height: 96px; }
+  .detail { max-height: 48vh; }
+}
+@media (prefers-reduced-motion: reduce) { .box { transition: none; } .box:hover { transform: none; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <h1>Bhaav-E <span>Explainer</span></h1>
+      <p>How a 212M model turns <b>a sentence</b> into <i>a 2-second sticker</i>. Every picture below is real model output, saved step by step.</p>
+    </div>
+    <nav>
+      <a href="https://github.com/Mohit-5899/bhaav-e">Code</a>
+      <a href="https://huggingface.co/Mohit5899/bhaav-e">Model</a>
+      <a href="https://huggingface.co/spaces/Mohit5899/bhaav-e">Gallery</a>
+    </nav>
+  </div>
+</header>
+
+<section id="machine" aria-label="The model, step by step">
+  <div class="wrap">
+    <div class="flow">
+      <div class="prompt-card">
+        <select id="promptSel" aria-label="Choose a prompt"></select>
+        <div class="prompt-text" id="promptText"></div>
+      </div>
+      <div class="arrow">→</div>
+      <button class="box text" data-open="text" aria-expanded="false">
+        <span class="tag">frozen</span><b>Text Encoder</b><small>Flan-T5 turns words into numbers</small>
+      </button>
+      <div class="arrow">→</div>
+      <button class="box lat" data-open="refine" aria-expanded="false">
+        <span class="tag">trained · 212M</span><b>Refiner</b>
+        <span class="refiner-mini"><canvas id="miniLat" width="80" height="16" aria-hidden="true"></canvas><small id="miniStep">step 0 of 50</small></span>
+      </button>
+      <div class="arrow">→</div>
+      <button class="box pix" data-open="decode" aria-expanded="false">
+        <span class="tag">frozen</span><b>Decoder</b><small>Wan2.2 VAE turns the summary into frames</small>
+      </button>
+      <div class="arrow">→</div>
+      <div class="out">
+        <canvas id="sticker" width="160" height="160" aria-label="The sticker at the current step"></canvas>
+        <small id="stickerNote"></small>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="play" id="play" aria-label="Play">▶</button>
+      <div class="slider">
+        <span class="stepnum" id="stepNum">step 0 · t 1.000</span>
+        <div class="track">
+          <div class="ticks" id="ticks"></div>
+          <input type="range" id="step" min="0" max="50" value="0" aria-label="Step">
+        </div>
+      </div>
+      <label>Seed <select id="seedSel"></select></label>
+      <label>Guidance <select id="cfgSel"></select></label>
+      <button class="cmp" id="cmp" aria-pressed="false">Compare the pair</button>
+    </div>
+    <div class="detail" id="detail" hidden></div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <article>
+      <h2><span class="k">In one minute</span>What happens when you type a sentence?</h2>
+      <p class="lead">Bhaav-E is a small text-to-video model. You type <em>"a crying emoji bouncing, tears falling, light blue background"</em> and it makes a 2-second looping sticker, 17 frames of 256 × 256 pixels.</p>
+      <p class="analogy">Think of a sculptor who starts with a rough block of marble and a written order. At every pass they look at the block, re-read the order, and chip a little away. After 50 passes the sticker is there. The marble is random static, the order is your sentence, and the sculptor is the trained model.</p>
+      <p>Press ▶ in the bar above to watch it happen. Click any box to open it. Everything on this page was computed in advance, so nothing runs in your browser.</p>
+
+      <h2><span class="k">The problem</span>Why not draw the pixels directly?</h2>
+      <p>One sticker is 17 frames × 256 × 256 pixels × 3 colours ≈ <b>3.3 million numbers</b>. Asking a model to fix all of them 50 times is slow and wasteful, because most of those numbers describe flat background.</p>
+      <p>So Bhaav-E works on a <b>summary</b> instead. A borrowed, frozen compressor (the Wan2.2 video VAE) squeezes a clip into 48 × 5 × 16 × 16 = <b>61,440 numbers</b>, about 54 times smaller. The model only ever edits this summary. The decoder turns it back into pixels once, at the end.</p>
+      <div class="numbers">
+        <div><b>3,342,336</b><span>numbers in one clip</span></div>
+        <div><b>61,440</b><span>numbers in its summary</span></div>
+        <div><b>320</b><span>pieces the model reads (2 × 2 patches)</span></div>
+        <div><b>50</b><span>refining steps</span></div>
+      </div>
+
+      <h2><span class="k">Step 1 · Text Encoder</span>Words become numbers</h2>
+      <p>A computer cannot read "crying". The frozen <b>Flan-T5-Base</b> encoder first cuts the sentence into word pieces it knows: <code>▁crying</code> stays whole, but <code>bouncing</code> becomes <code>▁bou</code> + <code>ncing</code> and <code>emoji</code> becomes <code>e</code> + <code>m</code> + <code>oji</code>, then gives each piece a list of <b>768 numbers</b> that captures its meaning in context. Captions are padded to <b>35 slots</b>, enough for the longest training caption.</p>
+      <p>Diffusion Explainer's Stable Diffusion uses CLIP here, a text encoder trained next to an image encoder. T5 never saw an image. It still works because the Refiner learns, through <b>cross-attention</b>, which numbers mean tears and which mean a blue background. Our captions are short and regular, which makes that easy to learn.</p>
+
+      <h2><span class="k">Step 2 · Refiner</span>Fifty small steps from static to sticker</h2>
+      <p>The Refiner is the only part we trained: a 212M-parameter <b>VideoDiT</b> (a transformer). It starts from pure random noise. At each step it reads three things: the current summary, how noisy it still is (<code>t</code>, from 1 down to 0), and the caption numbers. It answers with a <b>direction</b> <code>v</code>: which way to move to get from static to sticker.</p>
+      <p>Bhaav-E is trained with <b>rectified flow</b>: during training, noise and clip are joined by a straight line, <code>x_t = (1 − t)·clip + t·noise</code>, and the model learns the line's direction, <code>v = noise − clip</code>. At sampling time we walk back along it in 50 Euler steps: <code>x ← x − v·(t_now − t_next)</code>. The steps are not equal: a time shift of 5 spends more of them while <code>t</code> is still high, when the overall shape is decided.</p>
+      <p>Open the Refiner and watch the middle strip, <em>the model's guess</em>: <code>clip ≈ x − t·v</code>. By step 5 the guess already shows a crying face. The remaining 45 steps sharpen the details and the motion.</p>
+
+      <h2><span class="k">Guidance</span>How strongly to follow the words</h2>
+      <p>At every step the model is asked twice: once with your caption, once with an empty one. The difference is what the words add. Guidance scales it up: <code>v = v_empty + g · (v_caption − v_empty)</code>.</p>
+      <ul>
+        <li><b>g = 0</b>: ignores the words, so you get some sticker, not yours.</li>
+        <li><b>g = 1</b>: the plain caption prediction.</li>
+        <li><b>g = 3</b>: Bhaav-E's default.</li>
+        <li><b>g = 6</b>: pushes harder; colours and effects can get exaggerated.</li>
+      </ul>
+      <p>The orange heat strip in the Refiner shows <em>where</em> the words changed the prediction at each step, for example around the tears.</p>
+
+      <h2><span class="k">Step 3 · Decoder</span>From summary back to pixels</h2>
+      <p>After step 50 the frozen Wan2.2 decoder expands 61,440 numbers into 17 frames. It undoes the 16× squeeze in width and height and the 4× squeeze in time: latent frame 0 becomes frame 1, and each later latent frame becomes 4 frames. Frame 17 equals frame 1, so the sticker loops.</p>
+      <p>Decoding takes about 14 seconds per clip on a laptop, so this page fully decodes the guess only at steps 5, 10, 20, 30 and 50 (dots on the slider). Between them it shows a <b>quick look</b>: a simple linear mix of the 48 channels into red, green and blue that we fitted ourselves. It is blurry, but it is the true summary at every step.</p>
+
+      <h2><span class="k">Compare</span>Change one phrase, keep the same noise</h2>
+      <p>Each prompt has a twin that differs in one part: the effect, the motion or the background. Press <b>Compare the pair</b>. Both start from the same static. The chart flattens each step's 61,440-number summary to two numbers (a PCA projection of the pair's two paths), so you can see where they split.</p>
+      <p>Rectified flow trains straight paths, and it shows: two numbers keep about 99% of the variation of 102 summaries, which only happens when both paths are close to straight lines from the shared start to two different endings.</p>
+
+      <h2><span class="k">How it learned</span>Training runs the same line forwards</h2>
+      <p>Training never runs the 50 steps. For each of 61,571 training clips (already compressed once and saved), it picks a random <code>t</code>, mixes the clip with fresh noise, and asks the model for the direction <code>v = noise − clip</code>. The loss is the squared error of that guess. That is repeated in batches of 64 for 40,000 steps (about 3.6 hours on one GPU).</p>
+      <div class="trainbox" id="trainbox">
+        <div class="row">
+          <label for="trainT"><b>Mix level t</b></label>
+          <input type="range" id="trainT" min="0" max="10" value="4" aria-describedby="trainEq">
+          <span class="stepnum" id="trainTv">t = 0.4</span>
+        </div>
+        <canvas id="trainFilm" class="film" width="80" height="16" aria-label="The training clip mixed with noise"></canvas>
+        <div class="formula" id="trainEq"></div>
+        <p class="note">Quick look at the 5 latent frames of one clip (a sticker Bhaav-E made, standing in for a training clip; both are summaries of the same shape). At t = 0 it is the clip, at t = 1 pure noise. The model sees the mix and must answer with the direction back to the clip.</p>
+      </div>
+      <div class="tablewrap">
+        <table class="plain">
+          <tr><th>Part</th><th>Diffusion Explainer (Stable Diffusion)</th><th>Bhaav-E</th></tr>
+          <tr><td>Text encoder</td><td>CLIP, frozen, 77 tokens</td><td>Flan-T5-Base, frozen, 35 tokens × 768</td></tr>
+          <tr><td>Compressor</td><td>image VAE, 4 × 64 × 64</td><td>Wan2.2 video VAE, 48 × 5 × 16 × 16</td></tr>
+          <tr><td>Trained part</td><td>UNet, predicts noise</td><td>VideoDiT (212M), predicts direction v</td></tr>
+          <tr><td>Stepping</td><td>scheduler removes part of the noise</td><td>50 Euler steps on a straight path, shift 5</td></tr>
+          <tr><td>Guidance shown</td><td>0, 1, 7, 20</td><td>0, 1, 3, 6</td></tr>
+        </table>
+      </div>
+
+      <h2><span class="k">About this page</span>How it was made</h2>
+      <p id="about">Following the design of <a href="https://poloclub.github.io/diffusion-explainer/">Diffusion Explainer</a> (Georgia Tech and IBM Research), all results are precomputed. We ran Bhaav-E on 8 prompts and saved the summary, the guess and both predictions at every step.</p>
+    </article>
+  </div>
+</main>
+<footer><div class="wrap">Bhaav-E is MIT-licensed. Emoji art in the stickers: Microsoft Fluent Emoji (MIT). Page design follows <a href="https://github.com/poloclub/diffusion-explainer">Diffusion Explainer</a> (MIT).</div></footer>
+
+<script>
+(async function () {
+  const $ = id => document.getElementById(id);
+  const D = await fetch("data.json").then(r => r.json());
+  const T = D.tile, N = D.steps, PX = D.clipPx;
+  const S = { p: 0, seed: 0, cfg: D.fullCfg, step: 0, playing: false, open: null, compare: false, frame: 0 };
+  const imgs = {};
+  const rid = (p, s, g) => `p${p}_s${s}_g${g}`;
+  const has = (p, s, g) => !!D.runs[rid(p, s, g)];
+  const load = src => imgs[src] || (imgs[src] = new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }));
+  const sheet = r => load(`assets/runs/${r}.png`), clips = r => load(`assets/runs/${r}.jpg`);
+  const pairOf = p => D.pairs.find(q => q.a === p || q.b === p);
+  const twin = p => { const q = pairOf(p); return q.a === p ? q.b : q.a; };
+
+  // --- controls --------------------------------------------------------------
+  D.prompts.forEach((pr, i) => $("promptSel").add(new Option(`${i + 1}. ${pr.label}`, i)));
+  D.seeds.forEach(s => $("seedSel").add(new Option(s, s)));
+  D.cfgs.forEach(g => $("cfgSel").add(new Option(g, g)));
+  $("cfgSel").value = String(S.cfg);
+  D.decodeAt.forEach(s => { const i = document.createElement("i"); i.style.left = `calc(${s / N * 100}% )`; $("ticks").append(i); });
+
+  function syncOptions() {
+    [...$("cfgSel").options].forEach(o => o.disabled = !has(S.p, S.seed, +o.value));
+    [...$("seedSel").options].forEach(o => o.disabled = !has(S.p, +o.value, S.cfg));
+  }
+
+  function highlight(p) {
+    const mine = D.prompts[p].prompt.split(", "), other = D.prompts[twin(p)].prompt.split(", ");
+    return mine.map(part => other.includes(part) ? esc(part) : `<mark>${esc(part)}</mark>`).join(", ");
+  }
+  const esc = s => s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+  // --- drawing helpers ---------------------------------------------------------
+  // sheet columns: 0-4 latent, 5-9 guess, 10-14 heat; row = step
+  function film(ctx, img, block, step, w, h) {
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, w, h);
+    if (img) ctx.drawImage(img, block * 5 * T, step * T, 5 * T, T, 0, 0, w, h);
+  }
+  function tileAnim(ctx, img, block, step, f, size) {     // one latent frame, cycled (each covers 4 video frames)
+    ctx.imageSmoothingEnabled = false;
+    const k = f === 0 ? 0 : Math.min(4, Math.ceil(f / 4));
+    if (img) ctx.drawImage(img, (block * 5 + k) * T, step * T, T, T, 0, 0, size, size);
+  }
+  function decodedRow(r, step) {          // latest fully decoded checkpoint at or before this step
+    const ds = D.runs[r].decoded; let row = -1;
+    ds.forEach((s, i) => { if (s <= step) row = i; });
+    return row < 0 ? null : { row, at: ds[row] };
+  }
+  async function drawSticker(ctx, r, step, size, noteEl) {
+    const dr = decodedRow(r, step);
+    ctx.imageSmoothingEnabled = true;
+    if (dr) {
+      const img = await clips(r);
+      if (img) ctx.drawImage(img, S.frame * PX, dr.row * PX, PX, PX, 0, 0, size, size);
+      if (noteEl) noteEl.textContent = dr.at === step ? `decoded at step ${dr.at}` : `last decode: step ${dr.at}`;
+    } else {
+      const img = await sheet(r);
+      ctx.imageSmoothingEnabled = false;
+      tileAnim(ctx, img, step === 0 ? 0 : 1, step, S.frame, size);
+      if (noteEl) noteEl.textContent = step === 0 ? "pure noise (quick look)" : "guess, quick look";
+    }
+  }
+
+  // --- detail panels -------------------------------------------------------------
+  const detail = $("detail");
+  function openPanel(name) {
+    S.open = S.open === name ? null : name;
+    document.querySelectorAll("[data-open]").forEach(b => b.setAttribute("aria-expanded", String(b.dataset.open === S.open)));
+    buildDetail();
+  }
+  document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => { if (S.compare) toggleCompare(false); openPanel(b.dataset.open); }));
+
+  function buildDetail() {
+    detail.hidden = !S.open && !S.compare;
+    if (S.compare) return buildCompare();
+    if (S.open === "text") return buildText();
+    if (S.open === "refine") return buildRefine();
+    if (S.open === "decode") return buildDecode();
+    detail.innerHTML = "";
+  }
+
+  function buildText() {
+    const pr = D.prompts[S.p];
+    const pieces = pr.pieces.map(t => t === "</s>" ? `<span class="chip end">&lt;end&gt;</span>` : `<span class="chip">${esc(t)}</span>`).join("");
+    const pads = Math.max(0, pr.max_len - pr.pieces.length);
+    const rows = pr.corner.map((r, i) => `<tr><th>${esc(pr.pieces[i] || "")}</th>${r.map(v => `<td>${v.toFixed(2)}</td>`).join("")}<td>…</td></tr>`).join("");
+    detail.innerHTML = `
+      <h3 style="color:var(--text-c)">Text Encoder · Flan-T5-Base (frozen)</h3>
+      <div class="grid3">
+        <div class="cell"><span class="lbl">1 · cut into ${pr.n_tokens} word pieces, padded to ${pr.max_len} slots</span>
+          <div class="chips">${pieces}${pads ? `<span class="chip pad">pad × ${pads}</span>` : ""}</div>
+          <p>The ▁ marks the start of a word. Long or rare words are split into pieces the tokenizer knows.</p></div>
+        <div class="cell"><span class="lbl">2 · each piece → ${pr.dim} numbers (first 5 shown)</span>
+          <table class="matrix">${rows}<tr><th>…</th><td colspan="6" style="text-align:left">${pr.max_len} rows × ${pr.dim} numbers</td></tr></table></div>
+        <div class="cell"><span class="lbl">why these numbers help</span>
+          <p>The Refiner reads all ${pr.n_tokens} rows at every step through cross-attention: each of its 320 video pieces asks the caption "what should be here?". Padding slots are masked out, so they carry nothing.</p></div>
+      </div>`;
+  }
+
+  function buildRefine() {
+    const r = rid(S.p, S.seed, S.cfg);
+    detail.innerHTML = `
+      <h3 style="color:var(--lat-c)">Refiner · VideoDiT, 212M parameters (trained)</h3>
+      <div class="grid3">
+        <div class="cell"><span class="lbl">what the sampler holds · step <span class="sN"></span></span>
+          <canvas class="film" id="fLat" width="320" height="64"></canvas>
+          <p>The 48 × 5 × 16 × 16 summary, shown as a quick look. 5 latent frames, left to right.</p></div>
+        <div class="cell"><span class="lbl">the model's guess of the finished clip</span>
+          <canvas class="film" id="fGuess" width="320" height="64"></canvas>
+          <p><code>clip ≈ x − t·v</code>. Clear long before the end.</p></div>
+        <div class="cell"><span class="lbl">where the words mattered</span>
+          <canvas class="film" id="fHeat" width="320" height="64"></canvas>
+          <p>|v<sub>caption</sub> − v<sub>empty</sub>|, brighter = the caption changed the prediction more.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="cell"><span class="lbl">one step</span>
+          <div class="formula" id="stepEq"></div></div>
+        <div class="cell"><span class="lbl">guidance scale g</span>
+          <div class="gscale">${D.cfgs.map(g => `<button data-g="${g}" aria-pressed="${g === S.cfg}" ${has(S.p, S.seed, g) ? "" : "disabled"}>${g}</button>`).join("")}</div>
+          <p>g = 0 ignores the words; 3 is the default; 6 pushes harder.</p></div>
+        <div class="cell"><span class="lbl">how much the words changed each step</span>
+          <svg id="impact" viewBox="0 0 300 90" width="100%" height="90" role="img" aria-label="Caption impact per step"></svg></div>
+      </div>`;
+    detail.querySelectorAll("[data-g]").forEach(b => b.addEventListener("click", () => setCfg(+b.dataset.g)));
+    drawImpact(r);
+    updateDetail();
+  }
+
+  function drawImpact(r) {
+    const v = D.runs[r].impact, mx = Math.max(...v), svg = $("impact");
+    const x = i => 28 + i / (v.length - 1) * 262, y = a => 74 - a / mx * 62;
+    const pts = v.map((a, i) => `${x(i).toFixed(1)},${y(a).toFixed(1)}`).join(" ");
+    svg.innerHTML = `<line x1="28" y1="74" x2="290" y2="74" stroke="var(--line)"/>
+      <polyline points="28,74 ${pts} 290,74" fill="var(--lat-soft)" stroke="none"/>
+      <polyline points="${pts}" fill="none" stroke="var(--lat-c)" stroke-width="1.6"/>
+      <text x="28" y="88">step 1</text><text x="290" y="88" text-anchor="end">50</text>
+      <text x="24" y="16" text-anchor="end">high</text>
+      <line id="impCur" y1="10" y2="74" stroke="var(--ink)" stroke-dasharray="2 2"/>`;
+  }
+
+  function buildDecode() {
+    const r = rid(S.p, S.seed, S.cfg);
+    detail.innerHTML = `
+      <h3 style="color:var(--pix-c)">Decoder · Wan2.2 VAE (frozen)</h3>
+      <div class="grid3">
+        <div class="cell"><span class="lbl">in: the summary at step <span class="sN"></span></span>
+          <canvas class="film" id="fLat" width="320" height="64"></canvas>
+          <p>48 channels × 5 latent frames × 16 × 16 = 61,440 numbers.</p></div>
+        <div class="cell"><span class="lbl">out: 17 frames × 256 × 256 × 3</span>
+          <canvas id="decBig" width="192" height="192" style="width:192px;height:192px;border-radius:10px"></canvas>
+          <p id="decNote"></p></div>
+        <div class="cell"><span class="lbl">what the decoder undoes</span>
+          <p>16× in width and height (16 → 256 pixels) and 4× in time (5 latent frames → 17 video frames). It is borrowed from Wan2.2 and never trained here.</p>
+          <p>Fully decoded on this page at steps ${D.runs[r].decoded.join(", ")}. The dots on the slider mark them.</p></div>
+      </div>`;
+    updateDetail();
+  }
+
+  // --- compare mode ------------------------------------------------------------------
+  function toggleCompare(on) {
+    S.compare = on ?? !S.compare;
+    $("cmp").setAttribute("aria-pressed", String(S.compare));
+    if (S.compare) { S.open = null; document.querySelectorAll("[data-open]").forEach(b => b.setAttribute("aria-expanded", "false")); }
+    buildDetail();
+  }
+  $("cmp").addEventListener("click", () => toggleCompare());
+
+  function buildCompare() {
+    const q = pairOf(S.p);
+    const side = (p, cls) => `<div class="side ${cls}"><canvas class="big" id="cmp${cls}" width="160" height="160"></canvas>
+        <div style="min-width:0"><div class="prompt-text">${highlight(p)}</div>
+        <canvas class="film" id="cmpF${cls}" width="320" height="64" style="margin-top:8px"></canvas>
+        <div class="note" id="cmpN${cls}"></div></div></div>`;
+    detail.innerHTML = `
+      <h3>Same noise, one phrase changed: ${q.kind}</h3>
+      <div class="compare">${side(q.a, "a")}${side(q.b, "b")}</div>
+      <div class="cell"><span class="lbl">the two paths of the summary, flattened to 2-D (PCA of these 102 summaries, <span id="trajShare"></span> of their variation)</span>
+        <svg id="traj" viewBox="0 0 640 220" width="100%" height="220" role="img" aria-label="Trajectories"></svg></div>`;
+    drawTraj();
+    updateDetail();
+  }
+
+  function drawTraj() {
+    const svg = $("traj"); if (!svg) return;
+    const q = pairOf(S.p);
+    const A = D.runs[rid(q.a, S.seed, S.cfg)], B = D.runs[rid(q.b, S.seed, S.cfg)];
+    if (!A?.traj || !B?.traj) { svg.innerHTML = `<text x="20" y="30">This pair is not computed for these settings.</text>`; return; }
+    $("trajShare").textContent = `${(A.trajShare * 100).toFixed(1)}%`;
+    const pts = [...A.traj, ...B.traj];
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const X = v => 20 + (v - x0) / (x1 - x0 || 1) * 600, Y = v => 200 - (v - y0) / (y1 - y0 || 1) * 180;
+    const line = (tr, stroke, w, op) => `<polyline points="${tr.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(" ")}" fill="none" stroke="${stroke}" stroke-width="${w}" opacity="${op}" stroke-linejoin="round"/>`;
+    let h = line(A.traj, "var(--lat-c)", 2.2, 1) + line(B.traj, "var(--b-c)", 2.2, 1);
+    const st = A.traj[0], ea = A.traj[N], eb = B.traj[N];
+    h += `<circle cx="${X(st[0])}" cy="${Y(st[1])}" r="4" fill="var(--ink)"/><text x="${X(st[0]) + 8}" y="${Y(st[1]) - 6}">start: the same static</text>`;
+    h += `<text x="${X(ea[0])}" y="${Y(ea[1]) - 10}" text-anchor="middle">${esc(D.prompts[q.a].label)}</text>`;
+    h += `<text x="${X(eb[0])}" y="${Y(eb[1]) + 18}" text-anchor="middle">${esc(D.prompts[q.b].label)}</text>`;
+    h += `<circle id="dotA" r="5" fill="var(--lat-c)"/><circle id="dotB" r="5" fill="var(--b-c)"/>`;
+    svg.innerHTML = h;
+    svg._X = X; svg._Y = Y;
+  }
+
+  // --- per-step updates ----------------------------------------------------------------
+  async function updateDetail() {
+    const r = rid(S.p, S.seed, S.cfg), img = await sheet(r);
+    detail.querySelectorAll(".sN").forEach(e => e.textContent = S.step);
+    const f = (id, block) => { const c = $(id); if (c) film(c.getContext("2d"), img, block, S.step, c.width, c.height); };
+    f("fLat", 0); f("fGuess", 1); f("fHeat", 2);
+    const eq = $("stepEq");
+    if (eq) {
+      const t0 = D.t[Math.max(0, S.step - 1)], t1 = D.t[S.step];
+      eq.innerHTML = S.step === 0
+        ? `<span class="l">x</span> = random noise, t = 1.000<br>press ▶ or drag the slider`
+        : `<span class="l">v</span> = v<sub>empty</sub> + <b>${S.cfg}</b> · (v<sub class="c">caption</sub> − v<sub>empty</sub>)<br><span class="l">x</span> ← <span class="l">x</span> − <span class="l">v</span> · (${t0.toFixed(3)} − ${t1.toFixed(3)})<br>step ${S.step} of ${N}`;
+    }
+    const cur = $("impCur");
+    if (cur) { const x = 28 + Math.max(0, S.step - 1) / (N - 1) * 262; cur.setAttribute("x1", x); cur.setAttribute("x2", x); }
+    const dec = $("decBig");
+    if (dec) {
+      const dr = decodedRow(r, S.step);
+      $("decNote").textContent = dr ? (dr.at === S.step ? `Full decode of the guess at step ${dr.at}.` : `Showing the last full decode (step ${dr.at}). Next: step ${D.runs[r].decoded.find(s => s > S.step) ?? "–"}.`) : `No full decode before step ${D.runs[r].decoded[0]}; showing the quick look.`;
+    }
+    if (S.compare) {
+      const q = pairOf(S.p), svg = $("traj");
+      for (const [p, c] of [[q.a, "a"], [q.b, "b"]]) {
+        const rr = rid(p, S.seed, S.cfg); if (!D.runs[rr]) continue;
+        const im = await sheet(rr), fc = $(`cmpF${c}`);
+        if (fc) film(fc.getContext("2d"), im, 1, S.step, fc.width, fc.height);
+        const dot = $(`dot${c.toUpperCase()}`), p2 = D.runs[rr].traj?.[S.step];
+        if (dot && p2 && svg._X) { dot.setAttribute("cx", svg._X(p2[0])); dot.setAttribute("cy", svg._Y(p2[1])); }
+      }
+    }
+  }
+
+  async function renderStep() {
+    const r = rid(S.p, S.seed, S.cfg);
+    $("step").value = S.step;
+    $("stepNum").textContent = `step ${S.step} · t ${D.t[S.step].toFixed(3)}`;
+    $("miniStep").textContent = `step ${S.step} of ${N}`;
+    film($("miniLat").getContext("2d"), await sheet(r), 0, S.step, 80, 16);
+    updateDetail();
+  }
+
+  // stickers animate at 8 fps regardless of stepping
+  async function tick() {
+    S.frame = (S.frame + 1) % 16;
+    const r = rid(S.p, S.seed, S.cfg);
+    await drawSticker($("sticker").getContext("2d"), r, S.step, 160, $("stickerNote"));
+    const dec = $("decBig"); if (dec) await drawSticker(dec.getContext("2d"), r, S.step, 192, null);
+    if (S.compare) {
+      const q = pairOf(S.p);
+      for (const [p, c] of [[q.a, "a"], [q.b, "b"]]) {
+        const cv = $(`cmp${c}`), rr = rid(p, S.seed, S.cfg);
+        if (cv && D.runs[rr]) await drawSticker(cv.getContext("2d"), rr, S.step, 160, $(`cmpN${c}`));
+      }
+    }
+  }
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setInterval(tick, reduce ? 500 : 125);
+
+  let timer = null;
+  function setPlaying(on) {
+    S.playing = on; $("play").textContent = on ? "❚❚" : "▶"; $("play").setAttribute("aria-label", on ? "Pause" : "Play");
+    clearInterval(timer);
+    if (on) {
+      if (S.step >= N) S.step = 0;
+      timer = setInterval(() => { if (S.step >= N) return setPlaying(false); S.step++; renderStep(); }, 140);
+    }
+  }
+  $("play").addEventListener("click", () => setPlaying(!S.playing));
+  $("step").addEventListener("input", e => { setPlaying(false); S.step = +e.target.value; renderStep(); });
+
+  function setPrompt(p) {
+    S.p = p; $("promptSel").value = String(p); $("promptText").innerHTML = highlight(p);
+    if (!has(p, S.seed, S.cfg)) { S.seed = 0; S.cfg = D.fullCfg; $("seedSel").value = "0"; $("cfgSel").value = String(S.cfg); }
+    syncOptions(); buildDetail(); renderStep(); preload();
+  }
+  function setCfg(g) { if (!has(S.p, S.seed, g)) return; S.cfg = g; $("cfgSel").value = String(g); syncOptions(); buildDetail(); renderStep(); }
+  $("promptSel").addEventListener("change", e => setPrompt(+e.target.value));
+  $("cfgSel").addEventListener("change", e => setCfg(+e.target.value));
+  $("seedSel").addEventListener("change", e => { S.seed = +e.target.value; syncOptions(); buildDetail(); renderStep(); });
+  function preload() { const q = pairOf(S.p); [q.a, q.b].forEach(p => { const r = rid(p, S.seed, S.cfg); if (D.runs[r]) { sheet(r); clips(r); } }); }
+
+  // --- training demo ---------------------------------------------------------------------
+  const trainImg = load("assets/train.png");
+  async function drawTrain() {
+    const k = +$("trainT").value, t = D.train.t[k], img = await trainImg, c = $("trainFilm"), ctx = c.getContext("2d");
+    c.width = 320; c.height = 64; ctx.imageSmoothingEnabled = false;
+    if (img) ctx.drawImage(img, 0, k * T, 5 * T, T, 0, 0, 320, 64);
+    $("trainTv").textContent = `t = ${t.toFixed(1)}`;
+    $("trainEq").innerHTML = `<span class="l">x_t</span> = ${(1 - t).toFixed(1)} · <span class="p">clip</span> + ${t.toFixed(1)} · noise<br>target <span class="l">v</span> = noise − <span class="p">clip</span> &nbsp;·&nbsp; loss = (model(x_t, t, <span class="c">caption</span>) − v)²`;
+  }
+  $("trainT").addEventListener("input", drawTrain);
+  drawTrain();
+
+  const nRuns = Object.keys(D.runs).length;
+  $("about").insertAdjacentHTML("beforeend", ` This page holds <b>${nRuns} runs</b> (prompt × seed × guidance). The quick-look colour map was fitted by least squares on ${D.quickLook.positions.toLocaleString()} latent positions against the decoded frames (R² = ${D.quickLook.r2.join(" / ")} for red / green / blue).`);
+
+  setPrompt(0);
+  if (!reduce) setTimeout(() => setPlaying(true), 600);
+})();
+</script>

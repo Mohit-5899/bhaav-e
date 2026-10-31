@@ -18,3 +18,5 @@ launch-video/.hyperframes/
 launch-video/.thumbnails/
 launch-video/assets/audio/
 node_modules/
+explainer/build/raw/
+explainer/build/precompute.log
