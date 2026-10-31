@@ -192,8 +192,11 @@ Full reports: [r2 vs r1 comparison](runs/r2/RESULTS.md) · [r1 evaluation histor
 | Apple M1 Pro, CPU (10 threads) | 50 | ≈ 43 s |
 | Apple M1 Pro, CPU (2 threads) | 20 | ≈ 48 s |
 | NVIDIA L4 (24 GB) | 50 | tested; not benchmarked |
+| NVIDIA T4 (16 GB, free Kaggle/Colab tier), fp32 | 50 | ≈ 8.9 s (denoise 3.2 s + VAE decode 5.7 s), 5.2 GB VRAM |
 
 On CPU, most of the time is spent in the VAE decoder (≈ 41 s with 2 threads); each denoising step takes ≈ 0.3 s.
+On a T4 (8 README prompts, averaged after one warm-up), the VAE decoder is also about two thirds of the time. The T4 has no
+bf16, so the pipeline runs in fp32; fp16 autocast on the transformer is 2.2× faster but overflows and produces black frames.
 Decoding eight clips in one batch exceeded the 24 GB of an L4, so the provided scripts decode one clip at a time.
 
 ## Limitations
