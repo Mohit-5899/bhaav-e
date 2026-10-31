@@ -1,6 +1,6 @@
 """Train Bhaav-E's VideoDiT with rectified flow on the cached latents.  (OUR code.)
 
-One training step (how-training-works.md, section 9):
+One training step (docs/how-training-works.md, section 9):
   1. take a batch of clean latents x0 and one caption line each (10% of captions replaced by the empty caption)
   2. pick a noise level t per clip (logit-normal: most t near the middle, where learning is hardest)
   3. mix clean and noise on a straight line:  x_t = (1 - t) * x0 + t * noise

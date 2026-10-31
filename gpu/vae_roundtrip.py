@@ -1,7 +1,7 @@
 """Step 3a: Wan2.2 VAE round-trip test on ~200 Bhaav clips.  (OUR code. Untested sketch: not run yet.)
 
 Question it answers: can the frozen Wan2.2 VAE rebuild our stickers well enough?
-If not, no generator trained on its latents can make good stickers (see how-training-works.md, 3e).
+If not, no generator trained on its latents can make good stickers (see docs/how-training-works.md, 3e).
 
 Usage on the pod:
     python vae_roundtrip.py --clips /workspace/clips --split /workspace/splits/val.txt --n 200 --out /workspace/roundtrip

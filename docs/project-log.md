@@ -48,8 +48,8 @@ bhaav-e/
 - [x] Splits: train 61,569 / val 3,750 / test_seen 3,750 / test_unseen 5,918 (held-out combinations),
       14 excluded. No overlaps, no held-out combination in train (see `data/README.md`)
 - [x] GPU data step on RunPod (RTX 5090): VAE test passed (38.5 dB), latent cache (74,987 clips, 9.2 GB) and caption
-      cache (26,066 sentences) built and verified; pod stopped. About $2.40. Details in `gpu-plan.md`
-- [x] Training r1: our own VideoDiT code (211.92M), 40,000 steps, val 0.0854 → 0.0551, ≈ $2.60. Results in `runs/r1/`, details in `gpu-plan.md`
+      cache (26,066 sentences) built and verified; pod stopped. About $2.40. Details in `docs/gpu-plan.md`
+- [x] Training r1: our own VideoDiT code (211.92M), 40,000 steps, val 0.0854 → 0.0551, ≈ $2.60. Results in `runs/r1/`, details in `docs/gpu-plan.md`
 - [x] Evaluation (v2 checker): subject, background and accent carry over to unseen combinations; the model's own error rate is 19% unseen vs 10.5% seen, mostly a leaked 'usual' effect. Loss gap +8%. See `runs/r1/eval/RESULTS.md`
 - [x] Free improvements tested: CFG 3 beats 5 (unseen errors 10.9% → 7.3%), CFG-Zero* and autoguidance no gain; motion checker v3 shows motion error ≈ 0%. Next: r2 with rebalanced data
 - [x] r2 (rebalanced effects, same size and recipe, ≈ $3.85): unseen errors at CFG 5 halved (10.9% → 5.7%, p = 0.01); at CFG 3 unseen 7.3% → 5.3% but seen 6.1% → 9.0% (both not significant). Eye check shows the effect checker misreads many generated stickers. Keep r2's data; fix the effect checker next. See `runs/r2/RESULTS.md`

@@ -1,7 +1,7 @@
 """Step 3b: encode all 75,001 clips once with the frozen Wan2.2 VAE -> latent cache.  (OUR code. Untested sketch: not run yet.)
 
 Why: the VAE never changes, so encoding each clip on every training step would redo the same work
-~187 times (see how-training-works.md, section 7). Encode once, train on the saved latents.
+~187 times (see docs/how-training-works.md, section 7). Encode once, train on the saved latents.
 
 Usage on the pod:
     python encode_latents.py --clips /workspace/clips --ids /workspace/splits/all_ids.txt --out /workspace/cache/latents

@@ -48,7 +48,7 @@ fewer of those common combinations.
 Subject, background, UI accent and motion stay at 0–0.9% for both runs. Effect is still the only attribute that
 matters; every row above is almost entirely effect errors.
 
-Pre-registered rule (`improvement-plan.md`): unseen "any wrong" below 12%, seen not worse than 10.5%. **r2 passes. So
+Pre-registered rule (`docs/improvement-plan.md`): unseen "any wrong" below 12%, seen not worse than 10.5%. **r2 passes. So
 does r1 at CFG 3**, which we only found after writing the rule. The rule no longer separates the two runs.
 
 ## What the mistakes are (CFG 3, Verified: counted per clip)

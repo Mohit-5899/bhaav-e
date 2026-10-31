@@ -4,7 +4,7 @@ Design source: the DiT idea (Peebles & Xie, 2023) at the published "s210" size (
 12 heads, about 212M parameters). We copy the blueprint, not code; `count_params` checks we built the same size.
 
 What it does, in one line: given a noisy sketch x_t, the noise level t and a caption, predict the velocity
-v = noise - clean (rectified flow, see how-training-works.md 5a).
+v = noise - clean (rectified flow, see docs/how-training-works.md 5a).
 
 Shapes (B = batch):
   x      [B, 48, 5, 16, 16]   VAE latent: 48 channels, 5 time steps, 16 x 16 positions
